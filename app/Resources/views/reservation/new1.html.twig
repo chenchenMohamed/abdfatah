@@ -1,0 +1,240 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+<input class="form-control" id="time1" type="hidden" value="{{ time1 }}" readonly>
+<input class="form-control" id="time2" type="hidden" value="{{ time2 }}" readonly>
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('voiture_index')}}">Liste des contrats</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('disponibilite_search')}}">Liste des voitures disponibles</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Nouveau contrat</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Nouvelle réservation</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Numéro réservation {{ form_errors(form.numReservation) }}</label>
+                                    {{ form_widget(form.numReservation, {'attr': {'class':'form-control', 'readonly': 'readonly'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Date réservation {{ form_errors(form.dateResevation) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(form.dateResevation, {'attr': {'class':'form-control'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date début {{ form_errors(form.dateDebut) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(form.dateDebut, {'attr': {'class':'form-control'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date fin {{ form_errors(form.dateFin) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(form.dateFin, {'attr': {'class':'form-control'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nombre de jours {{ form_errors(form.nbreJour) }}</label>
+                                    {{ form_widget(form.nbreJour, {'attr': {'class':'form-control', 'readonly': 'readonly'}}) }}
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Voiture {{ form_errors(form.refVoiture) }}</label>
+                                    {{ form_widget(form.refVoiture, {'attr': {'class':'select2 form-control custom-select','style':'width: 282px;'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Voiture</label>
+                                    <input type="text" value="{{ voiture }}" class="form-control" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Client<span style="color: white;">aaaa</span>{{ form_errors(form.refClient) }} {{ form_errors(form_client.cin) }} {{ form_errors(form_client.numPermis) }}</label>
+                                    {{ form_widget(form.refClient, {'attr': {'class':'select2 form-control custom-select','style':'width: 282px; height: 10px;'}}) }}
+                                    <button type="button" class="btn btn-info btn-flat" data-toggle="modal" data-target="#new_client" style="height: 36px;">
+                                    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                               </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('disponibilite_search') }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+<div class="modal fade" id="new_client" role="dialog" aria-labelledby="new_role-label" aria-hidden="true">
+         {{ form_start(form_client) }}
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nouveau client :</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="first_name">Nom :</label>
+                        {{ form_errors(form_client.nom) }}
+                        {{ form_widget(form_client.nom,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Prénom :</label>
+                        {{ form_errors(form_client.prenom) }}
+                        {{ form_widget(form_client.prenom,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Date de naissance :</label>
+                        {{ form_errors(form_client.dateNaissance) }}
+                        {{ form_widget(form_client.dateNaissance,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Numéro CIN ou passeport :</label>
+                        {{ form_errors(form_client.cin) }}
+                        {{ form_widget(form_client.cin,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Téléphone :</label>
+                        {{ form_errors(form_client.telephone) }}
+                        {{ form_widget(form_client.telephone,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Numéro permis :</label>
+                        {{ form_errors(form_client.numPermis) }}
+                        {{ form_widget(form_client.numPermis,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Délivré le :</label>
+                        {{ form_errors(form_client.delivre) }}
+                        {{ form_widget(form_client.delivre,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Nationalité :</label>
+                        {{ form_errors(form_client.nationalite) }}
+                        {{ form_widget(form_client.nationalite,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Adresse :</label>
+                        {{ form_errors(form_client.adresse) }}
+                        {{ form_widget(form_client.adresse,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group" style="display: none;">
+                        <label for="first_name">Liste noire :</label>
+                        {{ form_errors(form_client.degat) }}
+                        {{ form_widget(form_client.degat,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group" style="display: none;">
+                        <label for="first_name">Cause :</label>
+                        {{ form_errors(form_client.cause) }}
+                        {{ form_widget(form_client.cause,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                    <div class="form-group" style="display: none;">
+                        <label for="first_name">Disponibilité :</label>
+                        {{ form_errors(form_client.disponibilite) }}
+                        {{ form_widget(form_client.disponibilite,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                     <input type="submit" name="insert" id="insert" class="btn btn-primary" value="Valider" />
+                </div>
+            </div>
+            {{ form_rest(form_client) }}
+            {{ form_end(form_client) }}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    
+     $('lv_locationbundle_reservation_dateFin').datetimepicker({
+                        mask: '39/19/9999 29:59'
+                    });
+
+
+$("#button").click(function() {
+  $("form").dialog({
+    appendTo: '#dialog',
+    title: "Dialog Title"
+  });
+});
+ </script>
+ <script>
+ var time1 = $('#time1').val(), time2 = $('#time2').val();
+  $(document).ready(function() {
+    $("#lv_locationbundle_reservation_dateDebut").val(time1);
+    $("#lv_locationbundle_reservation_dateFin").val(time2);
+
+});
+</script>
+{% endblock %}
+
+
+
+

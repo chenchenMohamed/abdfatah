@@ -1,0 +1,203 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li class="active"><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+
+        
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1><center>Réservation</center></h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li  class="breadcrumb-item active">Réservation</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+     <section class="content" style="padding-left:50px;padding-right:50px;">
+      <div class="row">
+        <div class="col-md-12">
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><center>Liste de Reservation</center></h3>
+                </div>
+      <div class="span8">
+  <div class="span3">
+    Matricule :    <input type="text" id="matricule" onkeyup="matricule()" placeholder="Search for matricule.." title="Type in a name">
+  </div>
+  <div class="span3">
+    Nom du client :    <input type="text" id="nom" onkeyup="nom()" placeholder="Search for nom.." title="Type in a name">
+  </div>
+  <div class="span3">
+    prenom du client :    <input type="text" id="prenom" onkeyup="prenom()" placeholder="Search for prenom.." title="Type in a name">
+  </div>
+  <div class="span3">
+    Search All : <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+  </div>
+  </div>
+  <div class="span3">
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <h4 class="text-center"><a href="{{ path('disponibilite_search') }}" role="button" class="btn btn-info btn-sm">Ajouter une Réservation</a></h4>
+          </div>
+      </div>
+  </div><br>
+                <div class="row">
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table id="example" class="table table-striped" style="background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+                    <thead>
+                     <tr>
+                      <th class="text-center">matricule</th>
+                      <th class="text-center">Date Reservation</th>
+                      <th class="text-center">DateDebut</th>
+                      <th class="text-center">DateFin</th>
+                      <th class="text-center">Nom</th>
+                      <th class="text-center">Prenom</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                     </tr>
+                    </thead>
+                    <tbody id="mytbody">
+                      {% for reservation in reservations %}
+                      <tr>
+                           {% for contrat in contrats if reservation.id == contrat.refReservation.id %}
+                           {% else %}
+                        <td>{{ reservation.refVoiture.matricule }}</td> 
+                        <td>{% if reservation.dateResevation %}{{ reservation.dateResevation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if reservation.dateDebut %}{{ reservation.dateDebut|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if reservation.dateFin %}{{ reservation.dateFin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{{ reservation.refClient.nom }}</td>
+                        <td>{{ reservation.refClient.prenom }}</td>
+                        <td>
+                            <h4 class="text-center"><a href="{{ path('reservation_show', { 'id': reservation.id }) }}" role="button" class="btn btn-danger btn-sm">Delete</a></h4>
+                        </td>
+                        <td>
+                            <h4 class="text-center"><a href="{{ path('reservation_edit', { 'id': reservation.id }) }}" role="button" class="btn btn-success btn-sm">Edit</a></h4>
+                        </td>
+                        <td>
+                              <h4 class="text-center"><a href="{{ path('contrat_new1', { 'id': reservation.id }) }}" role="button" class="btn btn-default btn-sm">Créer un Contrat</a></h4>
+                        </td>
+                            {% endfor %}
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+                  </div>
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#mytbody tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+
+function matricule() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("matricule");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+function nom() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("nom");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[5];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function prenom() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("prenom");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[6];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }        
+  }
+}
+</script>
+<script type="text/javascript">
+   function del() {
+	   if (confirm("Est-ce-que vous supprimer une réservation?")) { 
+alert("vous êtes d'accord")
+}
+else{
+alert("vous n'êtes pas d'accord")
+}
+   }
+</script>
+{% endblock %}

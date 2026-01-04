@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+
+  <div class="content-wrapper">
+
+     <section class="content" style="mapping:25px">
+      <div class="row">
+        <div class="col-md-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h2 class="box-title"><center>Ajouter une information au Retour de Voiture</center></h2>
+                </div><br>
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li class="breadcrumb-item"><a href="{{path('csr_index')}}"><i class="fa fa-car"></i>/ Retour</a></li>
+      </ol>
+    </section><br>
+                <div class="box-body">
+    <table id="example" class="table table-striped" style="background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+        <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom Client</th>
+                <th>numero Contrat</th>
+                <th>numero CSR</th>
+                <th>Km</th>
+                <th>Degats</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for retour in retours %}
+            <tr>
+                <td>{{ retour.refVoiture.Matricule }}</td>
+                <td>{{ retour.refClient.nom }} {{ retour.refClient.prenom }}</td>
+                <td>{% if retour.refContrat != "" %}{{ retour.refContrat.numContrat }}{% else %} {% endif %}</td>
+                <td>{% if retour.refCsr != "" %}{{ retour.refCsr.numContrat }}{% else %} {% endif %}</td>
+                <td>{{ retour.km }}</td>
+                <td>{% if retour.degats == 1 %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                  </div>
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

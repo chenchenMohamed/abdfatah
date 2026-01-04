@@ -1,0 +1,24 @@
+agence_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Agence:index" }
+    methods:  GET
+
+agence_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Agence:show" }
+    methods:  GET
+
+agence_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Agence:new" }
+    methods:  [GET, POST]
+
+agence_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Agence:edit" }
+    methods:  [GET, POST]
+
+agence_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Agence:delete" }
+    methods:  DELETE

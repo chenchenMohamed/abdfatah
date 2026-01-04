@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li class="active"><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+    <h1>Paiement</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ paiement.id }}</td>
+            </tr>
+            <tr>
+                <th>Datepayement</th>
+                <td>{% if paiement.datePayement %}{{ paiement.datePayement|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Refcontrat</th>
+                <td>{{ paiement.refContrat.numContrat }}</td>
+            </tr>
+            <tr>
+                <th>Montantpaye</th>
+                <td>{{ paiement.montantPaye }}</td>
+            </tr>
+            <tr>
+                <th>Montantrestant</th>
+                <td>{{ paiement.montantRestant }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ paiement.etat }}</td>
+            </tr>
+            <tr>
+                <th>Typepayement</th>
+                <td>{{ paiement.typePayement }}</td>
+            </tr>
+            <tr>
+                <th>Refcheque</th>
+                {% if (paiement.refCheque == null) %}
+                <td></td>
+                {% else %}
+                <td>{{ paiement.refCheque.numCheque }}</td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('paiement_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('paiement_edit', { 'id': paiement.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

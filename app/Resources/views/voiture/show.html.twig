@@ -1,0 +1,70 @@
+ <button type="button" class="btn btn-info" data-toggle="modal" data-target="#showModal{{ voiture.id }}"><span class="fa fa-align-justify" aria-hidden="true"></span></button>
+ <div class="modal fade none-border" id="showModal{{ voiture.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <h4 class="modal-title">Détails voiture</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+   </div>
+   <div class="modal-body" id="employee_detail">
+
+    <div class="table-responsive text-left">  
+        <table class="table">
+        <tr>  
+            <td width="30%"><label>Matricule</label></td>  
+            <td width="70%">{{voiture.matricule}}</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Marque</label></td>  
+            <td width="70%">{{voiture.marque.nom}}</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Modèle</label></td>  
+            <td width="70%">{{voiture.modele.nom}}</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Code couleur</label></td>  
+            <td width="70%">{{voiture.couleur}}</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Code radio</label></td>  
+            <td width="70%">{{voiture.codeRadio}}</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Date de mise en circulation</label></td>  
+            <td width="70%">{{voiture.miseEnCirculation|date('d/m/Y')}}</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Date Premier payement</label></td>  
+            <td width="70%">{{voiture.datePremierPay|date('d/m/Y')}}</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Date dernier payement</label></td>  
+            <td width="70%">{{voiture.dateDernierPay|date('d/m/Y')}}</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Montant total à payer</label></td>  
+            <td width="70%">{{voiture.montantTotal}} DT</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Montant mensuel</label></td>  
+            <td width="70%">{{voiture.montantMensuel}} DT</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Kilométrage</label></td>  
+            <td width="70%">{{voiture.km}} km</td>  
+        </tr>
+        <tr>  
+            <td width="30%"><label>Prix/Jour</label></td>  
+            <td width="70%">{{voiture.prix|number_format(3, '.', ',')}} DT</td>  
+        </tr>
+        </table>
+    </div>
+    
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+   </div>
+  </div>
+ </div>
+</div>

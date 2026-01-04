@@ -1,0 +1,173 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li class="active"><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+<h1>Ajouter une Paiement</h1>  
+<div class="content-wrapper">
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('paiement_index') }}"><i class="fa fa-car"></i>Contrat</a></li>
+        <li  class="breadcrumb-item active">Ajouter une Paiement</li>
+      </ol>
+    </section>
+           <div align="right" class="form-group" style="margin-right:110px;">
+                <div class="input-group">
+                  <h4 class="text-center"><a href="{{ path('paiement_index') }}" role="button" class="btn btn-info btn-sm">Retour à  la Liste</a></h4>
+                </div>
+            </div>
+   
+<div class="row">
+   <div class="col-sm-4">
+   </div>
+   <div class="col-sm-5 text-left">
+    {{ form_start(form) }}
+      <div class="span3">
+        <div>
+           <div >{{ form_label(form.datePayement,'Date Paiement') }}</div>
+           {{ form_errors(form.datePayement) }}
+           <div>{{ form_widget(form.datePayement,{'attr': {'readonly': true}}) }}</div>
+        </div>
+      </div>
+      <div class="span3">
+        <div ><label class="required">Montant Total</label></div>
+           
+           <div><input type="text" required="required" value="{{ recette }}" id="lv_locationbundle_paiement_montantTotal" readonly></div>
+        </div>
+      </div>
+      <div class="span3">
+        <div>
+           <div >{{ form_label(form.montantPaye) }}</div>
+           {{ form_errors(form.montantPaye) }}
+           <div>{{ form_widget(form.montantPaye, { 'attr': {'onkeyup': 'calculReste()'}}) }}</div>
+        </div>
+      </div>
+      <div class="span3">
+        <div>
+           <div >{{ form_label(form.montantRestant) }}</div>
+           {{ form_errors(form.montantRestant) }}
+           <div>{{ form_widget(form.montantRestant) }}</div>
+        </div>
+      </div>
+      <div class="span3">
+        <div>
+           <div >{{ form_label(form.refContrat,'Numero de Contrat') }}</div>
+           {{ form_errors(form.refContrat) }}
+           <div style="display:none;">{{ form_widget(form.refContrat,{'attr': {'class':'chosen-select'}}) }}</div>
+		   <input type="text" value="{{ refcontrat }}" readonly>
+        </div>
+      </div>
+      <div class="span3">
+        <div>
+           <div >{{ form_label(form.dateProchPayement,'Date Prochaine Paiement') }}</div>
+           {{ form_errors(form.dateProchPayement) }}
+           <div>{{ form_widget(form.dateProchPayement) }}</div>
+        </div>
+      </div>
+      <div class="span3">
+        <div>
+           <div >{{ form_label(form.etat) }}</div>
+           {{ form_errors(form.etat) }}
+           <div>{{ form_widget(form.etat) }}</div>
+        </div>
+      </div>
+      <div class="span3">
+        <div>
+           <div >{{ form_label(form.typePayement,'Type Paiement') }}</div>
+           {{ form_errors(form.typePayement) }}
+           <div>{{ form_widget(form.typePayement) }}</div>
+        </div>
+      </div>
+      <div class="span3" style="display:none;">
+        <div>
+           <div >{{ form_label(form.refCsr) }}</div>
+           {{ form_errors(form.refCsr) }}
+           <div>{{ form_widget(form.refCsr,{'attr': {'class':'chosen-select'}}) }}</div>
+        </div>
+      </div>
+      <div class="span6">
+        <div>
+           <div id="refCheque" style="display:none;">Information chèque</div>
+           {{ form_errors(form.refCheque) }}
+           <div>{{ form_widget(form.refCheque,{'attr': {'class':'chosen-select', 'style': 'display:none;'}}) }}</div>
+        </div>
+      </div>
+        <div>
+          <div align="right" class="form-group">
+            <div class="input-group">
+                 <input type="submit" class="btn btn-success" value="Payer" />
+            </div>
+          </div>
+        </div>
+    {{ form_end(form) }}
+     <br><br><br><br><br><br><br>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+          $(document).ready(function() {
+// [.change] Une fonction de JQuery à exécuter chaque fois que l'événement est déclenché.
+    $('#lv_locationbundle_paiement_typePayement').change(function() {
+        var selected = $('#lv_locationbundle_paiement_typePayement').val();
+        if (selected == "Espèce" || selected == "") {
+
+// [.fadeIn();] Fonction pour afficher le contenu du champ Compétence
+
+// [.fadeOut();] Fonction pour cacher le contenu du champ Compétence
+            $("#lv_locationbundle_paiement_refCheque").fadeOut();
+            $("#refCheque").fadeOut();
+        }
+        else {
+            $("#lv_locationbundle_paiement_refCheque").fadeIn();
+            $("#refCheque").fadeIn();
+        }
+    });
+});
+
+
+
+    function calculReste() {
+
+    var a = $('#lv_locationbundle_paiement_montantTotal').val();
+    var b = $('#lv_locationbundle_paiement_montantPaye').val();
+    var result = $("#lv_locationbundle_paiement_montantRestant");
+    var d = a-b;
+    if (d >= 0) {
+    
+    result.val(d);}
+    else {
+            alert("Le montant total doît être sup au payé");
+        }
+        };
+        
+    </script>
+{% endblock %}
+

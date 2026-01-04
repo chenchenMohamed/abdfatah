@@ -1,0 +1,89 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ path('soustraitance_index') }}">Liste des contrats d'échéance</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ path('soustraitance_detail', { 'id': soustraitance.id }) }}">Détails contrat</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Paiement de tranche mensuelle</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Nouveau paiement</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Date {{ form_errors(form.date) }}</label>
+                                    {{ form_widget(form.date, {'attr': {'class':'form-control','readonly': 'readonly'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Montant {{ form_errors(form.montant) }}</label>
+                                    {{ form_widget(form.montant, {'attr': {'class':'form-control','readonly': 'readonly'}}) }}
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Nom modèle {{ form_errors(form.refSoustraitance) }}</label>
+                                    {{ form_widget(form.refSoustraitance, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('soustraitance_detail', { 'id': soustraitance.id }) }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+
+
+
+

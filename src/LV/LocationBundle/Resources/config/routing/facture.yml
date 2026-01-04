@@ -1,0 +1,49 @@
+facture_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Facture:index" }
+    methods:  GET
+
+facture_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Facture:show" }
+    methods:  GET
+
+facture_new:
+    path:     /new/{id}
+    defaults: { _controller: "LocationBundle:Facture:new" }
+    methods:  [GET, POST]
+
+facture_new1:
+    path:     /new1/{id}
+    defaults: { _controller: "LocationBundle:Facture:new1" }
+    methods:  [GET, POST]
+
+facture_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Facture:edit" }
+    methods:  [GET, POST]
+
+facture_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Facture:delete" }
+    methods:  DELETE
+
+facture_pdf:
+    path:     /{id}/pdf
+    defaults: { _controller: "LocationBundle:Facture:pdf" }
+    methods:  [GET, POST]
+
+facture_new2:
+    path:     /new2/{id}
+    defaults: { _controller: "LocationBundle:Facture:new2" }
+    methods:  [GET, POST]
+
+facture_show2:
+    path:     /{id}/show2
+    defaults: { _controller: "LocationBundle:Facture:show2" }
+    methods:  GET
+
+facture_pdf2:
+    path:     /{id}/pdf2
+    defaults: { _controller: "LocationBundle:Facture:pdf2" }
+    methods:  [GET, POST]

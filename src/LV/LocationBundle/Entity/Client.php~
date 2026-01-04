@@ -1,0 +1,425 @@
+<?php
+
+namespace LV\LocationBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * Client
+ *
+ * @ORM\Table(name="client")
+ * @ORM\Entity(repositoryClass="LV\LocationBundle\Repository\ClientRepository")
+ */
+/**
+ * @ORM\Entity
+ * @UniqueEntity("cin", message="Client déjà existant")
+ * @UniqueEntity("numPermis", message="Numéro déjà existant")
+ */
+class Client
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cin", type="string", unique=true)
+     */
+    private $cin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255)
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     */
+    private $prenom;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateNaissance", type="date")
+     */
+    private $dateNaissance;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="numPermis", type="string", length=255, unique=true)
+     */
+    private $numPermis;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="delivre", type="date")
+     */
+    private $delivre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nationalite", type="string", length=255)
+     */
+    private $nationalite;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255)
+     */
+    private $adresse;
+
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="degat", type="boolean",nullable=true)
+     */
+    private $degat;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cause", type="string", length=255,nullable=true)
+     */
+    private $cause;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="telephone", type="integer")
+     */
+    private $telephone;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="disponibilite", type="boolean", nullable=true)
+     */
+    private $disponibilite;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set cin
+     *
+     * @param string $cin
+     *
+     * @return Client
+     */
+    public function setCin($cin)
+    {
+        $this->cin = $cin;
+
+        return $this;
+    }
+
+    /**
+     * Get cin
+     *
+     * @return string
+     */
+    public function getCin()
+    {
+        return $this->cin;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Client
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     *
+     * @return Client
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set numPermis
+     *
+     * @param string $numPermis
+     *
+     * @return Client
+     */
+    public function setNumPermis($numPermis)
+    {
+        $this->numPermis = $numPermis;
+
+        return $this;
+    }
+
+    /**
+     * Get numPermis
+     *
+     * @return string
+     */
+    public function getNumPermis()
+    {
+        return $this->numPermis;
+    }
+
+    /**
+     * Set nationalite
+     *
+     * @param string $nationalite
+     *
+     * @return Client
+     */
+    public function setNationalite($nationalite)
+    {
+        $this->nationalite = $nationalite;
+
+        return $this;
+    }
+
+    /**
+     * Get nationalite
+     *
+     * @return string
+     */
+    public function getNationalite()
+    {
+        return $this->nationalite;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     *
+     * @return Client
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Set degat
+     *
+     * @param boolean $degat
+     *
+     * @return Retour
+     */
+    public function setDegat($degat)
+    {
+        $this->degat = $degat;
+
+        return $this;
+    }
+
+    /**
+     * Get degat
+     *
+     * @return bool
+     */
+    public function getDegat()
+    {
+        return $this->degat;
+    }
+
+    public function __toString()
+    {   
+        if ($this->degat == 0){return $this->cin . ' ' . $this->nom. ' ' . $this->prenom;}
+        else{return $this->cin . ' ' . $this->nom. ' ' . $this->prenom.'  (client dans LN)'; }
+    }
+
+    /**
+     * Set cause
+     *
+     * @param string $cause
+     *
+     * @return Client
+     */
+    public function setCause($cause)
+    {
+        $this->cause = $cause;
+
+        return $this;
+    }
+
+    /**
+     * Get cause
+     *
+     * @return string
+     */
+    public function getCause()
+    {
+        return $this->cause;
+    }
+
+
+
+
+    /**
+     * Set telephone
+     *
+     * @param integer $telephone
+     *
+     * @return Client
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+    
+        return $this;
+    }
+
+    /**
+     * Get telephone
+     *
+     * @return integer
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * Set disponibilite
+     *
+     * @param boolean $disponibilite
+     *
+     * @return Client
+     */
+    public function setDisponibilite($disponibilite)
+    {
+        $this->disponibilite = $disponibilite;
+    
+        return $this;
+    }
+
+    /**
+     * Get disponibilite
+     *
+     * @return boolean
+     */
+    public function getDisponibilite()
+    {
+        return $this->disponibilite;
+    }
+
+    /**
+     * Set delivre
+     *
+     * @param \DateTime $delivre
+     *
+     * @return Client
+     */
+    public function setDelivre($delivre)
+    {
+        $this->delivre = $delivre;
+    
+        return $this;
+    }
+
+    /**
+     * Get delivre
+     *
+     * @return \DateTime
+     */
+    public function getDelivre()
+    {
+        return $this->delivre;
+    }
+
+    /**
+     * Set dateNaissance
+     *
+     * @param \DateTime $dateNaissance
+     *
+     * @return Client
+     */
+    public function setDateNaissance($dateNaissance)
+    {
+        $this->dateNaissance = $dateNaissance;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateNaissance
+     *
+     * @return \DateTime
+     */
+    public function getDateNaissance()
+    {
+        return $this->dateNaissance;
+    }
+}

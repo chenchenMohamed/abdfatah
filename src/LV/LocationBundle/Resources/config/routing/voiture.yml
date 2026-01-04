@@ -1,0 +1,37 @@
+voiture_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Voiture:index" }
+    methods:  GET
+
+voiture_index2:
+    path:     /voituressoustraitance
+    defaults: { _controller: "LocationBundle:Voiture:index2" }
+    methods:  GET
+
+voiture_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Voiture:show" }
+    methods:  GET
+
+voiture_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Voiture:new" }
+    methods:  [GET, POST]
+
+voiture_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Voiture:edit" }
+    methods:  [GET, POST]
+
+voiture_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Voiture:delete" }
+
+voiture_delete1:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Voiture:delete1" }
+
+marque_list_modeles:
+    path:     /get-modeles-from-marque
+    defaults: { _controller: "LocationBundle:Voiture:listModelesOfMarque" }
+    methods:  GET

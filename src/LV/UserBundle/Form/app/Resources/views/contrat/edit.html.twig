@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li class="active"><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div> 
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+<h1>Modifier un Contrat</h1>  
+<div class="content-wrapper">
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('csr_index') }}"><i class="fa fa-car"></i>/ Contrat</a></li>
+        <li  class="breadcrumb-item active">/ Modifier un Contrat</li>
+      </ol>
+    </section>
+           <div align="right" class="form-group" style="margin-right:110px;">
+                <div class="input-group">
+                  <h4 class="text-center"><a href="{{ path('csr_index') }}" role="button" class="btn btn-info btn-sm">Retour à  la Liste</a></h4>
+                </div>
+            </div>
+<div class="box-body"> 
+    {{ form_start(edit_form) }}
+    <div class="row">
+      <div class="span3">
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.numContrat) }}</div>
+           {{ form_errors(edit_form.numContrat) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.numContrat, {'attr': {'readonly': 'readonly'}}) }}</div>
+        </div>
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.dateContrat) }}</div>
+           {{ form_errors(edit_form.dateContrat) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.dateContrat, {'attr': {'readonly': 'readonly'}}) }}</div>
+        </div>
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.kmDepart) }}</div>
+           {{ form_errors(edit_form.kmDepart) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.kmDepart) }}</div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.tarif) }}</div>
+           {{ form_errors(edit_form.tarif) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.tarif, { 'attr': {'onkeyup': 'calcultarif()'}}) }}</div>
+        </div>
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.nbreJour) }}</div>
+           {{ form_errors(edit_form.nbreJour) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.nbreJour, {'attr': {'readonly': 'readonly'}}) }}</div>
+        </div>
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.recette) }}</div>
+           {{ form_errors(edit_form.recette) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.recette, {'attr': {'readonly': 'readonly'}}) }}</div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.conducteur1) }}</div>
+           {{ form_errors(edit_form.conducteur1) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.conducteur1,{'attr': {'class':'chosen-select'}}) }}</div>
+        </div><br>
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.conducteur2) }}</div>
+           {{ form_errors(edit_form.conducteur2) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.conducteur2,{'attr': {'class':'chosen-select'}}) }}</div>
+        </div>
+        <div class="row" style="display:none;">
+           <div class="col-sm-4">{{ form_label(edit_form.refReservation) }}</div>
+           {{ form_errors(edit_form.refReservation) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.refReservation,{'attr': {'class':'chosen-select'}}) }}</div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.niveauCarburant) }}</div>
+           {{ form_errors(edit_form.niveauCarburant) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.niveauCarburant) }}</div>
+        </div>
+        <div class="row">
+           <div class="col-sm-4">{{ form_label(edit_form.etat) }}</div>
+           {{ form_errors(edit_form.etat) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.etat) }}</div>
+        </div>
+      </div>
+      </div>
+        <div class="row">
+        <div class="span12" align="right">
+            <input type="submit" class="btn btn-success" value="Modifier" />
+        </div>
+      </div>
+    {{ form_end(edit_form) }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+ function calcultarif() {
+
+    var a = parseFloat($('#lv_locationbundle_contrat_tarif').val());
+    var b = parseInt($('#lv_locationbundle_contrat_nbreJour').val());
+    var result = $("#lv_locationbundle_contrat_recette");
+    var d = a*b;
+    result.val(d);
+        };
+
+    </script>
+    
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('client_index')}}">Liste des clients</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Modifier client</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Nouveau client</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nom {{ form_errors(form.nom) }}</label>
+                                    {{ form_widget(form.nom, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Prénom {{ form_errors(form.prenom) }}</label>
+                                    {{ form_widget(form.prenom, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Date de naissance {{ form_errors(form.dateNaissance) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(form.dateNaissance, {'attr': {'class':'form-control', 'required': 'required'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Numéro CIN ou passeport{{ form_errors(form.cin) }}</label>
+                                    {{ form_widget(form.cin, {'attr': {'class':'form-control', 'required': 'required'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Numéro permis {{ form_errors(form.numPermis) }}</label>
+                                    {{ form_widget(form.numPermis, {'attr': {'class':'form-control', 'required': 'required'}}) }}
+                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Délivré le {{ form_errors(form.delivre) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(form.delivre, {'attr': {'class':'form-control', 'required': 'required'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nationalité {{ form_errors(form.nationalite) }}</label>
+                                    {{ form_widget(form.nationalite, {'attr': {'class':'form-control', 'required': 'required'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Téléphone {{ form_errors(form.telephone) }}</label>
+                                    {{ form_widget(form.telephone, {'attr': {'class':'form-control', 'required': 'required'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Adresse {{ form_errors(form.adresse) }}</label>
+                                    {{ form_widget(form.adresse, {'attr': {'class':'form-control', 'required': 'required'}}) }}
+                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group" style="display: none;">
+                                    <label>Dégats {{ form_errors(form.degat) }}</label>
+                                    {{ form_widget(form.degat, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Cause {{ form_errors(form.cause) }}</label>
+                                    {{ form_widget(form.cause, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Disponibilité {{ form_errors(form.disponibilite) }}</label>
+                                    {{ form_widget(form.disponibilite, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('client_index') }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+
+

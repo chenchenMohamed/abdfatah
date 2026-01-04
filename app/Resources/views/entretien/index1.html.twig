@@ -1,0 +1,299 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{%block body %}<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12"> 
+
+  <div class="content-wrapper">
+
+     <section class="content" style="mapping:25px">
+      <div class="row">
+        <div class="col-md-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><center>Entretien</center></h3>
+                </div>
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item active">/<i class="fa fa-car"></i> Entretien</li>
+      </ol>
+    </section>
+   <div class="box-body">
+
+{{ form_start(form) }}
+        <div class="span3">
+         <div class="row" style="display:none;" readonly>
+           <div >{{ form_label(form.voiture) }}</div>
+           {{ form_errors(form) }}
+           <div>{{ form_widget(form.voiture)}}</div>
+         </div>
+                         <div class="row" readonly>
+                             <div class="col-sm-4" readonly> Matricule :</div>
+                             <div class="col-sm-8" readonly><input value="" id="matricule" readonly></div>
+                         </div>
+                         <div class="row" readonly>
+                             <div class="col-sm-4" readonly> Marque : </div>
+                             <div class="col-sm-8" readonly><input value="" id="marque" readonly></div>
+                          </div>
+                          <div class="row" readonly>
+                             <div class="col-sm-4" readonly> Modele : </div>
+                             <div class="col-sm-8" readonly><input value="" id="modele" readonly></div>
+                          </div>
+                          <div class="row" readonly>
+                             <div class="col-sm-4" readonly> Couleur: </div>
+                             <div class="col-sm-8" readonly><input value="" id="couleur" readonly></div>
+                          </div>                          
+                      </div>
+                      <div class="span3" readonly>
+                          <div class="row" readonly>
+                             <div class="col-sm-4" readonly> Code Radio : </div>
+                             <div class="col-sm-8" readonly><input value="" id="coderadio" readonly></div>
+                          </div>
+                          
+                          <div class="row" readonly>
+                             <div class="col-sm-4" readonly>Type Transmission : </div>
+                             <div class="col-sm-8" readonly><input value="" id="typetransmission" readonly></div>
+                          </div>
+                          <div class="row" readonly>
+                             <div class="col-sm-4" readonly> Age : </div>
+                             <div class="col-sm-8" readonly><input value="" id="age" readonly></div>
+                          </div>
+                          <div class="row" readonly>
+                             <div class="col-sm-4" readonly> Prix : </div>
+                             <div class="col-sm-8" readonly><input value="" id="prix" readonly></div>
+                          </div>
+                      </div>
+                      <div class="span3" readonly>
+                          <div class="row" readonly>
+                             <div class="col-sm-4" readonly> Nombre Porte :</div>
+                             <div class="col-sm-8" readonly><input value="" id="nombreporte" readonly></div>
+                          </div>
+                          <div class="row" readonly>
+                             <div class="col-sm-4" readonly> nombre Passagers : </div>
+                             <div class="col-sm-8" readonly><input value="" id="nombrepassager" readonly></div>
+                          </div>
+                          <div class="row" readonly>
+                             <div class="col-sm-4" readonly> Capacite Bagages : </div>
+                             <div class="col-sm-8" readonly><input value="" id="capacitebagage" readonly></div>
+                          </div><br><br><br>
+                      </div>
+        <div class="span3">
+        </div>
+        
+{{ form_end(form) }}
+<br>
+<br>
+<div class="row">
+<div class="span6">
+	<div class="row">
+  <div class="span5">
+    <section class="content-header"><center>
+      <ol class="breadcrumb">
+        <li><h1><u>Visite</u></h1></li>
+      </ol></center>
+    </section>
+  </div>
+    <div class="span5">
+      <a href="{{path('visite_new1',{'voiture':vehicule})}}"><input type="button" class="btn btn-info" value="Ajouter Visite" ></a><br><br>
+    </div>
+	</div>
+	<div class="row">
+ <table id="table" class="table table-striped" style="background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Matricule</th>
+                <th style="display:none;"></th>
+                <th>Numvisite</th>
+                <th>Datevisite</th>
+                <th>Montant</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for visite in visites %}
+            <tr var="{{ visite.refVoiture.id }}">
+                <td><a href="{{ path('visite_show', { 'id': visite.id }) }}">{{ visite.id }}</a></td>
+                <td>{{ visite.refVoiture.matricule }}</td>
+                <td style="display:none;">{{ visite.refVoiture.id }}</td>
+                <td>{{ visite.numVisite }}</td>
+                <td>{% if visite.dateVisite %}{{ visite.dateVisite|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ visite.montant }}</td>
+                <td><a href="{{ path('visite_edit', { 'id': visite.id }) }}"><button  class="btn btn-success form-control">Modifier</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	
+	</div>
+</div>
+<div class="span5">
+<div class="span6">
+    <section class="content-header"><center>
+      <ol class="breadcrumb center">
+        <li><h1><u>Vidange</u></h1></li>
+      </ol></center>
+    </section>
+	</div>
+    <div class="span6" align="right">
+      <a href="{{path('vidange_new1',{'voiture':vehicule})}}"><input type="button" class="btn btn-info" value="Ajouter Vidange" ></a><br><br>
+    </div>
+	<div class="row">
+<table id="table1" class="table table-striped" style="background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Matricule</th>
+                <th style="display:none;"></th>
+                <th>Numero vidange</th>
+                <th>Date vidange</th>
+                <th>Prochaine vidange</th>
+                <th>Compteur</th>
+                <th>Filtre</th>
+                <th>Bougie</th>
+                <th>Chaine</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vidange in vidanges %}
+            <tr var="{{ vidange.refVoiture.id }}">
+                <td><a href="{{ path('vidange_show', { 'id': vidange.id }) }}">{{ vidange.id }}</a></td>
+                <td>{{ vidange.refVoiture.matricule }}</td>
+                <td style="display:none;">{{ vidange.refVoiture.id }}</td>
+                <td>{{ vidange.numVidange }}</td>
+                <td>{% if vidange.dateVidange %}{{ vidange.dateVidange|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ vidange.prochVidange }}</td>
+                <td>{{ vidange.compteur }}</td>
+                <td>{{ vidange.filtre }}</td>
+                <td>{{ vidange.bougie }}</td>
+                <td>{{ vidange.chaine }}</td>
+                <td><a href="{{ path('vidange_edit', { 'id': vidange.id }) }}"><button  class="btn btn-success form-control">Modifier</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	</div>
+</div>
+    <table id="voiture" class="table table-striped" style="display:none;background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+                    <thead>
+                     <tr>
+                         <th class="text-center">Id</th>
+                         <th class="text-center">Matricule</th>
+                         <th class="text-center"></th>
+                         <th class="text-center">Marque</th>
+                         <th class="text-center">Modele</th>
+                         <th class="text-center">Couleur</th>
+                         <th class="text-center">Code Radio</th>
+                         <th class="text-center">Type Transmission</th>
+                         <th class="text-center">Nombre Portes</th>
+                         <th class="text-center">Nombre Passagers</th>
+                         <th class="text-center">Capacite Bagages</th>
+                         <th class="text-center">Age</th>
+                         <th class="text-center">Prix/Jours</th>
+                     </tr>
+                    </thead>
+                    <tbody id="myTable">
+                      {% for voiture in voitures %}
+                      <tr var="{{ voiture.id }}">
+                        <td style="padding-top:30px;">{{ voiture.id }}</td>
+                        <td style="padding-top:30px;">{{ voiture.matricule }}</td>
+                        <td></td>
+                        <td style="padding-top:30px;">{{ voiture.marque.nom }}</td>
+                        <td style="padding-top:30px;">{{ voiture.modele.nom }}</td>
+                        <td style="padding-top:30px;">{{ voiture.couleur }}</td>
+                        <td style="padding-top:30px;">{{ voiture.codeRadio }}</td>
+                        <td style="padding-top:30px;">{{ voiture.typeTransmission }}</td>
+                        <td style="padding-top:30px;">{{ voiture.nbrePortes }}</td>
+                        <td style="padding-top:30px;">{{ voiture.nbrePassagers }}</td>
+                        <td style="padding-top:30px;">{{ voiture.capaciteBagages }}</td>
+                        <td style="padding-top:30px;">{{ voiture.age }}</td>
+                        <td style="padding-top:30px;">{{ voiture.prix }} TND</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    </table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+ <script> 
+ 
+ var filterTable = function(item) {
+  // Get the value of the select box
+  var val = item.val();
+  
+ // Show all the rows
+ var e = document.getElementById("form_voiture");
+ var strUser = e.options[e.selectedIndex].value;
+ //alert(strUser);
+ if(strUser==""){
+ $('tbody tr').hide();}
+ else{
+  $('tbody tr').show();
+  }
+  // If there is a value hide all the rows except the ones with a data-year of that value
+  if(val) {
+    $('tbody tr').not($('tbody tr[var="' + val + '"]')).hide();
+        $("#matricule").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(1)").html())
+        $("#marque").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(3)").html());
+        $("#modele").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(4)").html());
+        $("#couleur").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(5)").html());
+        $("#prix").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(12)").html());
+        $("#coderadio").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(6)").html());
+        $("#typetransmission").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(7)").html());
+        $("#age").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(11)").html());
+        $("#nombreporte").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(8)").html());
+        $("#nombrepassager").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(9)").html());
+        $("#capacitebagage").attr("value",$('#myTable tr[var="' + strUser + '"]').find("td:eq(10)").html());
+  }
+}
+
+
+$('select').on('change', function(e){
+  // On change fire function
+  filterTable($(this));
+});
+
+// Fire function on load
+filterTable($('select'));
+  
+
+ 
+ </script>
+
+
+{% endblock %}

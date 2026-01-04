@@ -1,0 +1,114 @@
+{% extends 'template.html.twig' %}
+{% block stylesheets %}
+<style type="text/css">
+    @media (max-width: 600px){
+      #title{
+        margin-bottom: 20px;
+      }
+      #button{
+        height: 35px;
+      }
+    }
+  </style>
+{% endblock %}
+{% block body %}
+<!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Liste des voitures pour location</h4>#}
+                        <div class="ml-auto text-right col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Statistiques des contrats</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                
+                               
+                                {{ form_start(form) }}
+                                <div class="col-md-12 row">
+                                <div class="col-md-4 col-12">
+                                <div class="form-group" style="display: none;">
+                                {{ form_errors(form.date.day) }}
+                                {{ form_widget(form.date.day) }}
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <div class="input-group">
+                                    {{ form_widget(form.date.month, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                  <label>Année : {{ form_errors(form.date.year) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(form.date.year, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="col-md-2 col-6">
+                                <div class="form-group">
+                                  <label><span style="color:white;">Durée :</span></label>
+                                  <label><span style="color:white;">Durée :</span></label>
+
+                                  <input type="submit" value="Chercher" class="btn btn-success" style="height: 37px;">
+                                </div>
+                               </div>
+                                {{ form_end(form) }}
+                                <br>
+                                </div>
+                                <br>
+                                <div id="div_piechart" class="table-responsive"></div>
+                                <div id="div_histogram"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw(piechart, 'div_piechart') }}
+    </script>
+{% endblock %}

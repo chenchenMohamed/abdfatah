@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li class="active"><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+
+  <div class="content-wrapper">
+
+     <section class="content" style="mapping:25px">
+      <div class="row">
+        <div class="col-md-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Afficher un Client</h3>
+                </div>
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('client_index') }}"><i class="fa fa-car"></i>/ Client</a></li>
+        <li  class="breadcrumb-item active"><i class="fa fa-car"></i>/ Afficher un Client</li>
+      </ol>
+    </section>
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <h4 class="text-center"><a href="{{ path('client_index') }}" role="button" class="btn btn-info btn-sm">Retour à la liste</a></h4>
+          </div>
+      </div><br>
+                <div class="box-body">
+                    {{ form_start(show_form, {'attr':{'novalidate':'novalidate'}}) }}
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(show_form.cin) }}</div>
+                             {{ form_errors(show_form) }}
+                             <div class="col-sm-8">{{ form_widget(show_form.cin, { 'attr': { 'readonly': 'true' } }) }}</div>
+                         </div>
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(show_form.nom) }}</div>
+                             {{ form_errors(show_form) }}
+                             <div class="col-sm-8">{{ form_widget(show_form.nom, { 'attr': { 'readonly': 'true' } }) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(show_form.prenom) }}</div>
+                             {{ form_errors(show_form) }}
+                             <div class="col-sm-8">{{ form_widget(show_form.prenom, { 'attr': { 'readonly': 'true' } }) }}</div>
+                          </div>
+                          
+                      </div>
+                      <div class="span4">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(show_form.numPermis) }}</div>
+                             {{ form_errors(show_form) }}
+                             <div class="col-sm-8">{{ form_widget(show_form.numPermis, { 'attr': { 'readonly': 'true' } }) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(show_form.nationalite) }}</div>
+                             {{ form_errors(show_form) }}
+                             <div class="col-sm-8">{{ form_widget(show_form.nationalite, { 'attr': { 'readonly': 'true' } }) }}</div>
+                          </div>
+                          
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(show_form.adresse) }}</div>
+                             {{ form_errors(show_form) }}
+                             <div class="col-sm-8">{{ form_widget(show_form.adresse, { 'attr': { 'readonly': 'true' } }) }}</div>
+                          </div>
+                      </div>
+                      <div class="span4">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(show_form.degat) }}</div>
+                             {{ form_errors(show_form) }}
+                             <div class="col-sm-8">{{ form_widget(show_form.degat, { 'attr': { 'readonly': 'true' } }) }}</div>
+                          </div>
+                      </div>
+                      {{ form_end(show_form) }}
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('csr_index')}}">Liste des contrats</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Détails facture</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-body printableArea">
+                            <h3><b>FACTURE </b> <span class="pull-right">#{{ facture.numFacture }}</span></h3>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-left">
+                                        <address>
+                                            <h3> &nbsp;<b class="text-danger">{{agence.nom}}</b></h3>
+                                            <p class="text-muted m-l-5">Tél 1 : {{agence.tel}},
+                                                <br/> Tél 2 : {{agence.tel2}},
+                                                <br/> Fax : {{agence.Fax}},
+                                                <br/> {{agence.adresse}},
+                                                <br/> Tunisie</p>
+                                        </address>
+                                    </div>
+                                    <div class="pull-right text-right">
+                                        <address>
+                                            <h3>Client,</h3>
+                                            <h4 class="font-bold">{{ facture.refPayement.refCsr.conducteur1.prenom }} {{ facture.refPayement.refCsr.conducteur1.nom }},<br></h4>
+                                            <p class="text-muted m-l-30">Tél: {{ facture.refPayement.refCsr.conducteur1.telephone }},
+                                                <br/>Adresse : {{ facture.refPayement.refCsr.conducteur1.adresse }}</p>
+                                            <p class="m-t-30"><b>Date facture :</b> <i class="fa fa-calendar"></i> {% if facture.dateFacture %}{{ facture.dateFacture|date('d/m/Y') }}{% endif %}</p>
+                                            <p><b>Date contrat :</b> <i class="fa fa-calendar"></i> {% if facture.refPayement.refCsr.dateContrat %}{{ facture.refPayement.refCsr.dateContrat|date('d/m/Y') }}{% endif %}</p>
+                                            <p><b>Numéro contrat : </b>{{facture.refPayement.refCsr.numContrat}}</p>
+                                        </address>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="table-responsive m-t-40" style="clear: both;">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">#</th>
+                                                    <th>Description</th>
+                                                    <th class="text-right">Quantité</th>
+                                                    <th class="text-right">Prix</th>
+                                                    <th class="text-right">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-center">1</td>
+                                                    <td>Location de voiture {{ facture.refPayement.refCsr.refVoiture.marque }} {{ facture.refPayement.refCsr.refVoiture.modele }} : {{ facture.refPayement.refCsr.refVoiture.matricule }}<br> de {% if facture.RefPayement.refCsr.dateDebut %}{{ facture.RefPayement.refCsr.dateDebut|date('d/m/Y H:i') }}{% endif %}
+                                                    à {% if facture.RefPayement.refCsr.dateFin %}{{ facture.RefPayement.refCsr.dateFin|date('d/m/Y H:i') }}{% endif %}
+                                                    </td>
+                                                    <td class="text-right">{{duree}}</td>
+                                                    <td class="text-right">{{facture.refPayement.refCsr.tarif|number_format(3, '.', ',')}}</td>
+                                                    <td class="text-right">{{facture.refPayement.refCsr.recette|number_format(3, '.', ',')}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="pull-right m-t-30 text-right">
+                                        <p>Total : {{facture.refPayement.refCsr.recette|number_format(3, '.', ',')}} TND</p>
+                                        <hr>
+                                        <h3><b>Total :</b> {{facture.refPayement.refCsr.recette|number_format(3, '.', ',')}} TND</h3>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <div class="text-right">
+                                        <a href="{{ path('csr_index') }}" class="btn btn-secondary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        <a href="{{ path('facture_pdf2', { 'id': facture.id }) }}" role="button" class="btn btn-danger">&nbsp;&nbsp;&nbsp;Imprimer&nbsp;&nbsp;&nbsp;</a>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+
+
+
+
+
+
+
+
+                                                                            
+                                                                            
+
+
+
+
+
+                                                                            
+                                                                            
+                                                                    

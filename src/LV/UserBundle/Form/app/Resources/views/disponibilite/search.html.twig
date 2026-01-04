@@ -1,0 +1,235 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{%block body %}
+<body><div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12"> 
+
+  <div class="content-wrapper">
+
+     <section class="content" style="mapping:25px">
+      <div class="row">
+        <div class="col-md-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Liste des voitures disponibles</h3>
+                </div>
+
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item active"><i class="fa fa-car"></i>/ Voiture disponible</li>
+      </ol>
+    </section> <br><br>
+                <div class="box-body">
+                  <div class="table-responsive">
+<div class="row"><input type="hidden" id="today" value="{{ 'now'| date('Y-m-d')}}">
+{{ form_start(form) }}
+        <div  class="span3">
+           <div >{{ form_label(form.dateDepart) }}</div>
+           {{ form_errors(form) }}
+           <div>{{ form_widget(form.dateDepart, {'attr': {'onchange': 'calculDuree1()'}}) }}</div>
+        </div>
+        <div class="span3">
+           <div >{{ form_label(form.dateArrivee) }}</div>
+           {{ form_errors(form) }}
+           <div>{{ form_widget(form.dateArrivee, {'attr': {'onchange': 'calculDuree()'}}) }}</div>
+        </div>
+        <div class="span3">
+           <div >{{ form_label(form.duree) }}</div>
+           {{ form_errors(form) }}
+           <div>{{ form_widget(form.duree) }}</div>
+        </div>
+        <div class="span3"><br>
+            <input type="submit" value="Chercher">
+        </div>
+{{ form_end(form) }}<br>
+</div>
+<div class="row">
+    <h1><center>Liste de voiture disponible le {{ dateDepart |date('d-m-Y') }}</center></h1>
+    <table id="example" class="table table-striped display" style="background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+        <thead>
+            <tr>
+                <th class="text-center">Matricule</th>
+                <th class="text-center">Marque</th>
+                <th class="text-center">Modele</th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set newArray = [] %}
+        {% for disponibilite3 in disponibilites3 %}
+        {% if disponibilite3.etat == 'Location' or disponibilite3.etat == '' %}
+         {#{% for disponibilite2 in disponibilites2 %}#}
+          {#{% if (disponibilite.matricule not in disponibilite2) %}#}
+           {% if disponibilite3.matricule not in newArray %}
+            {% set newArray = newArray|merge([disponibilite3.matricule]) %}
+           
+            <tr>
+                <td style="padding-top:30px;">{{ disponibilite3.matricule }}</td>
+               <td style="padding-top:30px;">{{ disponibilite3.marque }}</td>
+                <td style="padding-top:30px;">{{ disponibilite3.modele }}</td>
+                <td style="padding-top:15px;">
+                            <h5 class="text-center"><a href="{{ path('reservation_new1', { 'time1': time1, 'time2': time1 , 'result' : duree ,'voiture': disponibilite3.matricule }) }}" role="button" class="btn btn-info btn-sm">Réserver</a></h5>
+                </td>
+                <td style="padding-top:15px;">
+                            <h5 class="text-center"><a href="{{ path('csr_new1', { 'time1': time1, 'time2': time1 , 'result' : duree ,'voiture': disponibilite3.matricule }) }}" role="button" class="btn btn-info btn-sm">Contrat</a></h5>
+                </td>
+                        
+            </tr>
+            {% endif %}
+        {#{% endif %}#}
+        {#{% endfor %}#}
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+                  </div>
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script> 
+ function calculDuree1() {
+ var today = $('#today').val(),time1 = $('#form_dateDepart').val(), time2 = $('#form_dateArrivee').val(),result = $("#form_duree");
+ var dt = new Date(today).getTime();
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+  //  if(d1 >= dt ){
+    if(d2>0){
+    if (parseInt(msec) > 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes');
+        var jours = dd;
+        document.getElementById('form_duree').value=dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes';
+        }
+		else if (parseInt(msec) == 0) {
+		document.getElementById("form_dateDepart").value=time1;
+		document.getElementById("form_dateArrivee").value=time1;
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }
+        else {
+		document.getElementById("form_dateDepart").value=time1;
+		document.getElementById("form_dateArrivee").value=time1;
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }
+ }
+/*}else{
+		document.getElementById("form_dateDepart").value=today;
+		if(d2 >= dt ){
+		document.getElementById("form_dateArrivee").value=time2;
+		}else{
+		document.getElementById("form_dateArrivee").value=today;
+		}
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+		}*/
+ };
+
+ function calculDuree() {
+ var time1 = $('#form_dateDepart').val(), time2 = $('#form_dateArrivee').val(),result = $("#form_duree");
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    
+    
+    if (parseInt(msec) > 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes');
+        var jours = dd;
+        document.getElementById('form_duree').value=dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes';
+        }
+		else  if (parseInt(msec) == 0) {
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }
+        else {
+        alert("La date d'arrivée doît être superieur à la date de depart");
+		document.getElementById("form_dateDepart").value=time1;
+		document.getElementById("form_dateArrivee").value=time1;
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }
+        }
+        ;
+       
+
+    var dat = $('<a href="reservation/new1/' + time1 + '/'+ time2 + '/' + result +'">send data</a>');
+    $('body').append(dat);
+    var dat1 = $('<a href="csr/new1/' + time1 + '/'+ time2 + '">send data</a>');
+    $('body').append(dat1);
+    var dat2 = $('<a href="contrat/new/' + time1 + '/'+ time2 + '/' + result +'">send data</a>');
+    $('body').append(dat2);
+  
+
+var nowTemp = new Date();
+var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+ 
+var checkin = $('#form_dateDepart').datepicker({
+  onRender: function(date) {
+    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+  }
+}).on('changeDate', function(ev) {
+  if (ev.date.valueOf() > checkout.date.valueOf()) {
+    var newDate = new Date(ev.date)
+    newDate.setDate(newDate.getDate() + 1);
+    checkout.setValue(newDate);
+  }
+  checkin.hide();
+  $('#form_dateFin')[0].focus();
+}).data('datepicker');
+var checkout = $('#form_dateFin').datepicker({
+  onRender: function(date) {
+    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+  }
+}).on('changeDate', function(ev) {
+  checkout.hide();
+}).data('datepicker');
+ </script>
+
+
+{% endblock %}

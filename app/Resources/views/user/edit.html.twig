@@ -1,0 +1,102 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('user_index')}}">Liste des utilisateurs</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Modifier utilisateur</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(edit_form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Modifier utilisateur</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                 <label>Nom d'utilisateur</label>
+                                 {{ form_errors(edit_form.username) }} 
+                                 {{ form_widget(edit_form.username, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                 <label>Email</label>
+                                 {{ form_errors(edit_form.email) }} 
+                                 {{ form_widget(edit_form.email, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                 {{ form_errors(edit_form.plainPassword) }} 
+                                 {{ form_widget(edit_form.plainPassword) }}
+                                </div>
+                                {% if is_granted('ROLE_USER') and is_granted('ROLE_ADMIN') %}
+                                <div class="form-group">
+                                 <label>Rôles</label>
+                                 {{ form_errors(edit_form.roles) }} 
+                                 {{ form_widget(edit_form.roles, {'attr': {'class': 'form-control select2','style':'width: 100%; height:36px;'}}) }}
+                                </div>
+                                {% else %}
+                                <div class="form-group" style="display: none;">
+                                 <label>Rôles</label>
+                                 {{ form_errors(edit_form.roles) }} 
+                                 {{ form_widget(edit_form.roles, {'attr': {'class': 'form-control select2','style':'width: 100%; height:36px;'}}) }}
+                                </div>
+                                {% endif %}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('user_index') }}" class="btn btn-default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit"  value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Créer un compte&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+
+
+

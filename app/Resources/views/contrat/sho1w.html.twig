@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li class="active"><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+<h1><center>Afficher un Contrat</center></h1>  
+<div class="content-wrapper">
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('contrat_index') }}"><i class="fa fa-car"></i>/ Contrat</a></li>
+        <li  class="breadcrumb-item active">/ Afficher un Contrat</li>
+      </ol>
+    </section>
+           <div class="span12">
+              <div align="right" class="form-group">
+                <div class="input-group" style="padding-right:150px;"">
+                  <a href="{{ path('paiement_new', { 'id': contrat.id }) }}"  class="btn btn-danger btn-sm">Paiement</a>
+                  <a href="{{ path('contrat_index') }}" class="btn btn-info btn-sm">Retour à  la Liste</a>
+                </div>
+              </div>
+            </div>
+   <br><br>
+<div class="row">
+   <div class="span12">
+
+      <div class="span4" style="background-color:#F2F3F4;padding:25px;mapping:25px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Détails</u></b><h2></center> <hr>
+        <div>
+           <div>Numéro de Contrat : <input type="text" value="{{ contrat.numContrat }}" readonly></div>
+        </div>
+        <div>
+            <div>Date Contrat : <input type="text" value="{% if contrat.dateContrat %}{{ contrat.dateContrat|date('Y-m-d') }}{% endif %}" readonly></div>
+        </div>
+        <br>
+      </div> 
+      <div class="span6" style="background-color:#F2F3F4;padding:18px;mapping:25px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Tarif et Prix</u></b><h2></center> <hr>
+        <div>
+           <div> Tarif :<input type="text" value="{{ contrat.tarif }}" readonly></div>
+        </div>
+        <div>
+           <div>Nombre de Jour : <input type="text" value="{{ contrat.nbreJour }}" readonly></div>
+        </div>
+        <div>
+           <div>Montant Total : <input type="text" value="{{ contrat.recette }}" readonly></div>
+        </div>  
+      </div>
+    </div>
+</div><br>
+<div class="row">
+   <div class="span12">
+      <div class="span4" style="background-color:#F2F3F4;padding:25px;mapping:25px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Réservation</u></b><h2></center> <hr>
+        <div> Matricule : <input type="text" required="required" value="{{ contrat.refReservation.refvoiture.matricule }}" readonly/></div>
+        <div>
+           <div>Date Debut : <input type="text" required="required" value="{% if contrat.refReservation.dateDebut %}{{ contrat.refReservation.dateDebut|date('Y-m-d H:i:s') }}{% endif %}" readonly/></div>
+        </div>
+        <div>
+           <div>Date Fin : <input type="text" required="required" value="{% if contrat.refReservation.dateFin %}{{ contrat.refReservation.dateFin|date('Y-m-d H:i:s') }}{% endif %}" readonly/></div>
+        </div>
+        <div>
+           <div>km Départ : <input type="text" value="{{ contrat.kmDepart }}" readonly></div>
+        </div>
+        <div>
+           <div>Niveau Carburant : <input type="text" value="{{ contrat.niveauCarburant }}" readonly></div>
+        </div>
+        <div>
+           <div>Etat de voiture : <input type="text"  value="{{ contrat.etat }}" readonly></div>
+        </div>
+      </div> 
+      <div class="span6" style="background-color:#F2F3F4;padding:25px;mapping:25px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Conducteur</u></b><h2></center> <hr>
+       
+<div class="row">
+   <div class="span12">
+    <div class="span3">
+          <b> <u>Conducteur 1 :</u></b>
+           <div>Cin : <br><input type="text" value="{{ contrat.conducteur1.cin }}" readonly/></div>
+           <div>Nom : <br><input type="text" value="{{ contrat.conducteur1.nom }}" readonly/></div>
+           <div>Prenom : <br><input type="text" value="{{ contrat.conducteur1.prenom }}" readonly/></div>
+           <div>Numéro Permis : <br><input type="text" value="{{ contrat.conducteur1.numPermis }}" readonly/></div>
+        </div>
+        <div class="span3">
+          <b><u>Conducteur 2 :</u></b>
+           <div>Cin : <br><input type="text" value="{{ contrat.conducteur2.cin }}" readonly/></div>
+           <div>Nom : <br><input type="text" value="{{ contrat.conducteur2.nom }}" readonly/></div>
+           <div>Prenom : <br><input type="text" value="{{ contrat.conducteur2.prenom }}" readonly/></div>
+           <div>Numéro Permis : <br><input type="text" value="{{ contrat.conducteur2.numPermis }}" readonly/></div>
+        </div>
+      </div>      
+     </div>
+    </div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

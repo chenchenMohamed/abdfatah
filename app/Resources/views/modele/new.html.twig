@@ -1,0 +1,114 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('marque_index')}}">Liste des modèles</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Nouveau modèle</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Nouveau modèle</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nom marque {{ form_errors(form.marque) }} {{ form_errors(form_marque.nom) }}</label>
+                                    {{ form_widget(form.marque, {'attr': {'class':'select2 form-control custom-select','style':'width: 282px;'}}) }}
+                                    <button type="button" class="btn btn-info btn-flat" data-toggle="modal" data-target="#new_marque">
+                                    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom modèle {{ form_errors(form.nom) }}</label>
+                                    {{ form_widget(form.nom, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('modele_index') }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+
+    <div class="modal fade" id="new_marque" role="dialog" aria-labelledby="new_role-label" aria-hidden="true">
+         {{ form_start(form_marque) }}
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nouvelle marque :</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="first_name">Nom marque:</label>
+                        {{ form_errors(form_marque.nom) }}
+                        {{ form_widget(form_marque.nom,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                     <input type="submit" name="insert" id="insert" class="btn btn-primary" value="Valider" />
+                </div>
+            </div>
+            {{ form_rest(form_marque) }}
+            {{ form_end(form_marque) }}
+        </div>
+    </div>
+{% endblock %}
+
+

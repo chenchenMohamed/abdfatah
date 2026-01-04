@@ -1,0 +1,28 @@
+echeance_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Echeance:index" }
+    methods:  GET
+
+echeance_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Echeance:show" }
+    methods:  GET
+
+echeance_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Echeance:new" }
+    methods:  [GET, POST]
+
+echeance_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Echeance:edit" }
+    methods:  [GET, POST]
+
+echeance_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Echeance:delete" }
+
+echeance_detail:
+    path:     /{id}/detail
+    defaults: { _controller: "LocationBundle:Echeance:detail" }
+    methods:  [GET, POST]

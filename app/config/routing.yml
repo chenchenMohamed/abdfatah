@@ -1,0 +1,103 @@
+location_cheque:
+    resource: "@LocationBundle/Resources/config/routing/cheque.yml"
+    prefix:   /cheque
+
+location_reservation:
+    resource: "@LocationBundle/Resources/config/routing/reservation.yml"
+    prefix:   /reservation
+
+location_facture:
+    resource: "@LocationBundle/Resources/config/routing/facture.yml"
+    prefix:   /facture
+
+location_csr:
+    resource: "@LocationBundle/Resources/config/routing/csr.yml"
+    prefix:   /csr
+
+location_soustraitance:
+    resource: "@LocationBundle/Resources/config/routing/soustraitance.yml"
+    prefix:   /soustraitance
+
+location_paiementechenace:
+        resource: "@LocationBundle/Resources/config/routing/paiementecheance.yml"
+        prefix:   /paiementecheance
+
+location_paiementsoustraitance:
+        resource: "@LocationBundle/Resources/config/routing/paiementsoustraitance.yml"
+        prefix:   /paiementsoustraitance
+
+location_depenses:
+    resource: "@LocationBundle/Resources/config/routing/depenses.yml"
+    prefix:   /depenses
+
+location_typedepenses:
+    resource: "@LocationBundle/Resources/config/routing/typedepenses.yml"
+    prefix:   /typedepenses
+
+location_agence:
+    resource: "@LocationBundle/Resources/config/routing/agence.yml"
+    prefix:   /agence
+
+location_contrat:
+    resource: "@LocationBundle/Resources/config/routing/contrat.yml"
+    prefix:   /contrat
+
+location_visite:
+    resource: "@LocationBundle/Resources/config/routing/visite.yml"
+    prefix:   /visite
+
+location_echeance:
+    resource: "@LocationBundle/Resources/config/routing/echeance.yml"
+    prefix:   /echeance
+
+location_vidange:
+    resource: "@LocationBundle/Resources/config/routing/vidange.yml"
+    prefix:   /vidange
+
+location_assurance:
+    resource: "@LocationBundle/Resources/config/routing/assurance.yml"
+    prefix:   /assurance
+
+location_voiture:
+    resource: "@LocationBundle/Resources/config/routing/voiture.yml"
+    prefix:   /voiture
+
+location:
+    resource: "@LocationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+location_client:
+    resource: "@LocationBundle/Resources/config/routing/client.yml"
+    prefix:   /client
+    
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+app_scheduler:
+    resource: "@LocationBundle/Resources/config/routing/scheduler.yml"
+    prefix:   /scheduler
+
+location_disponibilite:
+    resource: "@LocationBundle/Resources/config/routing/disponibilite.yml"
+    prefix:   /disponibilite
+
+location_retour:
+    resource: "@LocationBundle/Resources/config/routing/retour.yml"
+    prefix:   /retour
+
+location_marque:
+    resource: "@LocationBundle/Resources/config/routing/marque.yml"
+    prefix:   /marque
+
+location_modele:
+    resource: "@LocationBundle/Resources/config/routing/modele.yml"
+    prefix:   /modele
+
+location_paiement:
+        resource: "@LocationBundle/Resources/config/routing/paiement.yml"
+        prefix:   /paiement
+
+location_default:
+    path:     /accueil
+    defaults: { _controller: "LocationBundle:Default:index" }
+    methods: GET

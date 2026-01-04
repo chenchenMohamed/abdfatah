@@ -1,0 +1,39 @@
+soustraitance_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Soustraitance:index" }
+    methods:  GET
+
+soustraitance_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Soustraitance:show" }
+    methods:  GET
+
+soustraitance_new:
+    path:     /new/{voiture}
+    defaults: { _controller: "LocationBundle:Soustraitance:new" }
+    methods:  [GET, POST]
+
+soustraitance_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Soustraitance:edit" }
+    methods:  [GET, POST]
+
+soustraitance_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Soustraitance:delete" }
+
+soustraitance_detail:
+    path:     /{id}/detail
+    defaults: { _controller: "LocationBundle:Soustraitance:detail" }
+    methods:  [GET, POST]
+
+soustraitance_search:
+    path:     /search
+    defaults: { _controller: "LocationBundle:Soustraitance:search" }
+    methods:  [GET, POST]
+
+
+soustraitance_search_result:
+    path:     /search/result
+    defaults: { _controller: "LocationBundle:Soustraitance:search2" }
+    methods:  POST

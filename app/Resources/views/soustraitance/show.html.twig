@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+    <h1>Soustraitance</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ soustraitance.id }}</td>
+            </tr>
+            <tr>
+                <th>Numsoustraitance</th>
+                <td>{{ soustraitance.numSoustraitance }}</td>
+            </tr>
+            <tr>
+                <th>Montantpaye</th>
+                <td>{{ soustraitance.montantPaye }}</td>
+            </tr>
+            <tr>
+                <th>Monatntmensuel</th>
+                <td>{{ soustraitance.monatntMensuel }}</td>
+            </tr>
+            <tr>
+                <th>Montnatrestant</th>
+                <td>{{ soustraitance.montnatRestant }}</td>
+            </tr>
+            <tr>
+                <th>Datepremierpay</th>
+                <td>{% if soustraitance.datePremierPay %}{{ soustraitance.datePremierPay|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ soustraitance.etat }}</td>
+            </tr>
+            <tr>
+                <th>Refagence</th>
+                <td>{{ soustraitance.refAgence }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('soustraitance_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('soustraitance_edit', { 'id': soustraitance.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

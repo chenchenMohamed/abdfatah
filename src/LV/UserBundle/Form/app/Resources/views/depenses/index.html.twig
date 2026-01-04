@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12"> 
+
+  <div class="content-wrapper">
+
+     <section class="content" style="mapping:25px">
+      <div class="row">
+        <div class="col-md-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Liste de depense</h3>
+                </div>
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li  class="breadcrumb-item active"><i class="fa fa-car"></i>/ depense</li>
+      </ol>
+    </section>
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <h4 class="text-center"><a href="{{ path('depenses_new') }}" role="button" class="btn btn-info btn-sm">Ajouter une depense</a></h4>
+          </div>
+      </div><br>
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table  id="example" class="table table-striped" style="background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+                    <thead>
+                     <tr>
+                         <th class="text-center">Code Dépense</th>
+                         <th class="text-center">Date Dépense</th>
+                         <th class="text-center">Montant</th>
+                         <th class="text-center">Description</th>
+                         <th class="text-center">Utilisateur</th>
+                         <th class="text-center">Code Agence</th>
+                         <th></th>
+                     </tr>
+                    </thead>
+                    <tbody>
+                      {% for depense in depenses %}
+                      <tr>
+                        <td>{{ depense.codeDepense }}</td>
+                        <td>{% if depense.dateDepense %}{{ depense.dateDepense|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ depense.montant }}</td>
+                        <td>{{ depense.description }}</td>
+                        <td>{{ depense.refUtilisateur }}</td>
+                        <td>{{ depense.refAgence.codeAgence }}</td>
+                        <td style="padding-top:15px;">
+                            <h5 class="text-center"><a href="{{ path('depenses_edit', { 'id': depense.id }) }}" role="button" class="btn btn-success btn-sm">Edit</a></h5>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

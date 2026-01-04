@@ -1,0 +1,284 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li class="active"><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+
+  <div class="content-wrapper">
+
+     <section class="content" style="mapping:25px">
+      <div class="row">
+        <div class="col-md-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Ajouter une Voiture</h3>
+                </div>
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('voiture_index') }}"><i class="fa fa-car"></i>/ Voiture</a></li>
+        <li  class="breadcrumb-item active"><i class="fa fa-car"></i>/ Ajouter une Voiture</li>
+      </ol>
+    </section>
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <h4 class="text-center"><a href="{{ path('voiture_index') }}" role="button" class="btn btn-info btn-sm">Retour à la liste</a></h4>
+          </div>
+      </div><br>
+                <div class="box-body">
+                    {{ form_start(form) }}
+                      <div class="span3">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.matricule) }}</div>
+                             {{ form_errors(form.matricule) }}
+                             <div class="col-sm-8">{{ form_widget(form.matricule) }}</div>
+                         </div>
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.marque) }}</div>
+                             {{ form_errors(form.marque) }}
+                             <div class="col-sm-8">{{ form_widget(form.marque) }}
+							 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#new_marque">
+							 <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                  </div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.modele) }}</div>
+                             {{ form_errors(form.modele) }}
+                             <div class="col-sm-8">{{ form_widget(form.modele) }}
+							 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#new_modele">
+							 <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                  </div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.couleur) }}</div>
+                             {{ form_errors(form.couleur) }}
+                             <div class="col-sm-8">{{ form_widget(form.couleur) }}</div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.codeRadio) }}</div>
+                             {{ form_errors(form.codeRadio) }}
+                             <div class="col-sm-8">{{ form_widget(form.codeRadio) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.typeTransmission) }}</div>
+                             {{ form_errors(form.typeTransmission) }}
+                             <div class="col-sm-8">{{ form_widget(form.typeTransmission,{'attr': {'class':'chosen-select'}}) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.prix) }}</div>
+                             {{ form_errors(form.prix) }}
+                             <div class="col-sm-8">{{ form_widget(form.prix) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.age) }}</div>
+                             {{ form_errors(form.age) }}
+                             <div class="col-sm-8">{{ form_widget(form.age) }}</div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.nbrePortes) }}</div>
+                             {{ form_errors(form.nbrePortes) }}
+                             <div class="col-sm-8">{{ form_widget(form.nbrePortes) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.nbrePassagers) }}</div>
+                             {{ form_errors(form.nbrePassagers) }}
+                             <div class="col-sm-8">{{ form_widget(form.nbrePassagers) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.capaciteBagages) }}</div>
+                             {{ form_errors(form.capaciteBagages) }}
+                             <div class="col-sm-8">{{ form_widget(form.capaciteBagages) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.refAgence) }}</div>
+                             {{ form_errors(form.refAgence) }}
+                             <div class="col-sm-8">{{ form_widget(form.refAgence,{'attr': {'class':'chosen-select'}}) }}</div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.km) }}</div>
+                             {{ form_errors(form.km) }}
+                             <div class="col-sm-8">{{ form_widget(form.km) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form.etat) }}</div>
+                             {{ form_errors(form.etat) }}
+                             <div class="col-sm-8">{{ form_widget(form.etat) }}</div>
+                          </div><br><br><br><br><br><br>
+                      </div>
+                          <div class="row" align="right">
+                              <input type="submit" class="btn btn-success btn-sm" value="Ajouter" /></div>
+                      {{ form_end(form) }}
+                        <!-- Modal -->
+    
+<div class="modal fade" id="new_marque" role="dialog" aria-labelledby="new_role-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="new_role-label">Ajouter nouvelle marque</h4>
+            </div>
+            <div class="modal-body">
+               <div class="box-body">
+                    {{ form_start(form_marque) }}
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_marque.nom) }}</div>
+                             {{ form_errors(form_marque.nom) }}
+                             <div class="col-sm-8">{{ form_widget(form_marque.nom) }}</div>
+                         </div>
+                          
+                      </div>
+                      
+                          <div class="row" align="right">
+                              <input type="submit" class="btn btn-success btn-sm" value="Ajouter" />
+              </div>
+                      {{ form_end(form_marque) }}
+                </div>
+        </div>
+            
+          </div>
+               
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+!-- Modal -->
+    
+<div class="modal fade" id="new_modele" role="dialog" aria-labelledby="new_role-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="new_role-label">Ajouter nouveau modèle</h4>
+            </div>
+            <div class="modal-body">
+               <div class="box-body">
+                    {{ form_start(form_modele) }}
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_modele.marque) }}</div>
+                             {{ form_errors(form_modele.marque) }}
+                             <div class="col-sm-8">{{ form_widget(form_modele.marque) }}</div>
+                         </div>
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_modele.nom) }}</div>
+                             {{ form_errors(form_modele.nom) }}
+                             <div class="col-sm-8">{{ form_widget(form_modele.nom) }}</div>
+                         </div>
+                          
+                      </div>
+                      
+                          <div class="row" align="right">
+                              <input type="submit" class="btn btn-success btn-sm" value="Ajouter" />
+              </div>
+                      {{ form_end(form_modele) }}
+                </div>
+        </div>
+            
+          </div>
+               
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$("div").change(function(e) {
+
+    for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+        var file = e.originalEvent.srcElement.files[i];
+        
+        var img = document.createElement("div");
+        var reader = new FileReader();
+        reader.onloadend = function() {
+             img.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+        $("div").after(img);
+    }
+});
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $('#lv_locationbundle_voiture_marque').change(function () {
+            var marqueSelector = $(this);
+            
+            // Request the neighborhoods of the selected city.
+            $.ajax({
+                url: "{{ path('marque_list_modeles') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    marqueid: marqueSelector.val()
+                },
+                success: function (modeles) {
+                    var modeleSelect = $("#lv_locationbundle_voiture_modele");
+
+                    // Remove current options
+                    modeleSelect.html('');
+                    
+                    // Empty value ...
+                    modeleSelect.append('<option value> Sélectionner un modèle ' + marqueSelector.find("option:selected").text() + ' ...</option>');
+                    
+                    
+                    $.each(modeles, function (key, modele) {
+                        modeleSelect.append('<option value="' + modele.id + '">' + modele.nom + '</option>');
+                    });
+                },
+                error: function (err) {
+                    alert("An error ocurred while loading data ...");
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+

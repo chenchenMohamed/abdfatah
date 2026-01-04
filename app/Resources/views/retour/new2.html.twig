@@ -1,0 +1,107 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('csr_index')}}">Liste des contrats</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Retour de voiture</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Retour de voiture</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Numéro contrat {{ form_errors(form.refCsr) }}</label>
+                                    {{ form_widget(form.refCsr, {'attr': {'class':'form-control', 'style': 'display: none;'}}) }}
+                                    <input type="text" name="" value="{{refcsr}}" class="form-control" readonly="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Client {{ form_errors(form.refClient) }}</label>
+                                    {{ form_widget(form.refClient, {'attr': {'class':'form-control', 'style': 'display: none;'}}) }}
+                                    <input type="text" name="" value="{{refclient}}" class="form-control" readonly="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Client {{ form_errors(form.refVoiture) }}</label>
+                                    {{ form_widget(form.refVoiture, {'attr': {'class':'form-control', 'style': 'display: none;'}}) }}
+                                    <input type="text" name="" value="{{refvoiture}}" class="form-control" readonly="">
+                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label>Kilométrage de retour {{ form_errors(form.km) }}</label>
+                                    {{ form_widget(form.km, {'attr': {'class':'form-control'}}) }}
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Dégats {{ form_errors(form.degats) }}</label>
+                                    {{ form_widget(form.degats, {'attr': {'class':'form-control'}}) }}
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Etat de retour {{ form_errors(form.etatRetour) }}</label>
+                                    {{ form_widget(form.etatRetour, {'attr': {'class':'form-control','rows': 5}}) }}
+                                  </div>
+                                  <div class="form-group" style="display: none;">
+                                    <label>Numéro contrat {{ form_errors(form.refContrat) }}</label>
+                                    {{ form_widget(form.refContrat, { attr: {novalidate: 'novalidate'} }) }}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('csr_index') }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+
+

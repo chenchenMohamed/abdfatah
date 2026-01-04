@@ -1,0 +1,29 @@
+vidange_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Vidange:index" }
+    methods:  GET
+
+vidange_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Vidange:show" }
+    methods:  GET
+
+vidange_new:
+    path:     /new/{id}
+    defaults: { _controller: "LocationBundle:Vidange:new" }
+    methods:  [GET, POST]
+
+vidange_new1:
+    path:     /new1/{voiture}
+    defaults: { _controller: "LocationBundle:Vidange:new1" }
+    methods:  [GET, POST]
+
+vidange_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Vidange:edit" }
+    methods:  [GET, POST]
+
+vidange_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Vidange:delete" }
+

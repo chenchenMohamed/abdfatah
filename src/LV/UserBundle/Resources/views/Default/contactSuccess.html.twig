@@ -1,0 +1,198 @@
+    <!DOCTYPE html>
+    <html lang="zxx" class="no-js">
+    <head>
+        <!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Favicon-->
+        <link rel="shortcut icon" href="template/img/elements/fav.jpg">
+        <!-- Author Meta -->
+        <meta name="author" content="colorlib">
+        <!-- Meta Description -->
+        <meta name="description" content="">
+        <!-- Meta Keyword -->
+        <meta name="keywords" content="">
+        <!-- meta character set -->
+        <meta charset="UTF-8">
+        <!-- Site Title -->
+        <title>Chaffar rent a car</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+            <!--
+            CSS
+            ============================================= -->
+            <link rel="stylesheet" href="template/css/linearicons.css">
+            <link rel="stylesheet" href="template/css/owl.carousel.css">
+            <link rel="stylesheet" href="template/css/font-awesome.min.css">
+            <link rel="stylesheet" href="template/css/nice-select.css">          
+            <link rel="stylesheet" href="template/css/magnific-popup.css">
+            <link rel="stylesheet" href="template/css/bootstrap.css">
+            <link rel="stylesheet" href="template/css/main.css">
+        </head>
+        <body>
+
+              <header id="header" id="home">
+                <div class="container">
+                    <div class="row align-items-center justify-content-between d-flex">
+                      <div id="logo">
+                        <a href="{{path('accueilclient')}}"><img src="template/img/logo.png" alt="" title="" /></a>
+                      </div>
+                      <nav id="nav-menu-container">
+                        <ul class="nav-menu">
+                          <li><a href="{{path('accueilclient')}}">Accueil</a></li>
+                          <li><a href="{{path('reserver')}}">Réservation</a></li>
+                          <li><a href="{{path('voitures')}}">Voitures</a></li>
+                          {#<li><a href="service.html">Service</a></li>
+                          <li><a href="team.html">Team</a></li> #}
+                          {#<li><a href="blog-home.html">Blog</a></li>#}    
+                          <li class="menu-active"><a href="{{path('contact')}}">Contact</a></li>   
+                          {#<li class="menu-has-children"><a href="">Pages</a>
+                            <ul>
+                              <li><a href="blog-single.html">Blog Single</a></li>
+                              <li><a href="elements.html">Elements</a></li>
+                            </ul>
+                          </li>#}  
+                          <li><a href="{{ path('fos_user_security_login')}}">Connexion</a></li>                  
+                        </ul>
+                      </nav><!-- #nav-menu-container -->                    
+                    </div>
+                </div>
+              </header><!-- #header -->
+
+            <!-- start banner Area -->
+            <section class="banner-area relative" id="home">    
+                <div class="overlay overlay-bg"></div>
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="about-content col-lg-12">
+                            <h1 class="text-white">
+                                Contacter nous
+                            </h1>   
+                            <p class="text-white link-nav"><a href="index.html"></a><a href="contact.html"></a></p>
+                        </div>                                          
+                    </div>
+                </div>
+            </section>
+            <!-- End banner Area -->  
+            
+            <!-- Start contact-page Area -->
+            <section class="contact-page-area section-gap">
+                <div class="container">
+                    <strong><span style="color:green;">{{message}}</span></strong>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-8 pb-40 header-text">
+                            <center><h1>Trouvez nous!</h1></center>
+                            
+                        </div>
+                    </div>
+                    
+                        <center><div>
+                            <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:440px;width:700px;'><div id='gmap_canvas' style='height:440px;width:700px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:15,center:new google.maps.LatLng(33.4995226,11.098724800000014),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(33.4995226,11.098724800000014)});infowindow = new google.maps.InfoWindow({content:'<strong>Chaffare Rent a Car</strong><br>33.49960594357576,11.09825134277344<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                        </div>
+                        </center> <br><br><br>
+                        <div class="row">
+                        <div class="col-lg-4 d-flex flex-column address-wrap">
+                            <div class="single-contact-address d-flex flex-row">
+                                <div class="icon">
+                                    <span class="lnr lnr-home"></span>
+                                </div>
+                                <div class="contact-details">
+                                    <h5>Cité el Mansoura, Souihel <br>Zarzis 4170</h5>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="single-contact-address d-flex flex-row">
+                                <div class="icon">
+                                    <span class="lnr lnr-phone-handset"></span>
+                                </div>
+                                <div class="contact-details">
+                                    <h5>Tél/Fax&nbsp;: 75 705 332<br>
+                                    GSM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 26 290 218<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;99 290 218<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;97 290 218<br>
+                                    </h5>
+                                    <p>7/7 jours de 8:00 à 18:00</p>
+                                </div>
+                            </div>
+                            <div class="single-contact-address d-flex flex-row">
+                                <div class="icon">
+                                    <span class="lnr lnr-envelope"></span>
+                                </div>
+                                <div class="contact-details">
+                                    <h5>reservation@chaffarrentacar.com</h5>
+                                    <p>Contacter nous!</p>
+                                </div>
+                            </div>                                                      
+                        </div>
+                        <div class="col-lg-8">
+                            
+                            <div class="form-area">
+                                {{ form_start(form) }}
+                                <div class="row">   
+                                    <div class="col-lg-6 form-group">
+                                        
+                                        {{ form_widget(form.nom, {'attr': {'class': 'common-input mb-20 form-control','placeholder': 'Nom et pénom'}}) }}
+                                    
+                                        {{ form_widget(form.email, {'attr': {'class': 'common-input mb-20 form-control','placeholder': 'Adresse email'}}) }}
+
+                                        {{ form_widget(form.telephone, {'attr': {'class': 'common-input mb-20 form-control','placeholder': 'Téléphone'}}) }}
+                                        <div class="mt-20 alert-msg" style="text-align: left;"></div>
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+
+                                        {{ form_widget(form.mm, {'attr': {'class': 'common-textarea form-control'}}) }}
+                                        
+                                        <input type="submit" value="Envoyer message" class="primary-btn mt-20 text-white col-lg-7" style="float: right;">
+                                                                                
+                                    </div>
+                                </div>
+                             {{ form_end(form) }}
+                            </div> 
+                        </div>
+                    </div>
+
+                
+            </section>
+            <!-- End contact-page Area -->
+
+            <!-- start footer Area -->      
+            <footer class="footer-area section-gap">
+                <div class="container">
+                    <div class="row">
+                       
+                        
+                                                                    
+                                          
+                        
+                        <p class="mt-50 mx-auto footer-text col-lg-12">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <a href="#" target="_blank">Innovative Technology</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>                                            
+                    </div>
+                </div>
+            </footer>   
+            <!-- End footer Area -->        
+
+            <script src="template/js/vendor/jquery-2.2.4.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="template/js/vendor/bootstrap.min.js"></script>          
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>          
+            <script src="template/js/easing.min.js"></script>            
+            <script src="template/js/hoverIntent.js"></script>
+            <script src="template/js/superfish.min.js"></script> 
+            <script src="template/js/jquery.ajaxchimp.min.js"></script>
+            <script src="template/js/jquery.magnific-popup.min.js"></script> 
+            <script src="template/js/owl.carousel.min.js"></script>          
+            <script src="template/js/jquery.sticky.js"></script>
+            <script src="template/js/jquery.nice-select.min.js"></script>    
+            <script src="template/js/waypoints.min.js"></script>
+            <script src="template/js/jquery.counterup.min.js"></script>                  
+            <script src="template/js/parallax.min.js"></script>      
+            <script src="template/js/mail-script.js"></script>   
+            <script src="template/js/main.js"></script>  
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBt5tJTim4lOO3ojbGARhPd1Z3O3CnE-C8" type="text/javascript"></script>
+        </body>
+    </html>
+
+

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rapport mensuel du {{rapportMonth}}/{{rapportYear}}</title>
+
+<style type="text/css">
+    * {
+        font-family: Verdana, Arial, sans-serif;
+    }
+    table{
+        font-size: x-small;
+    }
+    tfoot tr td{
+        font-weight: bold;
+        font-size: x-small;
+    }
+    .gray {
+        background-color: lightgray
+    }
+</style>
+
+</head>
+<body>
+
+  <table width="100%">
+    <tr>
+        {#<td valign="top"><img src="{{asset('images/meteor-logo.png')}}" alt="" width="150"/></td>#}
+        <td align="right">
+            <h3>Sté ELBIBENE Rent A Car</h3>
+            <pre>
+                Hcham - Hamadi
+                4124 Zarzis
+                Tél./Fax : 75.701.613
+                GSM : 58.933.573 - 27.430.494
+                MF : 117690Q
+            </pre>
+        </td>
+    </tr>
+
+  </table>
+
+  <table width="100%">
+    <tr>
+        <td><strong>Edité le :</strong> {{'now'|date('d/m/Y')}}</td>
+        <td><h3>Rapport mensuel du {{rapportMonth}}/{{rapportYear}}</h3></td>
+    </tr>
+
+  </table>
+  <br>
+  <table width="100%">
+    <tr>
+        <td><strong>Nombre de voitures sous Leasing :</strong> {{nbreVoitures}}</td>
+    </tr>
+
+  </table>
+
+   <table width="100%">
+    <thead style="background-color: lightgray;">
+      <tr>
+        <th>Description</th>
+        <th>Montant</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Recette du mois</th>
+        <td align="right">{{montantEncaisse|number_format(3, '.', ',')}} DT</td>
+      </tr>
+      <tr>
+        <th scope="row">Montant Leasing</th>
+        <td align="right">{{montantAEncaisse|number_format(3, '.', ',')}} DT</td>
+      </tr>
+      <tr>
+        <th scope="row">Frais généraux</th>
+        <td align="right">{{frais|number_format(3, '.', ',')}} DT</td>
+      </tr>
+      <tr>
+        <th scope="row">Crédit</th>
+        <td align="right">{{credit|number_format(3, '.', ',')}} DT</td>
+      </tr>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td align="right">Résultat du mois</td>
+            <td align="right" class="gray">{{(montantEncaisse-frais-montantAEncaisse)|number_format(3, '.', ',')}} DT</td>
+        </tr>
+    </tfoot>
+
+    
+  </table>
+  <br/>
+
+  <table width="100%">
+    <tr>
+        <td><strong>Liste des clients non réglés</strong></td>
+    </tr>
+
+  </table>
+
+
+  <table width="100%">
+    <thead style="background-color: lightgray;">
+      <tr>
+        <th># Numéro contrat</th>
+        <th>Client</th>
+        <th>Montant</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for modele in clientNonRegle %}
+      <tr>
+        <th scope="row">{{ modele.refCsr.numContrat}}</th>
+        <td>{{ modele.refCsr.conducteur1.nom}} {{ modele.refCsr.conducteur1.prenom}}</td>
+        <td align="right">{{ modele.montantRestant|number_format(3, '.', ',')}} DT</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+
+</body>
+</html>

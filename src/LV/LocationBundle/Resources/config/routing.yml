@@ -1,0 +1,128 @@
+location_assurance:
+    resource: "@LocationBundle/Resources/config/routing/assurance.yml"
+    prefix:   /assurance
+
+location_homepage:
+    path:     /
+    defaults: { _controller: "LocationBundle:Default:index" }
+    methods: [GET, POST]
+    
+entretien:
+    path:     /entretien/{id}
+    defaults: { _controller: LocationBundle:Entretien:index }
+
+entretien1:
+    path:     /entretien/index1/{voiture}
+    defaults: { _controller: LocationBundle:Entretien:index1 }   
+
+accueil:
+    path:     /accueil
+    defaults: { _controller: LocationBundle:Default:index }
+
+recette_jour:
+    path:     /recettejour
+    defaults: { _controller: "LocationBundle:Default:recetteJour" }
+
+recette_jour1:
+    path:     /recettejour1
+    defaults: { _controller: "LocationBundle:Default:recetteJour1" }
+
+recette_mois:
+    path:     /recettemois
+    defaults: { _controller: "LocationBundle:Default:recetteMois" }
+
+recette_mois1:
+    path:     /recettemois1
+    defaults: { _controller: "LocationBundle:Default:recetteMois1" }
+
+recette_an:
+    path:     /recettean
+    defaults: { _controller: "LocationBundle:Default:recetteAn" }
+
+recette_an1:
+    path:     /recettean1
+    defaults: { _controller: "LocationBundle:Default:recetteAn1" }
+
+user_index:
+    path:     /user
+    defaults: { _controller: "UserBundle:User:index" }
+    methods:  GET
+
+user_edit:
+    path:     /user/{id}/edit
+    defaults: { _controller: "UserBundle:User:edit" }
+    methods:  [GET, POST]
+
+user_show:
+    path:     /user/{id}/show
+    defaults: { _controller: "UserBundle:User:show" }
+    methods:  GET
+
+user_delete:
+    path:     /user/{id}/delete
+    defaults: { _controller: "UserBundle:User:delete" }
+
+reserver:
+    path:  /reserver
+    defaults: { _controller: "UserBundle:Default:reserver" }
+
+reserver_result:
+    path:  /reserverresult
+    defaults: { _controller: "UserBundle:Default:reserverResult" }
+
+info:
+    path:  /reserverinfo
+    defaults:
+        _controller: UserBundle:Default:info
+        time1: ''
+        time2: ''     
+        result: ''
+        voiture: ''
+
+reserversuccess:
+    path:  /reserversuccess
+    defaults: { _controller: "UserBundle:Default:reserverSuccess" }
+
+contact:
+    path:  /contact
+    defaults: { _controller: "UserBundle:Default:contact" }
+
+contactsuccess:
+    path:  /contactsuccess
+    defaults: { _controller: "UserBundle:Default:contactSuccess" }
+
+accueilclient:
+    path:  /accueilclient
+    defaults: { _controller: "UserBundle:Default:accueilClient" }
+
+voitures:
+    path:  /voitures
+    defaults: { _controller: "UserBundle:Default:voitures" }
+
+chart:
+    path:  /chart
+    defaults: { _controller: "LocationBundle:Default:chart" }
+
+rapport:
+    path:  /rapport/{id}
+    defaults: { _controller: "LocationBundle:Default:rapport" }
+
+rapportParPeriode:
+    path:  /rapportParPeriode/{id}
+    defaults: { _controller: "LocationBundle:Default:reportByDateRange" }
+
+credit:
+    path:  /credit
+    defaults: { _controller: "LocationBundle:Default:credit" }
+    methods:  [GET, POST]
+    
+print2:
+    path:  /print2
+    defaults: { _controller: "LocationBundle:Default:print2" }
+    methods:  [GET, POST]
+
+
+
+
+
+    

@@ -1,0 +1,652 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+<input class="form-control" id="time1" type="hidden" value="{{ time1 }}" readonly>
+<input class="form-control" id="time2" type="hidden" value="{{ time2 }}" readonly>
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <div class="ml-auto col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="{{path('csr_index')}}">Liste des contrats</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Modifier contrat</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+              {{ form_start(edit_form) }}
+                <div class="card-body">
+                  <h3 class="card-title m-b-0">Modifier contrat</h3>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Numéro contrat {{ form_errors(edit_form.numContrat) }}</label>
+                        {{ form_widget(edit_form.numContrat, {'attr': {'class':'form-control', 'readonly': 'readonly'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Date {{ form_errors(edit_form.dateContrat) }}</label>
+                        {{ form_widget(edit_form.dateContrat, {'attr': {'class':'form-control', 'readonly': 'readonly'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Date de départ {{ form_errors(edit_form.dateDebut) }} {% if errors == ''%}
+                        {% else %}
+                            <strong ><span style="color:red;"><i class="fa fa-fw fa-exclamation-circle"></i> {{ errors }}</span></strong>
+                        {% endif %}</label>
+                        <div class="input-group">
+                        {{ form_widget(edit_form.dateDebut, {'attr': {'class':'form-control', 'onblur': 'calculDuree()'}}) }}
+                        
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Date d'arrivée {{ form_errors(edit_form.dateFin) }}</label>
+                        <div class="input-group">
+                        {{ form_widget(edit_form.dateFin, {'attr': {'class':'form-control', 'onblur': 'calculDuree()'}}) }}
+                        
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Premier conducteur {{ form_errors(edit_form.conducteur1) }}</label>
+                        {{ form_widget(edit_form.conducteur1, {'attr': {'class':'form-control select2 custom-select','style':'width: 100%;', 'onchange':'myFunction()'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <input type="text" id="nom1" value="{{nom1}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Prénom</label>
+                        <input type="text" id="prenom1" value="{{prenom1}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Date de naissance</label>
+                        <input type="text" id="dateNaissance1" value="{{dateNaissance1}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Numéro CIN ou passeport</label>
+                        <input type="text" id="cin1" value="{{cin1}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Numéro permis</label>
+                        <input type="text" id="numPermis1" value="{{numpermis1}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Délivré le</label>
+                        <input type="text" id="delivre1" value="{{delivre1}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group" style="display: none;">
+                        <label>Nationalité</label>
+                        <input type="text" id="nationalite1" value="{{nationalite1}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse</label>
+                        <input type="text" id="adresse1" value="{{adresse1}}"  class="form-control" readonly>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Deuxième conducteur {{ form_errors(edit_form.conducteur2) }}</label>
+                        {{ form_widget(edit_form.conducteur2, {'attr': {'class':'form-control select2 custom-select','style':'width: 100%; height:36px;', 'onchange':'myFunction()'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <input type="text" id="nom2" value="{{nom}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Prénom</label>
+                        <input type="text" id="prenom2" value="{{prenom}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Date de naissance</label>
+                        <input type="text" id="dateNaissance2" value="{{dateNaissance}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Numéro CIN ou passeport</label>
+                        <input type="text" id="cin2" value="{{cin}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Numéro permis</label>
+                        <input type="text" id="numPermis2" value="{{numpermis}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Délivré le</label>
+                        <input type="text" id="delivre2" value="{{delivre}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group" style="display: none;">
+                        <label>Nationalité</label>
+                        <input type="text" id="nationalite2" value="{{nationalite1}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse</label>
+                        <input type="text" id="adresse2" value="{{adresse}}"  class="form-control" readonly>
+                    </div>
+                    
+                   </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title m-b-0"></h3>    
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group" style="display: none;">
+                        <label>Voiture {{ form_errors(edit_form.refVoiture) }}</label>
+                        {{ form_widget(edit_form.refVoiture, {'attr': {'class':'form-control', 'readonly': 'readonly'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Matricule</label>
+                        <input type="text" id="modele" value="{{matricule}}"  class="form-control" readonly style="width: 100%;height: 36px;">
+                    </div>
+                    <div class="form-group">
+                        <label>Marque</label>
+                        <input type="text" id="modele" value="{{marque}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Modèle</label>
+                        <input type="text" id="cin1" value="{{modele}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Couleur</label>
+                        <input type="text" id="couleur" value="{{couleur}}"  class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Prix/jour</label>
+                        <input type="text" id="tarif" value="{{prix}} TND"  class="form-control" readonly>
+                    </div>
+                    
+                   </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Kilométrage de départ {{ form_errors(edit_form.kmDepart) }}</label>
+                        {{ form_widget(edit_form.kmDepart, {'attr': {'class':'form-control', 'readonly': 'readonly'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Kilométrage de retour {{ form_errors(edit_form.kmRetour) }}</label>
+                        {{ form_widget(edit_form.kmRetour, {'attr': {'class':'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Niveau carburant {{ form_errors(edit_form.niveauCarburant) }}</label>
+                        {{ form_widget(edit_form.niveauCarburant ,{'attr':{'class':'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Etat de départ{{ form_errors(edit_form.etat) }}</label>
+                        {{ form_widget(edit_form.etat, {'attr': {'class':'form-control', 'rows': '5'}}) }}
+                    </div>
+                   </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Dégats {{ form_errors(edit_form.degats) }}</label>
+                        {{ form_widget(edit_form.degats, {'attr': {'class':'form-control', 'rows': '5'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Etat de retour {{ form_errors(edit_form.etatRetour) }}</label>
+                        {{ form_widget(edit_form.etatRetour, {'attr': {'class':'form-control', 'rows': '5'}}) }}
+                    </div>
+                   </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title m-b-0"></h3>
+                  
+                  <div class="row">
+                   <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Prix/jour {{ form_errors(edit_form.tarif) }}</label>
+                        {{ form_widget(edit_form.tarif, {'attr': {'class':'form-control', 'onkeyup': 'calcultarif()'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre de jours {{ form_errors(edit_form.nbreJour) }}</label>
+                        {{ form_widget(edit_form.nbreJour, {'attr': {'class':'form-control' , 'readonly': 'readonly', 'style':'height:36px;'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Recette {{ form_errors(edit_form.recette) }}</label>
+                        {{ form_widget(edit_form.recette, {'attr': {'class':'form-control', 'readonly': 'readonly'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Garant {{ form_errors(edit_form.garant) }}</label>
+                        {{ form_widget(edit_form.garant, {'attr': {'class':'form-control', 'onkeyup': 'calcultotal()'}}) }}
+                    </div>
+                   </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Frais aéroport {{ form_errors(edit_form.fraisAeroport) }}</label>
+                        {{ form_widget(edit_form.fraisAeroport, {'attr': {'class':'form-control', 'onkeyup': 'calcultotal()'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Siège bébé {{ form_errors(edit_form.siegeBebe) }}</label>
+                        {{ form_widget(edit_form.siegeBebe, {'attr': {'class':'form-control', 'onkeyup': 'calcultotal()'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Supplément {{ form_errors(edit_form.supplement) }}</label>
+                        {{ form_widget(edit_form.supplement, {'attr': {'class':'form-control', 'onkeyup': 'calcultotal()'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Carburant {{ form_errors(edit_form.carburant) }}</label>
+                        {{ form_widget(edit_form.carburant, {'attr': {'class':'form-control', 'onkeyup': 'calcultotal()'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Total {{ form_errors(edit_form.total) }}</label>
+                        {{ form_widget(edit_form.total, {'attr': {'class':'form-control', 'readonly': 'readonly'}}) }}
+                    </div>
+                   </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Total HTVA {{ form_errors(edit_form.totalHTVA) }}</label>
+                        {{ form_widget(edit_form.totalHTVA, {'attr': {'class':'form-control', 'onkeyup': 'calcultotal()', 'readonly': 'readonly'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>TVA 19% {{ form_errors(edit_form.TVA) }}</label>
+                        {{ form_widget(edit_form.TVA, {'attr': {'class':'form-control', 'onkeyup': 'calcultotal()', 'readonly': 'readonly'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Sous total {{ form_errors(edit_form.sousTotal) }}</label>
+                        {{ form_widget(edit_form.sousTotal, {'attr': {'class':'form-control', 'onkeyup': 'calcultotal()', 'readonly': 'readonly'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Timbre fiscal {{ form_errors(edit_form.timbre) }}</label>
+                        {{ form_widget(edit_form.timbre, {'attr': {'class':'form-control', 'onkeyup': 'calcultotal()', 'readonly': 'readonly'}}) }}
+                    </div>
+                   </div>
+                  </div>
+                </div>
+                <div class="border-top" >
+                        <div class="card-body" style="float: right;" >
+                            <div class="btn-group">
+                            <a href="{{ path('csr_index') }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            </div>
+                            <div class="btn-group">
+                            <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                        </div>
+                  </div>
+                {{ form_end(edit_form) }}
+            </div>
+        </div>
+    </div>
+    <!-- editor -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<table  id="client" class="table table-striped" style="display: none;background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+        <thead>
+         <tr>
+             <th class="text-center">Cin</th>
+             <th class="text-center">Nom</th>
+             <th class="text-center">Prenom</th>
+             <th class="text-center">dateNaissance</th>
+             <th class="text-center">Numpermis</th>
+             <th class="text-center">delivre</th>
+             <th class="text-center">Nationalite</th>
+             <th class="text-center">Adresse</th>
+             <th class="text-center">Degats</th>
+         </tr>
+        </thead>
+        <tbody id="myclient">
+          {% for client in clients %}
+          <tr varc="{{ client.id }}">
+            <td>{{ client.cin }}</td>
+            <td>{{ client.nom }}</td>
+            <td>{{ client.prenom }}</td>
+            <td>{{ client.dateNaissance|date('d/m/Y') }}</td>
+            <td>{{ client.numPermis }}</td>
+            <td>{{ client.delivre|date('d/m/Y') }}</td>
+            <td>{{ client.nationalite }}</td>
+            <td>{{ client.adresse }}</td>
+            <td>{{ client.degat }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        </table> 
+
+        <table id="voiture" name="voiture" class="table table-striped" style="display: none;background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+        <thead>
+         <tr>
+             <th class="text-center">Matricule</th>
+             <th class="text-center">Marque</th>
+             <th class="text-center">Modele</th>
+             <th class="text-center">Couleur</th>
+             <th class="text-center">Code Radio</th>
+             <th class="text-center">Type Transmission</th>
+             <th class="text-center">Nombre Portes</th>
+             <th class="text-center">Nombre Passagers</th>
+             <th class="text-center">Capacite Bagages</th>
+             <th class="text-center">Age</th>
+             <th class="text-center">Prix/Jours</th>
+         </tr>
+        </thead>
+        <tbody id="myvoiture">
+          {% for voiture in voitures %}
+          <tr var="{{ voiture.id }}">
+            <td style="padding-top:30px;"><a href="{{ path('voiture_show', { 'id': voiture.id }) }}">{{ voiture.matricule }}</a></td>
+            <td style="padding-top:30px;">{{ voiture.marque.nom }}</td>
+            <td style="padding-top:30px;">{{ voiture.modele.nom }}</td>
+            <td style="padding-top:30px;">{{ voiture.couleur }}</td>
+            <td style="padding-top:30px;">{{ voiture.codeRadio }}</td>
+            <td style="padding-top:30px;"></td>
+            <td style="padding-top:30px;"></td>
+            <td style="padding-top:30px;"></td>
+            <td style="padding-top:30px;"></td>
+            <td style="padding-top:30px;"></td>
+            <td style="padding-top:30px;"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+
+{% endblock %}
+{% block javascripts %}
+<script>
+function calcultarif() {
+
+var a = parseFloat($('#lv_locationbundle_csr_tarif').val().replace(",", "."));
+var b = parseInt($('#lv_locationbundle_csr_nbreJour').val());
+
+var c = parseFloat($('#lv_locationbundle_csr_garant').val().replace(",", "."));
+var d = parseFloat($('#lv_locationbundle_csr_fraisAeroport').val().replace(",", "."));
+var e = parseFloat($('#lv_locationbundle_csr_siegeBebe').val().replace(",", "."));
+var f = parseFloat($('#lv_locationbundle_csr_supplement').val().replace(",", "."));
+var g = parseFloat($('#lv_locationbundle_csr_carburant').val().replace(",", "."));
+var h = parseFloat($('#lv_locationbundle_csr_timbre').val().replace(",", "."));
+
+var result = $("#lv_locationbundle_csr_recette");
+var result2 = $('#lv_locationbundle_csr_totalHTVA');
+var result3 = $('#lv_locationbundle_csr_TVA');
+var result4 = $('#lv_locationbundle_csr_sousTotal');
+var result5 = $("#lv_locationbundle_csr_total");
+
+if(isNaN(a)){a = 0};
+if(isNaN(b)){b = 0};
+if(isNaN(c)){c = 0};
+if(isNaN(d)){d = 0};
+if(isNaN(e)){e = 0};
+if(isNaN(f)){f = 0};
+if(isNaN(g)){g = 0};
+if(isNaN(h)){h = 0};
+
+var i = (a*b);
+var j = (c+d+e+f+g+i);
+result.val(i.toFixed(3));
+var k = ((19*i)/100);
+result3.val(k.toFixed(3));
+var x = i-k;
+result2.val(x.toFixed(3));
+var l = i+d+e+f+g
+result4.val(l.toFixed(3));
+var m = l+h
+result5.val(m.toFixed(3));
+};
+
+function calcultotal() {
+
+var a = parseFloat($('#lv_locationbundle_csr_recette').val().replace(",", "."));
+var b = parseFloat($('#lv_locationbundle_csr_garant').val().replace(",", "."));
+var c = parseFloat($('#lv_locationbundle_csr_fraisAeroport').val().replace(",", "."));
+var d = parseFloat($('#lv_locationbundle_csr_siegeBebe').val().replace(",", "."));
+var e = parseFloat($('#lv_locationbundle_csr_supplement').val().replace(",", "."));
+var f = parseFloat($('#lv_locationbundle_csr_carburant').val().replace(",", "."));
+var result = $('#lv_locationbundle_csr_totalHTVA');
+var result2 = $('#lv_locationbundle_csr_TVA');
+var result3 = $('#lv_locationbundle_csr_sousTotal');
+var j = parseFloat($('#lv_locationbundle_csr_timbre').val().replace(",", "."));
+var result4 = $("#lv_locationbundle_csr_total");
+if(isNaN(a)){a = 0};
+if(isNaN(b)){b = 0};
+if(isNaN(c)){c = 0};
+if(isNaN(d)){d = 0};
+if(isNaN(e)){e = 0};
+if(isNaN(f)){f = 0};
+if(isNaN(j)){j = 0};
+var k = (a+c+d+e+f);
+//if(isNaN(k)){k = (0).toFixed(3);};
+
+var l = ((19*a)/100);
+result2.val(l.toFixed(3));
+var x = a-l;
+result.val(x.toFixed(3));
+var m = (a+c+d+e+f);
+result3.val(m.toFixed(3));
+var o = m+j;
+result4.val(o.toFixed(3));
+};
+
+function calculDuree() {
+ var time1 = $('#lv_locationbundle_csr_dateDebut').val(), time2 = $('#lv_locationbundle_csr_dateFin').val(),result = $("#lv_locationbundle_csr_nbreJour");
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    
+    
+    if (parseInt(msec) > 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes');
+        var jours = dd;
+
+        var a = parseFloat($('#lv_locationbundle_csr_tarif').val().replace(",", "."));
+        var b = parseInt($('#lv_locationbundle_csr_nbreJour').val());
+        var c = parseFloat($('#lv_locationbundle_csr_garant').val().replace(",", "."));
+        var d = parseFloat($('#lv_locationbundle_csr_fraisAeroport').val().replace(",", "."));
+        var e = parseFloat($('#lv_locationbundle_csr_siegeBebe').val().replace(",", "."));
+        var f = parseFloat($('#lv_locationbundle_csr_supplement').val().replace(",", "."));
+        var g = parseFloat($('#lv_locationbundle_csr_carburant').val().replace(",", "."));
+        var result5 = $('#lv_locationbundle_csr_totalHTVA');
+        var result2 = $('#lv_locationbundle_csr_TVA');
+        var result3 = $('#lv_locationbundle_csr_sousTotal');
+        var h = parseFloat($('#lv_locationbundle_csr_timbre').val().replace(",", "."));
+        var result4 = $("#lv_locationbundle_csr_total");
+        var result = $("#lv_locationbundle_csr_recette");
+        if(isNaN(a)){a = 0};
+        if(isNaN(b)){b = 0};
+        if(isNaN(c)){c = 0};
+        if(isNaN(d)){d = 0};
+        if(isNaN(e)){e = 0};
+        if(isNaN(f)){f = 0};
+        if(isNaN(g)){g = 0};
+        if(isNaN(h)){h = 0};
+        var i = (a*b);
+        result.val(i.toFixed(3));
+        var j = i+c+d+e+f+g;
+        var k = ((19*i)/100);
+        result2.val(k.toFixed(3));
+        var x = i-k;
+        result5.val(x.toFixed(3));
+        var l = (i+d+e+f+g);
+        result3.val(l.toFixed(3));
+        var m = l+h;
+        result4.val(m.toFixed(3));
+        }
+        else {
+        alert("La date fin d'arrivée doît > au date début");
+         var time2 = $('#time2').val();
+         $("#lv_locationbundle_csr_dateFin").val(time2);
+
+        }
+        }
+        ;
+        function calculDuree1() {
+ var time1 = $('#lv_locationbundle_csr_dateDebut').val(), time2 = $('#lv_locationbundle_csr_dateFin').val(),result = $("#lv_locationbundle_csr_nbreJour");
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    
+    
+    if (parseInt(msec) > 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes');
+        var jours = dd;
+
+        var a = parseFloat($('#lv_locationbundle_csr_tarif').val().replace(",", "."));
+        var b = parseInt($('#lv_locationbundle_csr_nbreJour').val());
+        var c = parseFloat($('#lv_locationbundle_csr_garant').val().replace(",", "."));
+        var d = parseFloat($('#lv_locationbundle_csr_fraisAeroport').val().replace(",", "."));
+        var e = parseFloat($('#lv_locationbundle_csr_siegeBebe').val().replace(",", "."));
+        var f = parseFloat($('#lv_locationbundle_csr_supplement').val().replace(",", "."));
+        var g = parseFloat($('#lv_locationbundle_csr_carburant').val().replace(",", "."));
+        var result5 = $('#lv_locationbundle_csr_totalHTVA');
+        var result2 = $('#lv_locationbundle_csr_TVA');
+        var result3 = $('#lv_locationbundle_csr_sousTotal');
+        var h = parseFloat($('#lv_locationbundle_csr_timbre').val().replace(",", "."));
+        var result4 = $("#lv_locationbundle_csr_total");
+        var result = $("#lv_locationbundle_csr_recette");
+        if(isNaN(a)){a = 0};
+        if(isNaN(b)){b = 0};
+        if(isNaN(c)){c = 0};
+        if(isNaN(d)){d = 0};
+        if(isNaN(e)){e = 0};
+        if(isNaN(f)){f = 0};
+        if(isNaN(g)){g = 0};
+        if(isNaN(h)){h = 0};
+        var i = (a*b);
+        result.val(i.toFixed(3));
+        var j = i+c+d+e+f+g;
+        var k = ((19*i)/100);
+        result2.val(k.toFixed(3));
+        var x = i-k;
+        result5.val(x.toFixed(3));
+        var l = (i+d+e+f+g);
+        result3.val(l.toFixed(3));
+        var m = l+h;
+        result4.val(m.toFixed(3));
+        }
+        else {
+        alert("La date fin d'arrivée doît > au date début");
+         var time1 = $('#time1').val();
+         $("#lv_locationbundle_csr_dateDebut").val(time1);
+        }
+        }
+        ;
+</script>
+
+<script type="text/javascript">
+function myFunction(){
+strUser1=$('select[id=lv_locationbundle_csr_conducteur1]').val();
+liste1=$("#lv_locationbundle_csr_conducteur1 option:selected").html();
+if(strUser1==""){
+$("#cin1").attr("value",'');
+$("#nom1").attr("value",'');
+$("#prenom1").attr("value",'');
+$("#dateNaissance1").attr("value",'');
+$("#numPermis1").attr("value",'');
+$("#delivre1").attr("value",'');
+$("#nationalite1").attr("value",'');
+$("#adresse1").attr("value",'');
+}
+else{
+$('tbody tr').show();
+}
+if(strUser1) {
+//$('tbody tr').not($('tbody tr[varc="' + strUser1 + '"]')).hide();
+$("#cin1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(0)").html());
+$("#nom1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(1)").html());
+$("#prenom1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(2)").html());
+$("#dateNaissance1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(3)").html());
+$("#numPermis1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(4)").html());
+$("#delivre1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(5)").html());
+$("#nationalite1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(6)").html());
+$("#adresse1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(7)").html());
+}
+if(liste1.includes('client dans LN')) {
+    alert('Ce client ne peut pas être sélectionné car il est dans la liste noire !');
+    $("#lv_locationbundle_csr_conducteur1").val('').change();
+}
+
+strUser2=$('select[id=lv_locationbundle_csr_conducteur2]').val();
+liste2=$("#lv_locationbundle_csr_conducteur2 option:selected").html();
+if(strUser2==""){
+$("#cin2").attr("value",'');
+$("#nom2").attr("value",'');
+$("#prenom2").attr("value",'');
+$("#dateNaissance2").attr("value",'');
+$("#numPermis2").attr("value",'');
+$("#delivre2").attr("value",'');
+$("#nationalite2").attr("value",'');
+$("#adresse2").attr("value",'');
+}
+else{
+$('tbody tr').show();
+}
+if(strUser2) {
+//$('tbody tr').not($('tbody tr[varc="' + strUser1 + '"]')).hide();
+$("#cin2").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(0)").html());
+$("#nom2").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(1)").html());
+$("#prenom2").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(2)").html());
+$("#dateNaissance2").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(3)").html());
+$("#numPermis2").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(4)").html());
+$("#delivre2").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(5)").html());
+$("#nationalite2").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(6)").html());
+$("#adresse2").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(7)").html());
+}
+if(liste2.includes('client dans LN')) {
+    alert('Ce client ne peut pas être sélectionné car il est dans la liste noire !');
+    $("#lv_locationbundle_csr_conducteur2").val('').change();
+}
+
+}
+$('#client').data.reload();
+</script>
+<script>
+var time1 = $('#time1').val(), time2 = $('#time2').val();
+$(document).ready(function() {
+$("#lv_locationbundle_csr_dateDebut").val(time1);
+$("#lv_locationbundle_csr_dateFin").val(time2);
+
+});
+
+
+</script>
+{% endblock %}
+
+
+
+
+

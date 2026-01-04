@@ -1,0 +1,29 @@
+contrat_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Contrat:index" }
+    methods:  GET
+
+contrat_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Contrat:show" }
+    methods:  GET
+
+contrat_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Contrat:new" }
+    methods:  [GET, POST]
+
+contrat_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Contrat:edit" }
+    methods:  [GET, POST]
+
+contrat_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Contrat:delete" }
+    methods:  DELETE
+
+contrat_new1:
+    path:     /new1/{id}
+    defaults: { _controller: "LocationBundle:Contrat:new1" }
+    methods:  [GET, POST]

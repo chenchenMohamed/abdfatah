@@ -1,0 +1,239 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('echeance_index')}}">Liste des contrats d'échéance</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Nouveau contrat</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Nouveau contrat</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Voiture {{ form_errors(form.refVoiture) }}</label>
+                                    {{ form_widget(form.refVoiture, {'attr': {'class':'select2 form-control custom-select','style':'width: 100%;'}}) }}
+                                </div>
+                                </div>
+                                <div class="col-md-3">
+                                <div class="form-group">
+                                <label>Date premier payement {{ form_errors(form.datePremierPay) }}</label>
+                                <div class="input-group">
+                                    {{ form_widget(form.datePremierPay, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa' ,'onchange': 'calculDuree1()', 'style': 'height:35.5px;'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                <label>Date dernier payement {{ form_errors(form.dateDernierPay) }}</label>
+                                <div class="input-group">
+                                    {{ form_widget(form.dateDernierPay, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa', 'onchange': 'calculDuree()', 'style': 'height:35.5px;'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre payement restant {{ form_errors(form.nbrePayRestant) }}</label>
+                                    {{ form_widget(form.nbrePayRestant, {'attr': {'class':'form-control', 'readonly':'readonly'}}) }}
+                                </div>
+                               </div>
+                               <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Montant total {{ form_errors(form.montantTotal) }}</label>
+                                    {{ form_widget(form.montantTotal, {'attr': {'class':'form-control', 'onkeyup': 'calculMontant()'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Montant mensuel {{ form_errors(form.montantMensuel) }}</label>
+                                    {{ form_widget(form.montantMensuel, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Montant payé {{ form_errors(form.montantPaye) }}</label>
+                                    {{ form_widget(form.montantPaye, {'attr': {'class':'form-control' , 'readonly':'readonly'}}) }}
+                                </div>
+                               </div>
+                               <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Montant restant {{ form_errors(form.montantRestant) }}</label>
+                                    {{ form_widget(form.montantRestant, {'attr': {'class':'form-control', 'readonly':'readonly'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Numéro contrat {{ form_errors(form.contartLeasing) }}</label>
+                                    {{ form_widget(form.contartLeasing, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom {{ form_errors(form.nomLeasing) }}</label>
+                                    {{ form_widget(form.nomLeasing, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Nom {{ form_errors(form.etat) }}</label>
+                                    {{ form_widget(form.etat, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                               </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('echeance_index') }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+{% block javascripts %}
+ <script> 
+
+
+ function calculDuree() {
+ var time1 = $('#lv_locationbundle_echeance_datePremierPay').val(), time2 = $('#lv_locationbundle_echeance_dateDernierPay').val(),result = $("#lv_locationbundle_echeance_nbrePayRestant"),a = $('#lv_locationbundle_echeance_montantTotal').val();
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    if (parseInt(msec) > 0) {
+        var d1=time1.split('-'); 
+        var annee_1  = parseInt(d1[0]);
+        var mois_1 =  parseInt(d1[1]);
+
+       
+ 
+        var d2=time2.split('-'); 
+        var annee_2 = parseInt(d2[0]);
+        var mois_2 =  parseInt(d2[1]);
+        
+        var dd = (annee_2-annee_1)*12 + (mois_2-mois_1);
+        result.val(dd+1);
+        if(a != null){ 
+          var d = parseFloat(a.replace(",", "."))/(dd+1);
+          document.getElementById("lv_locationbundle_echeance_montantMensuel").value=d.toFixed(2);}
+          else {
+            alert("Le montant mensuel doît être sup à 0");
+        }
+       
+      }
+        else{
+          alert("La date de dernier pay doît être sup au date de premier pay ");
+        $("#lv_locationbundle_echeance_dateDernierPay").val('');
+        }
+        }
+        ;
+
+        function calculDuree1() {
+ var time1 = $('#lv_locationbundle_echeance_datePremierPay').val(), time2 = $('#lv_locationbundle_echeance_dateDernierPay').val(),result = $("#lv_locationbundle_echeance_nbrePayRestant"),a = $('#lv_locationbundle_echeance_montantTotal').val();
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    if (parseInt(msec) > 0) {
+        var d1=time1.split('-'); 
+        var annee_1  = parseInt(d1[0]);
+        var mois_1 =  parseInt(d1[1]);
+
+       
+ 
+        var d2=time2.split('-'); 
+        var annee_2 = parseInt(d2[0]);
+        var mois_2 =  parseInt(d2[1]);
+        
+        var dd = (annee_2-annee_1)*12 + (mois_2-mois_1);
+        result.val(dd+1);
+        if(a != null){ 
+          var d = parseFloat(a.replace(",", "."))/(dd+1);
+          document.getElementById("lv_locationbundle_echeance_montantMensuel").value=d.toFixed(2);}
+          else {
+            alert("Le montant mensuel doît être sup à 0");
+        }
+       
+      }
+        else{
+          alert("La date de dernier pay doît être sup au date de premier pay ");
+        $("#lv_locationbundle_echeance_datePremierPay").val('');
+        }
+        }
+        ;
+
+       function calculMontant() {
+
+    var a = $('#lv_locationbundle_echeance_montantTotal').val();
+    var b = $('#lv_locationbundle_echeance_nbrePayRestant').val();
+    var result = $("#lv_locationbundle_echeance_montantMensuel");
+    var result2 = $("#lv_locationbundle_echeance_montantRestant");
+    var d = parseFloat(a.replace(",", "."))/b;
+    var c = d.toFixed(2);
+    if (a >= 0) {
+    
+    result.val(c);
+    result2.val(a);}
+    else {
+            alert("Le montant total doît être sup à 0");
+        }
+        };
+
+
+       
+
+    
+  
+
+ 
+ </script>
+{% endblock %}
+
+
+

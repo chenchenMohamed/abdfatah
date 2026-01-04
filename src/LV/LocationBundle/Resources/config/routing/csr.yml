@@ -1,0 +1,28 @@
+csr_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:CSR:index" }
+    methods:  GET
+
+csr_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:CSR:show" }
+    methods:  GET
+
+csr_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:CSR:new" }
+    methods:  [GET, POST]
+
+csr_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:CSR:edit" }
+    methods:  [GET, POST]
+
+csr_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:CSR:delete" }
+    
+csr_new1:
+    path:     /new1/{time1}/{time2}/{result}/{voiture}
+    defaults: { _controller: "LocationBundle:CSR:new1" }
+    methods:  [GET, POST]

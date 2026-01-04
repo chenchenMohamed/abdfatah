@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li class="active"><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+<h1>Ajouter une Facture</h1>  
+<div class="content-wrapper">
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('facture_index') }}"><i class="fa fa-car"></i>Contrat</a></li>
+        <li  class="breadcrumb-item active">Ajouter une Facture</li>
+      </ol>
+    </section>
+           <div align="right" class="form-group" style="margin-right:110px;">
+                <div class="input-group">
+                  <h4 class="text-center"><a href="{{ path('csr_index') }}" role="button" class="btn btn-info btn-sm">Retour à  la Liste</a></h4>
+                </div>
+            </div>
+   <br><br>
+<div class="row" style="border-style:groove;">
+
+    {{ form_start(form) }}
+      <div class="span12">
+      <div class="span3">
+        <div>
+           <div>{{ form_label(form.numFacture) }}</div>
+           {{ form_errors(form.numFacture) }}
+           <div>{{ form_widget(form.numFacture, { 'attr': { 'readonly': 'true' ,'value':rnum}}) }}</div>
+        </div>
+        <div>
+           <div>{{ form_label(form.dateFacture) }}</div>
+           {{ form_errors(form.dateFacture) }}
+           <div>{{ form_widget(form.dateFacture, { 'attr': { 'readonly': 'true' } }) }}</div>
+        </div>
+        <div style="display:none;">
+           <div>{{ form_label(form.refPayement) }}</div>
+           {{ form_errors(form.refPayement) }}
+           <div>{{ form_widget(form.refPayement,{'attr': {'class':'chosen-select', 'readonly': 'true' } }) }}</div>
+        </div>
+            <div><label class="required">Num contrat</label></div>
+           <div><input type="text" required="required" value="{{ numContrat }}" readonly/></div>
+       
+      </div>
+      <div class="span3">
+          <div>
+             <label class="required">Matricule :</label>
+             <input type="text" value="{{ matricule }}" readonly/>
+          </div>
+          <div>
+              <label class="required">Nom Client :</label>
+              <input type="text" required="required" value="{{ nom }}" readonly/>
+          </div>
+          <div>
+              <label class="required">Prenom Client :</label>
+              <input type="text" value="{{ prenom }}" readonly/>
+          </div>
+      </div>
+      <div class="span3">
+        <div><label class="required">Date Payement :</label></div>
+        <div><input type="text" value="{{ datePayement }}" readonly/></div>
+
+        <div><label class="required">Recette :</label></div>
+           
+           <div><input type="text" value="{{ recette }}" readonly/></div>
+     
+        <div><label class="required">Montant paye :</label></div>
+           
+           <div><input type="text" value="{{ montantPaye }}" readonly/></div>
+      
+         <div><label class="required">Montnat restant :</label></div>
+           
+           <div><input type="text" value="{{ montantRestant }}" readonly/></div>
+        
+      </div>
+      <div class="span2">
+        <div><label class="required">Type payement</label></div>
+           
+           <div><input type="text" required="required" value="{{ typePayement }}" readonly/></div>
+        {% if typePayement == 'Chèque' %}
+        <div><label class="required">Numéro du cheque</label></div>
+           
+           <div><input type="text" value="{{ numCheque }}"/></div>
+        
+        {% else %}
+        {% endif %}
+        </div>
+      </div>
+      <div>
+          <div align="right" class="form-group">
+            <div class="input-group">
+                 <input type="submit" class="btn btn-success" value="Ajouter une Facture" />
+            </div>
+          </div>
+      </div>
+    {{ form_end(form) }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+
+
+
+                                                                            
+                                                                            
+                                                                    

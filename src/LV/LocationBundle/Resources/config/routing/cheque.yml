@@ -1,0 +1,24 @@
+cheque_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Cheque:index" }
+    methods:  GET
+
+cheque_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Cheque:show" }
+    methods:  GET
+
+cheque_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Cheque:new" }
+    methods:  [GET, POST]
+
+cheque_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Cheque:edit" }
+    methods:  [GET, POST]
+
+cheque_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Cheque:delete" }
+    methods:  DELETE

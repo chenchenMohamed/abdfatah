@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li class="active"><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+
+  <div class="content-wrapper">
+
+     <section class="content" style="mapping:25px">
+      <div class="row">
+        <div class="col-md-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Modifier un Client</h3>
+                </div>
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('client_index') }}"><i class="fa fa-car"></i>/ Client</a></li>
+        <li  class="breadcrumb-item active"><i class="fa fa-car"></i>/ Modifier un Client</li>
+      </ol>
+    </section>
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <h4 class="text-center"><a href="{{ path('client_index') }}" role="button" class="btn btn-info btn-sm">Retour à la liste</a></h4>
+          </div>
+      </div><br>
+                <div class="box-body">
+                    {{ form_start(edit_form) }}
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.cin) }}</div>
+                             {{ form_errors(edit_form.cin) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.cin) }}</div>
+                         </div>
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.nom) }}</div>
+                             {{ form_errors(edit_form.nom) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.nom) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.prenom) }}</div>
+                             {{ form_errors(edit_form.prenom) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.prenom) }}</div>
+                          </div>
+                          
+                      </div>
+                      <div class="span4">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.numPermis) }}</div>
+                             {{ form_errors(edit_form.numPermis) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.numPermis) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.nationalite) }}</div>
+                             {{ form_errors(edit_form.nationalite) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.nationalite) }}</div>
+                          </div>
+                          
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.adresse) }}</div>
+                             {{ form_errors(edit_form.adresse) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.adresse) }}</div>
+                          </div>
+                      </div>
+                      <div class="span4">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.degat) }}</div>
+                             {{ form_errors(edit_form.degat) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.degat) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.cause) }}</div>
+                             {{ form_errors(edit_form.cause) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.cause) }}</div>
+                          </div>
+                      </div>
+                              <input type="submit" class="btn btn-success btn-sm" value="Modifier" />
+                      {{ form_end(edit_form) }}
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

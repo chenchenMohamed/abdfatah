@@ -1,0 +1,28 @@
+paiementsoustraitance_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:PaiementSoustraitance:index" }
+    methods:  GET
+
+paiementsoustraitance_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:PaiementSoustraitance:show" }
+    methods:  GET
+
+paiementsoustraitance_new:
+    path:     /new/{id}/{date}
+    defaults: { _controller: "LocationBundle:PaiementSoustraitance:new" }
+    methods:  [GET, POST]
+
+paiementsoustraitance_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:PaiementSoustraitance:edit" }
+    methods:  [GET, POST]
+
+paiementsoustraitance_annuler:
+    path:     /{id}/{date}/annuler
+    defaults: { _controller: "LocationBundle:PaiementSoustraitance:annuler" }
+
+paiementsoustraitance_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:PaiementSoustraitance:delete" }
+    methods:  DELETE

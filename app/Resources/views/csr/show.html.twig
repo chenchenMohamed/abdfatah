@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li class="active"><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+        <h1>Contrat</h1>
+           <div align="right" class="form-group" style="margin-right:110px;">
+                <div class="input-group">
+                  <h4 class="text-center"><a href="{{ path('csr_index') }}" role="button" class="btn btn-info btn-sm" data-toggle="modal">Liste de Contrat</a></h4>
+                </div>
+            </div>
+<br><br><hr/>
+<br>
+
+<div class="row">
+<div class="span4">
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Num Contrat</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="numcontrat" type="text" value="{{ cSR.numContrat }}" readonly>
+          </div>
+      </div>
+	  
+	  <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Date Contrat</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="dc" type="text" value="{% if cSR.dateContrat %}{{ cSR.dateContrat|date('Y-m-d') }}{% endif %}" readonly>
+          </div>
+      </div>
+	  
+	  <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Date Debut</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="dd" type="text" value="{% if cSR.dateDebut %}{{ cSR.dateDebut|date('Y-m-d') }}{% endif %}" readonly>
+          </div>
+      </div>
+	  
+	  <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Date Fin</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="df" type="text" value="{% if cSR.dateFin %}{{ cSR.dateFin|date('Y-m-d') }}{% endif %}" readonly>
+          </div>
+      </div>  
+         
+</div>
+<div class="span4">
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Nombre de Jour</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="nbrejour" type="text" value="{{ cSR.nbreJour }}" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Km Départ</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="kmdepart" type="text" value="{{ cSR.kmDepart }}" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">niveau Carburant</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="niveaucarburant" type="text" value="{{ cSR.niveauCarburant }}" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Tarif</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="tarif" type="text" value="{{ cSR.tarif  }}" readonly>
+          </div>
+      </div>
+</div>
+<div class="span4">
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Etat</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="etat" type="text" value="{{ cSR.etat }}" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Recette</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="recette" type="text" value="{{ cSR.recette }}" readonly>
+          </div>
+      </div>
+      
+<br><br>
+	  {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-danger" value="Delete">
+            {{ form_end(delete_form) }}
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

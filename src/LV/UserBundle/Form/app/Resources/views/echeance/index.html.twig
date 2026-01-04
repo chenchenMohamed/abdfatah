@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+
+        
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        <center>Echeance</center>
+      </h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li  class="breadcrumb-item active"> / Echeance</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+     <section class="content" style="padding-left:50px;padding-right:50px;">
+      <div class="row">
+        <div class="col-md-12">
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><center>Liste d'Echeance</center></h3>
+                </div>
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <h4 class="text-center"><a href="{{ path('echeance_new') }}" role="button" class="btn btn-info btn-sm">Ajouter une Echeance</a></h4>
+          </div>
+      </div><br>
+                <div class="box-body">
+                  <div class="table-responsive">
+    <table class="table table-striped" style="background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+        <thead>
+            <tr>
+                {#<th>Id</th>#}
+                <th>Matricule</th>
+                <th>Modele</th>
+                <th>Marque</th>
+                <th>Etat</th>
+                <th>Contartleasing</th>
+                <th>Nomleasing</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for echeance in echeances %}
+            <tr>
+                {#<td><a href="{{ path('echeance_show', { 'id': echeance.id }) }}">{{ echeance.id }}</a></td>#}
+                <td>{{ echeance.refVoiture.matricule }}</td>
+                <td>{{ echeance.refVoiture.modele }}</td>
+                <td>{{ echeance.refVoiture.marque}}</td>
+                <td>{{ echeance.etat }}</td>
+                <td>{{ echeance.contartLeasing }}</td>
+                <td>{{ echeance.nomLeasing }}</td>
+                <td>
+                    <h4 class="text-center"><a href="{{ path('echeance_detail', { 'id': echeance.id }) }}" role="button" class="btn btn-success btn-sm">Détails</a></h4>
+                </td>
+                {% if echeance.montantPaye == 0%}
+                <td>
+                    <h4 class="text-center"><a href="{{ path('echeance_edit', { 'id': echeance.id }) }}" role="button" class="btn btn-success btn-sm">Modifier</a></h4>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

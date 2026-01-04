@@ -1,0 +1,25 @@
+# This file is auto-generated during the composer install
+
+# parameters:
+#     database_host: mysql216.sql004
+#     database_port: 3306
+#     database_name: chaffarrnp221   
+#     database_user: chaffarrnp221
+#     database_password: StCGTJpC2uYh
+#     mailer_transport: smtp
+#     mailer_host: 127.0.0.1
+#     mailer_user: null
+#     mailer_password: null
+#     secret: ThisTokenIsNotSoSecretChangeIt
+
+parameters:
+    database_host: sql303.0fees.net
+    database_port: 3306
+    database_name: 0fe_23612547_bibene
+    database_user: root
+    database_password: 
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: ThisTokenIsNotSoSecretChangeIt

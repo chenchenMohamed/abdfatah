@@ -1,0 +1,317 @@
+<?php
+
+namespace LV\LocationBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * Paiement
+ *
+ * @ORM\Table(name="paiement")
+ * @ORM\Entity(repositoryClass="LV\LocationBundle\Repository\PaiementRepository")
+ */
+class Paiement
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datePayement", type="date")
+     * 
+     */
+    private $datePayement;
+
+    /**
+     * @ORM\OneToOne(targetEntity="LV\LocationBundle\Entity\Contrat", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $refContrat;
+
+    /**
+     * @ORM\OneToOne(targetEntity="LV\LocationBundle\Entity\CSR", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $refCsr;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="montantPaye", type="float")
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     */
+    private $montantPaye;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="montantRestant", type="float")
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     */
+    private $montantRestant;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="typePayement", type="string", length=255)
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     */
+    private $typePayement;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateProchPayement", type="date", nullable=true)
+     */
+    private $dateProchPayement;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="numVirement", type="integer", nullable=false)
+     */
+    private $numVirement;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="numCheque", type="integer", nullable=false)
+     */
+    private $numCheque;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set datePayement
+     *
+     * @param \DateTime $datePayement
+     *
+     * @return Paiement
+     */
+    public function setDatePayement($datePayement)
+    {
+        $this->datePayement = $datePayement;
+
+        return $this;
+    }
+
+    /**
+     * Get datePayement
+     *
+     * @return \DateTime
+     */
+    public function getDatePayement()
+    {
+        return $this->datePayement;
+    }
+
+    /**
+     * Set refContrat
+     *
+     * @param string $refContrat
+     *
+     * @return Paiement
+     */
+    public function setRefContrat($refContrat)
+    {
+        $this->refContrat = $refContrat;
+
+        return $this;
+    }
+
+    /**
+     * Get refContrat
+     *
+     * @return string
+     */
+    public function getRefContrat()
+    {
+        return $this->refContrat;
+    }
+
+    /**
+     * Set montantPaye
+     *
+     * @param float $montantPaye
+     *
+     * @return Paiement
+     */
+    public function setMontantPaye($montantPaye)
+    {
+        $this->montantPaye = $montantPaye;
+
+        return $this;
+    }
+
+    /**
+     * Get montantPaye
+     *
+     * @return float
+     */
+    public function getMontantPaye()
+    {
+        return $this->montantPaye;
+    }
+
+    /**
+     * Set montantRestant
+     *
+     * @param float $montantRestant
+     *
+     * @return Paiement
+     */
+    public function setMontantRestant($montantRestant)
+    {
+        $this->montantRestant = $montantRestant;
+
+        return $this;
+    }
+
+    /**
+     * Get montantRestant
+     *
+     * @return float
+     */
+    public function getMontantRestant()
+    {
+        return $this->montantRestant;
+    }
+
+    /**
+     * Set typePayement
+     *
+     * @param string $typePayement
+     *
+     * @return Paiement
+     */
+    public function setTypePayement($typePayement)
+    {
+        $this->typePayement = $typePayement;
+
+        return $this;
+    }
+
+    /**
+     * Get typePayement
+     *
+     * @return string
+     */
+    public function getTypePayement()
+    {
+        return $this->typePayement;
+    }
+
+    /**
+     * Set dateProchPayement
+     *
+     * @param \DateTime $dateProchPayement
+     *
+     * @return Paiement
+     */
+    public function setDateProchPayement($dateProchPayement)
+    {
+        $this->dateProchPayement = $dateProchPayement;
+
+        return $this;
+    }
+
+    /**
+     * Get dateProchPayement
+     *
+     * @return \DateTime
+     */
+    public function getDateProchPayement()
+    {
+        return $this->dateProchPayement;
+    }
+
+    /**
+     * Set refCsr
+     *
+     * @param \LV\LocationBundle\Entity\CSR $refCsr
+     *
+     * @return Paiement
+     */
+    public function setRefCsr(\LV\LocationBundle\Entity\CSR $refCsr)
+    {
+        $this->refCsr = $refCsr;
+
+        return $this;
+    }
+
+    /**
+     * Get refCsr
+     *
+     * @return \LV\LocationBundle\Entity\CSR
+     */
+    public function getRefCsr()
+    {
+        return $this->refCsr;
+    }
+
+    /**
+     * Set numVirement
+     *
+     * @param integer $numVirement
+     *
+     * @return Paiement
+     */
+    public function setNumVirement($numVirement)
+    {
+        $this->numVirement = $numVirement;
+    
+        return $this;
+    }
+
+    /**
+     * Get numVirement
+     *
+     * @return integer
+     */
+    public function getNumVirement()
+    {
+        return $this->numVirement;
+    }
+
+    /**
+     * Set numCheque
+     *
+     * @param integer $numCheque
+     *
+     * @return Paiement
+     */
+    public function setNumCheque($numCheque)
+    {
+        $this->numCheque = $numCheque;
+    
+        return $this;
+    }
+
+    /**
+     * Get numCheque
+     *
+     * @return integer
+     */
+    public function getNumCheque()
+    {
+        return $this->numCheque;
+    }
+}

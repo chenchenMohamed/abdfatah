@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
+{% endblock %}
+{% block body %}
+
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+
+        
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1><center>Recette</center></h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item active">Recette</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+     <section class="content" style="padding-left:50px;padding-right:50px;">
+      <div class="row">
+        <div class="col-md-12">
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><center>Recette du {{month}}/{{year}}</center></h3>
+                </div>
+                {{ form_start(form) }}
+        <div  class="span3">
+           <div >{{ form_label(form.date) }}</div>
+           {{ form_errors(form) }}
+           <div class="hidden">{{ form_widget(form.date.day) }}</div>
+           <div>{{ form_widget(form.date.month) }}</div>
+           <div>{{ form_widget(form.date.year) }}</div>
+        </div>
+        <div class="span3"><br>
+            <input type="submit" value="Search">
+        </div>
+{{ form_end(form) }}
+
+  <div  class="span5" align="right">
+  <a href="{{path('recette_jour')}}"><button class="btn btn-success">jour</button></a>
+  <a href="{{path('recette_mois')}}"><button class="btn btn-success">mois</button></a> 
+  <a href="{{path('recette_an')}}"><button class="btn btn-success">annee</button></a> 
+</div>
+
+<br>
+                <br>
+                <div class="box-body">
+                  <div class="table-responsive">
+
+    <table id="example" class="table table-striped" style="background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+        <thead>
+            <tr>
+                <th class="text-center">Date de payement</th>
+                <th class="text-center">Numéro contrat</th>
+                <th class="text-center">Réf Soustraitance</th>
+                <th class="text-center">Montant payé</th>
+                <th class="text-center">Montant restant</th>
+                <th class="text-center">Etat</th>
+                <th class="text-center">Type de payement</th>
+                <th class="text-center">Réf chèque</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paiement in paiements %}
+            <tr>
+                <td style="padding-top:30px;">{% if paiement.datePayement %}{{ paiement.datePayement|date('d-m-Y') }}{% endif %}</td>
+                <td style="padding-top:30px;">{% if paiement.refContrat != "" %}{{ paiement.refContrat.numContrat }}{% elseif paiement.refCsr != "" %}{{ paiement.refCsr.numContrat }}{% endif %}</td>
+                <td style="padding-top:30px;">-</td>
+                <td style="padding-top:30px;">{{ paiement.montantPaye }}</td>
+                <td style="padding-top:30px;">{{ paiement.montantRestant }}</td>
+                <td style="padding-top:30px;">{{ paiement.etat }}</td>
+                <td style="padding-top:30px;">{{ paiement.typePayement }}</td>
+                <td style="padding-top:30px;">{% if (paiement.refCheque != null) %}{{ paiement.refCheque.numCheque }}{% else %}-{% endif %}</td>
+               
+                
+            </tr>
+        {% endfor %}
+        {% for paiementSoustraitance in paiementSoustraitances %}
+            <tr>
+                <td style="padding-top:30px;">{% if paiementSoustraitance.date %}{{  paiementSoustraitance.date|date('d-m-Y') }}{% endif %}</td>
+                <td style="padding-top:30px;">-</td>
+                <td style="padding-top:30px;">{{ paiementSoustraitance.refSoustraitance.numSoustraitance }}</td>
+                <td style="padding-top:30px;">{{ paiementSoustraitance.montant }}</td>
+                <td style="padding-top:30px;">0</td>
+                <td style="padding-top:30px;">Payement de tranche mensuelle <br>de contrat de sous-traitance</td>
+                <td style="padding-top:30px;">-</td>
+                <td style="padding-top:30px;">-</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <<th class="text-center">Total</th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center">{{mp}}</th>
+                <th class="text-center">{{mr}}</th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+            </tr>
+        </tbody>
+        
+    </table>
+                  </div>
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

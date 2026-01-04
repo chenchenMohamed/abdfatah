@@ -1,0 +1,25 @@
+modele_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Modele:index" }
+    methods:  GET
+
+modele_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Modele:show" }
+    methods:  GET
+
+modele_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Modele:new" }
+    methods:  [GET, POST]
+    
+modele_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Modele:edit" }
+    methods:  [GET, POST]
+
+modele_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Modele:delete" }
+    methods:  DELETE
+

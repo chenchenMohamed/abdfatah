@@ -1,0 +1,34 @@
+visite_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Visite:index" }
+    methods:  GET
+
+visite_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Visite:show" }
+    methods:  GET
+
+visite_new:
+    path:     /new/{id}
+    defaults: { _controller: "LocationBundle:Visite:new" }
+    methods:  [GET, POST]
+
+visite_new1:
+    path:     /new1/{voiture}
+    defaults: { _controller: "LocationBundle:Visite:new1" }
+    methods:  [GET, POST]
+
+visite_new2:
+    path:     /new2/%s
+    defaults: { _controller: "LocationBundle:Visite:new2" }
+    methods:  [GET, POST]
+
+visite_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Visite:edit" }
+    methods:  [GET, POST]
+
+visite_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Visite:delete" }
+

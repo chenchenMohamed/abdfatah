@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li class="active"><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+
+  <div class="content-wrapper">
+
+     <section class="content" style="mapping:25px">
+      <div class="row">
+        <div class="col-md-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Ajouter une Voiture</h3>
+                </div>
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('voiture_index') }}"><i class="fa fa-car"></i>/ Voiture</a></li>
+        <li  class="breadcrumb-item active"><i class="fa fa-car"></i>/ Ajouter une Voiture</li>
+      </ol>
+    </section>
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <h4 class="text-center"><a href="{{ path('voiture_index') }}" role="button" class="btn btn-info btn-sm">Retour à la liste</a></h4>
+          </div>
+      </div><br>
+                <div class="box-body">
+                    {{ form_start(edit_form) }}
+                      <div class="span3">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.matricule) }}</div>
+                             {{ form_errors(edit_form.matricule) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.matricule) }}</div>
+                         </div>
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.marque) }}</div>
+                             {{ form_errors(edit_form.marque) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.marque,{'attr': {'class':'chosen-select'}}) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.modele) }}</div>
+                             {{ form_errors(edit_form.modele) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.modele,{'attr': {'class':'chosen-select'}}) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.couleur) }}</div>
+                             {{ form_errors(edit_form.couleur) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.couleur) }}</div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.codeRadio) }}</div>
+                             {{ form_errors(edit_form.codeRadio) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.codeRadio) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.typeTransmission) }}</div>
+                             {{ form_errors(edit_form.typeTransmission) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.typeTransmission) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.age) }}</div>
+                             {{ form_errors(edit_form.age) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.age) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.prix) }}</div>
+                             {{ form_errors(edit_form.prix) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.prix) }}</div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.nbrePortes) }}</div>
+                             {{ form_errors(edit_form.nbrePortes) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.nbrePortes) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.nbrePassagers) }}</div>
+                             {{ form_errors(edit_form.nbrePassagers) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.nbrePassagers) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.capaciteBagages) }}</div>
+                             {{ form_errors(edit_form.capaciteBagages) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.capaciteBagages) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.refAgence) }}</div>
+                             {{ form_errors(edit_form.refAgence) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.refAgence, {'attr': {'class':'chosen-select'}}) }}</div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.km) }}</div>
+                             {{ form_errors(edit_form.km) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.km) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(edit_form.etat) }}</div>
+                             {{ form_errors(edit_form.etat) }}
+                             <div class="col-sm-8">{{ form_widget(edit_form.etat) }}</div>
+                          </div>
+                      </div>
+                      <div class="row" align="right">
+                              <input type="submit" class="btn btn-success btn-sm" value="Modifier" />
+                      </div>
+                      {{ form_end(edit_form) }}
+<!--
+    <ul>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-danger" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>-->
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $('#lv_locationbundle_voiture_marque').change(function () {
+            var marqueSelector = $(this);
+            
+            // Request the neighborhoods of the selected city.
+            $.ajax({
+                url: "{{ path('marque_list_modeles') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    marqueid: marqueSelector.val()
+                },
+                success: function (modeles) {
+                    var modeleSelect = $("#lv_locationbundle_voiture_modele");
+
+                    // Remove current options
+                    modeleSelect.html('');
+                    
+                    // Empty value ...
+                    modeleSelect.append('<option value> Sélectionner un modèle ' + marqueSelector.find("option:selected").text() + ' ...</option>');
+                    
+                    
+                    $.each(modeles, function (key, modele) {
+                        modeleSelect.append('<option value="' + modele.id + '">' + modele.nom + '</option>');
+                    });
+                },
+                error: function (err) {
+                    alert("An error ocurred while loading data ...");
+                }
+            });
+        });
+    </script>
+{% endblock %}

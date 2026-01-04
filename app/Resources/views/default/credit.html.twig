@@ -1,0 +1,174 @@
+{% extends 'template.html.twig' %}
+{% block stylesheets %}
+<style type="text/css">
+    @media (max-width: 600px){
+      #title{
+        margin-bottom: 20px;
+      }
+      #button{
+        height: 35px;
+      }
+    }
+  </style>
+{% endblock %}
+{% block body %}
+<!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Liste des voitures pour location</h4>#}
+                        <div class="ml-auto text-right col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Etat de crédit</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                <h3 class="card-title m-b-0 col-md-6 col-12" id="title">Liste des clients non réglés</h3>
+                                <div class="col-md-4 col-1"></div>
+                                
+                                </div>
+                                <br>
+                                <div class="col-12 row">
+                                  <input type="text" id="cin" placeholder="Rechercher CIN" title="Type in a name" class="col-md-2 col-8 form-control">&nbsp;&nbsp;
+                                  <input type="text" id="nom" placeholder="Rechercher nom" title="Type in a name" class="col-md-2 col-8 form-control">&nbsp;&nbsp;
+                                  <input type="text" id="prenom" placeholder="Rechercher prénom" title="Type in a name" class="col-md-2 col-8 form-control">&nbsp;&nbsp;
+                                  <input type="text" id="numPermis" placeholder="Rechercher numéro permis" title="Type in a name" class="col-md-2 col-8 form-control">&nbsp;&nbsp;
+                                </div>
+                                <br>
+                                <div class="table-responsive">
+                                    <table id="zero_config" width="100%" class="table table-striped table-bordered">
+                                      <thead>
+                                          <tr>
+                                              <th style="display: none;">Id</th>
+                                              <th>Numéro CIN ou passeport</th>
+                                              <th>Nom</th>
+                                              <th>Prénom</th>
+                                              <th>Numéro permis</th>
+                                              <th>Adresse</th>
+                                              <th>Numéro contrat</th>
+                                              <th>Montant</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% for client in clientNonRegle %}
+                                          <tr>
+                                              <td style="display: none;">{{ client.id}}</td>
+                                              <td>{{ client.refCsr.conducteur1.cin }}</td>
+                                              <td>{{ client.refCsr.conducteur1.nom }}</td>
+                                              <td>{{ client.refCsr.conducteur1.prenom }}</td>
+                                              <td>{{ client.refCsr.conducteur1.numPermis }}</td>
+                                              <td>{{ client.refCsr.conducteur1.adresse }}</td>
+                                              <td>{{ client.refCsr.numContrat }}</td>
+                                              <td class="montantRestant-col">{{ client.montantRestant|number_format(3, '.', ',')}} DT</td>
+                                          </tr>
+                                          {% endfor %}
+                                      </tbody>
+                                      <tfoot>
+                                          <tr>
+                                              <th colspan="6" style="text-align:right">Total :</th>
+                                              <th id="montantRestantTotal"></th>
+                                          </tr>
+                                      </tfoot>
+                                  </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+{% block javascripts %}
+<script>
+
+var table = $('#zero_config').DataTable();
+
+document.addEventListener("DOMContentLoaded", function() {
+    function calculateTotal() {
+        let total = 0;
+
+        document.querySelectorAll(".montantRestant-col").forEach(function(cell) {
+            // Nettoyer la valeur (supprimer DT, virgules, espaces)
+            let value = cell.innerText.replace("TND", "").replace(/,/g, "").trim();
+            total += parseFloat(value) || 0;
+        });
+
+        document.getElementById("montantRestantTotal").innerText = total.toFixed(3) + " TND";
+    }
+
+    // Calcul initial
+    calculateTotal();
+
+    // Observer les changements dans le tableau
+    const target = document.querySelector("tbody");
+    if (target) {
+        const observer = new MutationObserver(function() {
+            calculateTotal();
+        });
+
+        observer.observe(target, { childList: true, subtree: true, characterData: true });
+    }
+});
+
+ 
+$('#cin').on( 'keyup', function () {
+    table
+        .columns( 1 )
+        .search( this.value )
+        .draw();
+} );
+$('#nom').on( 'keyup', function () {
+    table
+        .columns( 2 )
+        .search( this.value )
+        .draw();
+} );
+$('#prenom').on( 'keyup', function () {
+    table
+        .columns( 3 )
+        .search( this.value )
+        .draw();
+} );
+$('#numPermis').on( 'keyup', function () {
+    table
+        .columns( 4 )
+        .search( this.value )
+        .draw();
+} );
+</script>
+{% endblock %}

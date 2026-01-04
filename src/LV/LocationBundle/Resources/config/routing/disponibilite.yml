@@ -1,0 +1,36 @@
+disponibilite_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Disponibilite:index" }
+    methods:  GET
+
+disponibilite_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Disponibilite:show" }
+    methods:  GET
+
+disponibilite_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Disponibilite:new" }
+    methods:  [GET, POST]
+
+disponibilite_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Disponibilite:edit" }
+    methods:  [GET, POST]
+
+disponibilite_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Disponibilite:delete" }
+    methods:  DELETE
+
+disponibilite_search:
+    path:     /search
+    defaults: { _controller: "LocationBundle:Disponibilite:search" }
+    methods:  [GET, POST]
+
+
+disponibilite_search_result:
+    path:     /search/result
+    defaults: { _controller: "LocationBundle:Disponibilite:search2" }
+
+    

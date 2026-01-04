@@ -1,0 +1,37 @@
+client_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Client:index" }
+    methods:  GET
+
+client_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Client:show" }
+    methods:  GET
+
+client_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Client:new" }
+    methods:  [GET, POST]
+
+client_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Client:edit" }
+    methods:  [GET, POST]
+
+client_edit2:
+    path:     /{id}/edit2
+    defaults: { _controller: "LocationBundle:Client:edit2" }
+    methods:  [GET, POST]
+
+client_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Client:delete" }
+
+client_delete1:
+    path:     /{id}/delete1
+    defaults: { _controller: "LocationBundle:Client:delete1" }
+
+client_liste_noir:
+    path:     /listenoir
+    defaults: { _controller: "LocationBundle:Client:listeNoir" }
+    methods:  GET

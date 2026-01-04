@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12"> 
+
+  <div class="content-wrapper">
+
+     <section class="content" style="mapping:25px">
+      <div class="row">
+        <div class="col-md-12">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Modifier une depense</h3>
+                </div>
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item active"><i class="fa fa-car"></i>/ depense</li>
+      </ol>
+    </section>
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <h4 class="text-center"><a href="{{ path('depenses_index') }}" role="button" class="btn btn-info btn-sm">Retour à la liste</a></h4>
+          </div>
+      </div><br>
+                <div class="box-body">
+                  <div class="table-responsive">
+{{ form_start(edit_form) }}
+        <div class="row">
+    <div class="span4">
+        <div>
+           <div >{{ form_label(edit_form.codeDepense) }}</div>
+           {{ form_errors(edit_form.codeDepense) }}
+           <div>{{ form_widget(edit_form.codeDepense,{'attr':{'readonly':true}}) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.dateDepense) }}</div>
+           {{ form_errors(edit_form.dateDepense) }}
+           <div>{{ form_widget(edit_form.dateDepense) }}</div>
+        </div>
+    </div>
+    <div class="span4">
+        <div>
+           <div >{{ form_label(edit_form.montant) }}</div>
+           {{ form_errors(edit_form.montant) }}
+           <div>{{ form_widget(edit_form.montant) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.description) }}</div>
+           {{ form_errors(edit_form.description) }}
+           <div>{{ form_widget(edit_form.description) }}</div>
+        </div>
+    </div>
+    <div class="span4">
+        <div>
+           <div >{{ form_label(edit_form.refAgence,'Agence ') }}</div>
+           {{ form_errors(edit_form.refAgence) }}
+           <div>{{ form_widget(edit_form.refAgence,{'attr': {'class':'chosen-select'}}) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.refUtilisateur,'Utilisateur') }}</div>
+           {{ form_errors(edit_form.refUtilisateur) }}
+           <div>{{ form_widget(edit_form.refUtilisateur,{'attr':{'readonly':true}}) }}</div>
+        </div>
+    </div>
+    </div>
+        <div class="row" align="right">
+            <input type="submit" class="btn btn-success" value="Modifier" />
+        </div>
+{{ form_end(edit_form) }}
+
+
+                  </div>
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

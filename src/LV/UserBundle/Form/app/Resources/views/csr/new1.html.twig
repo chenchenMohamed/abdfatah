@@ -1,0 +1,627 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li class="active"><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div> 
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <div class="content-wrapper">
+            <section class="content-header">
+              <h1><center> Contrat  </center> </h1>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li  class="breadcrumb-item active">Contrat</li>
+              </ol>
+            </section>
+            <section class="content" style="padding-left:25px;padding-right:25px;">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="box box-info">
+                    <div class="box-header with-border">
+                       <h3 class="box-title"><center>Ajouter un Contrat</center></h3>
+                    </div> 
+  {{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
+    <div class="row">
+      <div class="span12">
+      <div class="span3" style="background-color:#F2F3F4;padding:25px;mapping:1px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Détails</u></b><h2></center> <hr>
+        <div> 
+           {{ form_errors(form.numContrat) }}
+           <div>Numéro de Contrat : {{ form_widget(form.numContrat,{'attr': {'readonly' : true}}) }}</div>
+        </div>
+        <div>
+              {{ form_errors(form.dateContrat) }}
+            <div>Date Contrat : {{ form_widget(form.dateContrat,{'attr': {'readonly' : true}}) }}</div>
+        </div>
+        <div>
+              {{ form_errors(form.dateDebut) }}
+            <div>Date Debut : {{ form_widget(form.dateDebut,{'attr': {'readonly' : true}}) }}</div>
+        </div>
+        <div>
+              {{ form_errors(form.dateFin) }}
+            <div>Date Fin : {{ form_widget(form.dateFin,{'attr': {'readonly' : true}}) }}</div>
+        </div>
+      </div> 
+       <div class="span3" style="background-color:#F2F3F4;padding:25px;mapping:1px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Réservation</u></b><h2></center> <hr>
+        
+        
+        <div>
+           {{ form_errors(form.kmDepart) }}
+           <div>km Départ : {{ form_widget(form.kmDepart,{'attr': {'onchange': 'calculDuree()'}}) }}</div>
+        </div>
+        <div>
+           <div>{{ form_label(form.niveauCarburant) }}</div>
+           {{ form_errors(form.niveauCarburant) }}
+           <div> {{ form_widget(form.niveauCarburant) }}</div>
+        </div>
+        <div>
+           <div>{{ form_label(form.etat,'Etat de voiture') }}</div>
+           {{ form_errors(form.etat) }}
+           <div> {{ form_widget(form.etat) }}</div>
+        </div><br><br><br>
+      </div> 
+      <div class="span3" style="background-color:#F2F3F4;padding:25px;mapping:1px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Tarif et Prix</u></b><h2></center> <hr>
+        <div>
+           {{ form_errors(form.tarif) }}
+           <div> Tarif :<br>{{ form_widget(form.tarif, { 'attr': {'onkeyup': 'calcultarif()'}}) }}</div>
+        </div>
+        <div>
+           {{ form_errors(form.nbreJour) }}
+           <div>Nombre de Jour : {{ form_widget(form.nbreJour,{'attr': {'readonly' : true}}) }}</div>
+        </div>
+        <div>
+           {{ form_errors(form.recette) }}
+           <div>Montant Total : {{ form_widget(form.recette,{'attr': {'readonly' : true}}) }}</div>
+        </div>
+        <br><br><br>
+      </div>
+     </div>
+</div>
+<br>
+<div class="row">
+      <div class="span12">
+      <div class="span3" style="background-color:#F2F3F4;padding:25px;mapping:1px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Conducteur 1</u></b><h2></center><br><br>
+          <div> {{ form_errors(form.conducteur1) }}
+           <div> Conducteur 1 : {{ form_widget(form.conducteur1,{'attr': {'class':'chosen-select'}}) }}
+		   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#new_client">
+		   <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                  </div>
+		  </div>
+        <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">CIN</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="cin1" id="cin1" type="text" value="" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Nom</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="nom1" id="nom1" type="text" value="" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Prenom</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="prenom1" id="prenom1" type="text" value="" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Numero Permis</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="numpermis1" id="numpermis1" type="text" value="" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Nationalité</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="nationalite1" id="nationalite1" type="text" value="" readonly>
+          </div>
+      </div>
+    </div>
+
+      <div class="span3" style="background-color:#F2F3F4;padding:25px;mapping:1px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Conducteur 2</u></b><h2></center> <hr>
+          
+        <div>
+           {{ form_errors(form.conducteur2) }}
+           <div> Conducteur 2 : {{ form_widget(form.conducteur2,{'attr': {'class':'chosen-select'}}) }}
+		 <!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#new_client2">
+		   <i class="fa fa-plus-circle" aria-hidden="true"></i></button> -->                 
+		   </div>
+        </div>
+        <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">CIN</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="cin" id="cin" type="text" value="" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Nom</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="nom" id="nom" type="text" value="" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Prenom</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="prenom" id="prenom" type="text" value="" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Numero Permis</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="numpermis" id="numpermis" type="text" value="" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Nationalité</label>
+          <div class="input-group text">
+              <input class="form-control" size="16" name="nationalite" id="nationalite" type="text" value="" readonly>
+          </div>
+      </div>
+    </div>
+<div class="span3" style="background-color:#F2F3F4;padding:25px;mapping:1px;border:1px solid #BDC3C7;"> 
+      <center><h2><b style="color:#4BA7DC"><u>Voiture</u></b><h2></center> <hr>
+    <div style="display:none;"> 
+        {{ form_errors(form.refVoiture) }}
+        <div> Voiture : {{ form_widget(form.refVoiture,{'attr': {'class':'chosen-select'}}) }}</div>
+    </div>
+   <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Matricule</label>
+          <div class="input-group text"> 
+              <input class="form-control" size="16" name="matricule" id="matricule" type="text" value="{{ matricule }}" readonly>
+          </div>
+      </div>
+   <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Modele</label>
+          <div class="input-group text"> 
+              <input class="form-control" size="16" name="modele" id="modele" type="text" value="{{ modele }}" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Marque</label>
+          <div class="input-group text"> 
+              <input class="form-control" size="16" name="marque" id="marque" type="text" value="{{ marque }}" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Couleur</label>
+          <div class="input-group text"> 
+              <input class="form-control" size="16" name="couleur" id="couleur" type="text" value="{{ couleur }}" readonly>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="dtp_input2" class="col-md-4 control-label">Prix</label>
+          <div class="input-group text"> 
+              <input class="form-control" size="16" name="prix" id="prix" type="text" value="{{ prix }}" readonly>
+          </div>
+      </div>  
+    <br>
+    <div class="span2">
+    </div>
+   </div>
+  </div>
+</div>      
+        <br>
+    <div class="row">
+        <div class="span12" align="right">
+            <input type="submit" class="btn btn-success" value="Créer un Contrat" />
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+     <!-- Modal -->
+    
+<div class="modal fade" id="new_client" role="dialog" aria-labelledby="new_role-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="new_role-label">Ajouter nouveau client</h4>
+            </div>
+            <div class="modal-body">
+               <div class="box-body">
+                    {{ form_start(form_client) }}
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.cin) }}</div>
+                             {{ form_errors(form_client.cin) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.cin) }}</div>
+                         </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.numPermis) }}</div>
+                             {{ form_errors(form_client.numPermis) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.numPermis) }}</div>
+                          </div>
+                      </div>
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.nom) }}</div>
+                             {{ form_errors(form_client.nom) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.nom) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.prenom) }}</div>
+                             {{ form_errors(form_client.prenom) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.prenom) }}</div>
+                          </div>
+                          
+                      </div>
+                      <div class="span4">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.nationalite) }}</div>
+                             {{ form_errors(form_client.nationalite) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.nationalite) }}</div>
+                          </div>
+                          
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.adresse) }}</div>
+                             {{ form_errors(form_client.adresse) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.adresse) }}</div>
+                          </div>
+                          <div class="row" style="display:none;">
+                             <div class="col-sm-4">{{ form_label(form_client.degat) }}</div>
+                             {{ form_errors(form_client.degat) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.degat,{'attr': {'readonly' : true}}) }}</div>
+                          </div>
+                          <div class="row" style="display:none;">
+                             <div class="col-sm-4">{{ form_label(form_client.cause) }}</div>
+                             {{ form_errors(form_client.cause) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.cause) }}</div>
+                          </div>
+                      </div>
+                          <div class="row" align="right">
+                              <input type="submit" class="btn btn-success btn-sm" value="Ajouter" />
+              </div>
+                      {{ form_end(form_client) }}
+                </div>
+        </div>
+            
+          </div>
+               
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal -->
+ <!--   
+<div class="modal fade" id="new_client2" role="dialog" aria-labelledby="new_role-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="new_role-label2">Ajouter nouveau client</h4>
+            </div>
+            <div class="modal-body">
+               <div class="box-body">
+                    {#{ form_start(form_client2) }}
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client2.cin) }}</div>
+                             {{ form_errors(form_client2.cin) }}
+                             <div class="col-sm-8">{{ form_widget(form_client2.cin) }}</div>
+                         </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client2.numPermis) }}</div>
+                             {{ form_errors(form_client2.numPermis) }}
+                             <div class="col-sm-8">{{ form_widget(form_client2.numPermis) }}</div>
+                          </div>
+                      </div>
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client2.nom) }}</div>
+                             {{ form_errors(form_client2.nom) }}
+                             <div class="col-sm-8">{{ form_widget(form_client2.nom) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client2.prenom) }}</div>
+                             {{ form_errors(form_client2.prenom) }}
+                             <div class="col-sm-8">{{ form_widget(form_client2.prenom) }}</div>
+                          </div>
+                          
+                      </div>
+                      <div class="span4">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client2.nationalite) }}</div>
+                             {{ form_errors(form_client2.nationalite) }}
+                             <div class="col-sm-8">{{ form_widget(form_client2.nationalite) }}</div>
+                          </div>
+                          
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client2.adresse) }}</div>
+                             {{ form_errors(form_client2.adresse) }}
+                             <div class="col-sm-8">{{ form_widget(form_client2.adresse) }}</div>
+                          </div>
+                          <div class="row" style="display:none;">
+                             <div class="col-sm-4">{{ form_label(form_client2.degat) }}</div>
+                             {{ form_errors(form_client2.degat) }}
+                             <div class="col-sm-8">{{ form_widget(form_client2.degat,{'attr': {'readonly' : true}}) }}</div>
+                          </div>
+                          <div class="row" style="display:none;">
+                             <div class="col-sm-4">{{ form_label(form_client2.cause) }}</div>
+                             {{ form_errors(form_client2.cause) }}
+                             <div class="col-sm-8">{{ form_widget(form_client2.cause) }}</div>
+                          </div>
+                      </div>
+                          <div class="row" align="right">
+                              <input type="submit" class="btn btn-success btn-sm" value="Ajouter" />
+              </div>
+                      {{ form_end(form_client2) }#}
+                </div>
+        </div>
+            
+          </div>
+               
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal -->
+
+
+
+
+
+
+
+    <table  id="client" class="table table-striped" style="display: none;background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+                    <thead>
+                     <tr>
+                         <th class="text-center">Cin</th>
+                         <th class="text-center">Nom</th>
+                         <th class="text-center">Prenom</th>
+                         <th class="text-center">Numpermis</th>
+                         <th class="text-center">Nationalite</th>
+                         <th class="text-center">Adresse</th>
+                         <th class="text-center">Degats</th>
+                     </tr>
+                    </thead>
+                    <tbody id="myc">
+                      {% for client in clients %}
+                      <tr varc="{{ client.cin }} {{ client.nom }} {{ client.prenom }}">
+                        <td>{{ client.cin }}</td>
+                        <td>{{ client.nom }}</td>
+                        <td>{{ client.prenom }}</td>
+                        <td>{{ client.numPermis }}</td>
+                        <td>{{ client.nationalite }}</td>
+                        <td>{{ client.adresse }}</td>
+                        <td>{{ client.degat }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    </table> 
+					<table  id="client" class="table table-striped" style="display: none;background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+                    <thead>
+                     <tr>
+                         <th class="text-center">Cin</th>
+                         <th class="text-center">Nom</th>
+                         <th class="text-center">Prenom</th>
+                         <th class="text-center">Numpermis</th>
+                         <th class="text-center">Nationalite</th>
+                         <th class="text-center">Adresse</th>
+                         <th class="text-center">Degats</th>
+                     </tr>
+                    </thead>
+                    <tbody id="myc">
+                      {% for client in clients %}
+                      <tr varc1="{{ client.cin }} {{ client.nom }} {{ client.prenom }}  (client dans LN)">
+                        <td>{{ client.cin }}</td>
+                        <td>{{ client.nom }}</td>
+                        <td>{{ client.prenom }}</td>
+                        <td>{{ client.numPermis }}</td>
+                        <td>{{ client.nationalite }}</td>
+                        <td>{{ client.adresse }}</td>
+                        <td>{{ client.degat }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    </table>
+                    <table  id="client1" class="table table-striped" style="display: none;background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+                    <thead>
+                     <tr>
+                         <th class="text-center">Cin</th>
+                         <th class="text-center">Nom</th>
+                         <th class="text-center">Prenom</th>
+                         <th class="text-center">Numpermis</th>
+                         <th class="text-center">Nationalite</th>
+                         <th class="text-center">Adresse</th>
+                         <th class="text-center">Degats</th>
+                     </tr>
+                    </thead>
+                    <tbody id="mycc">
+                      {% for client in clients %}
+                      <tr varcc="{{ client.cin }} {{ client.nom }} {{ client.prenom }}">
+                        <td>{{ client.cin }}</td>
+                        <td>{{ client.nom }}</td>
+                        <td>{{ client.prenom }}</td>
+                        <td>{{ client.numPermis }}</td>
+                        <td>{{ client.nationalite }}</td>
+                        <td>{{ client.adresse }}</td>
+                        <td>{{ client.degat }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    </table>
+                    <table id="voiture" name="voiture" class="table table-striped" style="display: none;background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+                    <thead>
+                     <tr>
+                         <th class="text-center">Matricule</th>
+                         <th class="text-center">Marque</th>
+                         <th class="text-center">Modele</th>
+                         <th class="text-center">Couleur</th>
+                         <th class="text-center">Code Radio</th>
+                         <th class="text-center">Type Transmission</th>
+                         <th class="text-center">Nombre Portes</th>
+                         <th class="text-center">Nombre Passagers</th>
+                         <th class="text-center">Capacite Bagages</th>
+                         <th class="text-center">Age</th>
+                         <th class="text-center">Prix/Jours</th>
+                     </tr>
+                    </thead>
+                    <tbody id="myTable">
+                      {% for voiture in voitures %}
+                      <tr var="{{ voiture.matricule }}">
+                        <td style="padding-top:30px;"><a href="{{ path('voiture_show', { 'id': voiture.id }) }}">{{ voiture.matricule }}</a></td>
+                        <td style="padding-top:30px;">{{ voiture.marque.nom }}</td>
+                        <td style="padding-top:30px;">{{ voiture.modele.nom }}</td>
+                        <td style="padding-top:30px;">{{ voiture.couleur }}</td>
+                        <td style="padding-top:30px;">{{ voiture.codeRadio }}</td>
+                        <td style="padding-top:30px;">{{ voiture.typeTransmission }}</td>
+                        <td style="padding-top:30px;">{{ voiture.nbrePortes }}</td>
+                        <td style="padding-top:30px;">{{ voiture.nbrePassagers }}</td>
+                        <td style="padding-top:30px;">{{ voiture.capaciteBagages }}</td>
+                        <td style="padding-top:30px;">{{ voiture.age }}</td>
+                        <td style="padding-top:30px;">{{ voiture.prix }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    </table>
+
+
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+  function calcultarif() {
+
+    var a = parseInt($('#lv_locationbundle_csr_tarif').val());
+    var b = parseInt($('#lv_locationbundle_csr_nbreJour').val());
+    var result = $("#lv_locationbundle_csr_recette");
+	if (b<=1){ 
+	var d = a;
+	}else{
+    var d = a*b;
+	}
+    result.val(d);
+        };
+
+function calculDuree() {
+ var time1 = $('#lv_locationbundle_csr_dateDebut').val(), time2 = $('#lv_locationbundle_csr_dateFin').val(),result = $("#lv_locationbundle_csr_nbreJour");
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    
+    
+    if (parseInt(msec) >= 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes');
+        var jours = dd;
+
+    var a = parseInt($('#lv_locationbundle_csr_tarif').val());
+    var b = parseInt($('#lv_locationbundle_csr_nbreJour').val());
+    var result = $("#lv_locationbundle_csr_recette");
+    if (b<=1){ 
+	var d = a;
+	}else{
+    var d = a*b;
+	}
+    result.val(d);
+        }
+        else {
+        alert("La date d'arrivée doît ");
+        }
+        }
+        ;
+</script>
+
+<script type="text/javascript">
+  $(function() {
+    $("#lv_locationbundle_csr_conducteur1").chosen().change(function() {
+      strUser1=$("#lv_locationbundle_csr_conducteur1_chosen").find("a").find("span").text();
+  //    alert(strUser1.length);
+//  strUser11=strUser1 + " (client dans LN)";
+ // alert(strUser11);
+ res = strUser1.substr(((strUser1.length)-16), (strUser1.length));
+       if(strUser1==""){
+ $('tbody tr').hide();}
+ else{
+  $('tbody tr').show();
+  }
+  if(res != "(client dans LN)") {
+        $('tbody tr').not($('tbody tr[varc="' + strUser1 + '"]')).hide();
+        $("#cin1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(0)").html())
+        $("#nom1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(1)").html());
+        $("#prenom1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(2)").html());
+        $("#numpermis1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(3)").html());
+        $("#nationalite1").attr("value",$('tbody tr[varc="' + strUser1 + '"]').find("td:eq(4)").html());
+  }else if(res == "(client dans LN)"){	  
+        $('tbody tr').not($('tbody tr[varc1="' + strUser1 + '"]')).hide();
+        $("#cin1").attr("value",$('tbody tr[varc1="' + strUser1 + '"]').find("td:eq(0)").html())
+        $("#nom1").attr("value",$('tbody tr[varc1="' + strUser1 + '"]').find("td:eq(1)").html());
+        $("#prenom1").attr("value",$('tbody tr[varc1="' + strUser1 + '"]').find("td:eq(2)").html());
+        $("#numpermis1").attr("value",$('tbody tr[varc1="' + strUser1 + '"]').find("td:eq(3)").html());
+        $("#nationalite1").attr("value",$('tbody tr[varc1="' + strUser1 + '"]').find("td:eq(4)").html());  
+  }
+    });
+	
+    $("#lv_locationbundle_csr_conducteur2").chosen().change(function() {
+      strUser2=$("#lv_locationbundle_csr_conducteur2_chosen").find("a").find("span").text();
+  //    alert(strUser1.length);
+//  strUser11=strUser1 + " (client dans LN)";
+ // alert(strUser11);
+ res = strUser2.substr(((strUser2.length)-16), (strUser2.length));
+       if(strUser2==""){
+ $('tbody tr').hide();}
+ else{
+  $('tbody tr').show();
+  }
+  if(res != "(client dans LN)") {
+        $('tbody tr').not($('tbody tr[varc="' + strUser2 + '"]')).hide();
+        $("#cin").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(0)").html())
+        $("#nom").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(1)").html());
+        $("#prenom").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(2)").html());
+        $("#numpermis").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(3)").html());
+        $("#nationalite").attr("value",$('tbody tr[varc="' + strUser2 + '"]').find("td:eq(4)").html());
+  }else if(res == "(client dans LN)"){	  
+        $('tbody tr').not($('tbody tr[varc1="' + strUser2 + '"]')).hide();
+        $("#cin").attr("value",$('tbody tr[varc1="' + strUser2 + '"]').find("td:eq(0)").html())
+        $("#nom").attr("value",$('tbody tr[varc1="' + strUser2 + '"]').find("td:eq(1)").html());
+        $("#prenom").attr("value",$('tbody tr[varc1="' + strUser2 + '"]').find("td:eq(2)").html());
+        $("#numpermis").attr("value",$('tbody tr[varc1="' + strUser2 + '"]').find("td:eq(3)").html());
+        $("#nationalite").attr("value",$('tbody tr[varc1="' + strUser2 + '"]').find("td:eq(4)").html());  
+  }
+    });
+  });
+
+  $('#client').data.reload();
+ </script>
+{% endblock %}

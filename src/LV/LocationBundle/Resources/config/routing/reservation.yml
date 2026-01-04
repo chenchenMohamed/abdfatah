@@ -1,0 +1,38 @@
+reservation_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Reservation:index" }
+    methods:  GET
+
+reservation_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Reservation:show" }
+    methods:  GET
+
+reservation_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Reservation:new" }
+    methods:  [GET, POST]
+
+reservation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Reservation:edit" }
+    methods:  [GET, POST]
+ 
+reservation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Reservation:delete" }
+
+reservation_search:
+    path:     /search
+    defaults: { _controller: "LocationBundle:Reservation:search" }
+    methods:  [GET, POST]
+
+reservation_new1:
+    path:     /new1/{time1}/{time2}/{result}/{voiture}
+    defaults: { _controller: "LocationBundle:Reservation:new1" }
+    methods:  [GET, POST]
+
+new_client:
+    path:     /newclient
+    defaults: { _controller: "LocationBundle:Reservation:newClient" }
+    methods:  [GET, POST]

@@ -1,0 +1,7 @@
+user_homepage:
+    path:     /aa
+    defaults: { _controller: UserBundle:Default:index }
+
+login:
+    path:  /
+    defaults: { _controller: "FOSUserBundle:Security:login" }

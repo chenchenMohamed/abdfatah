@@ -1,0 +1,307 @@
+    <!DOCTYPE html>
+    <html lang="zxx" class="no-js">
+    <head>
+        <!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Favicon-->
+        <link rel="shortcut icon" href="template/img/elements/fav.png">
+        <!-- Author Meta -->
+        <meta name="author" content="colorlib">
+        <!-- Meta Description -->
+        <meta name="description" content="">
+        <!-- Meta Keyword -->
+        <meta name="keywords" content="">
+        <!-- meta character set -->
+        <meta charset="UTF-8">
+        <!-- Site Title -->
+        <title>Chaffar rent a car</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+            <!--
+            CSS
+            ============================================= -->
+            <link rel="stylesheet" href="template/css/linearicons.css">
+            <link rel="stylesheet" href="template/css/owl.carousel.css">
+            <link rel="stylesheet" href="template/css/font-awesome.min.css">
+            <link rel="stylesheet" href="template/css/nice-select.css">          
+            <link rel="stylesheet" href="template/css/magnific-popup.css">
+            <link rel="stylesheet" href="template/css/bootstrap.css">
+            <link rel="stylesheet" href="template/css/main.css">
+        </head>
+        <body>
+
+              <header id="header" id="home">
+                <div class="container">
+                    <div class="row align-items-center justify-content-between d-flex">
+                      <div id="logo">
+                        <a href="{{path('accueilclient')}}"><img src="template/img/logo.png" alt="" title="" /></a>
+                      </div>
+                      <nav id="nav-menu-container">
+                        <ul class="nav-menu">
+                          <li><a href="{{path('accueilclient')}}">Accueil</a></li>
+                          <li class="menu-active"><a href="{{path('reserver')}}">Réservation</a></li>
+                          <li><a href="{{path('voitures')}}">Voitures</a></li>
+                          {#<li><a href="service.html">Service</a></li>
+                          <li><a href="team.html">Team</a></li> #}
+                          {#<li><a href="blog-home.html">Blog</a></li>#}    
+                          <li><a href="{{path('contact')}}">Contact</a></li>   
+                          {#<li class="menu-has-children"><a href="">Pages</a>
+                            <ul>
+                              <li><a href="blog-single.html">Blog Single</a></li>
+                              <li><a href="elements.html">Elements</a></li>
+                            </ul>
+                          </li>#}   
+                          <li><a href="{{ path('fos_user_security_login')}}">Connexion</a></li>                 
+                        </ul>
+                      </nav><!-- #nav-menu-container -->                    
+                    </div>
+                </div>
+              </header><!-- #header -->
+
+            <!-- start banner Area -->
+            <section class="banner-area relative" id="home">    
+                <div class="overlay overlay-bg"></div>
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="about-content col-lg-12">
+                            <h1 class="text-white">
+                                Réservation
+                            </h1>   
+                            <p class="text-white link-nav"><a href="index.html">3. Compléter vos informations </a></p>
+                        </div>                                          
+                    </div>
+                </div>
+            </section>
+            <!-- End banner Area -->    
+
+            <!-- Start contact-page Area -->
+            <section class="contact-page-area section-gap">
+                <div class="container">
+                    <div class="row">
+                        
+                        
+                        <div class="col-lg-12">
+                            {{ form_start(form) }}
+                            
+                                <div class="row">   
+                                    <div class="col-lg-6 form-group">
+                                      <label>Date départ :</label>
+                                      <input class="common-input mb-20 form-control" value="{{time1}}" type="text" disabled>  
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                      <label>Date retour :</label>
+                                      <input class="common-input mb-20 form-control" value="{{time2}}" type="text" disabled> 
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label>Durée :</label>
+                                         {{ form_widget(form.duree, {'attr': {'class': 'common-input mb-20 form-control','readonly' : "readonly"}}) }}                                         
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label>Voiture :</label>
+                                         {{ form_widget(form.voiture, {'attr': {'class': 'common-input mb-20 form-control','readonly' : "readonly"}}) }}                                         
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label>Prénom :</label>
+                                         {{ form_widget(form.prenom, {'attr': {'class': 'common-input mb-20 form-control'}}) }}                                         
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label>Nom :</label>
+                                         {{ form_widget(form.nom, {'attr': {'class': 'common-input mb-20 form-control'}}) }}                                         
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label>Numéro permis :</label>
+                                         {{ form_widget(form.numPermis, {'attr': {'class': 'common-input mb-20 form-control'}}) }}                                         
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label>CIN :</label>
+                                         {{ form_widget(form.cin, {'attr': {'class': 'common-input mb-20 form-control'}}) }}                                         
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label>Téléphone :</label>
+                                         {{ form_widget(form.telephone, {'attr': {'class': 'common-input mb-20 form-control'}}) }}                                         
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label>Adresse :</label>
+                                         {{ form_widget(form.adresse, {'attr': {'class': 'common-input mb-20 form-control'}}) }}                                         
+                                    </div>
+                                </div>
+                                 </div>
+                                <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-4 form-group">
+                                         
+                                    </div>
+                                    <div class="col-lg-4 form-group">
+                                         <input type="submit" value="Valider" class="genric-btn primary radius mt-20 text-black form-control" style="float: right;">
+                                                                            
+                                    </div>
+                                    <div class="col-lg-4 form-group">
+                                         
+                                    </div>
+                                </div>
+                            </div>
+                       
+                                {{ form_end(form) }}
+                            
+                        </div>
+                    </div>
+                </div>  
+            </section>
+            <!-- End contact-page Area -->
+
+            <!-- start footer Area -->      
+            <footer class="footer-area section-gap">
+                <div class="container">
+                    <div class="row">
+                        
+                        
+                                                               
+                                                 
+                          
+                        <p class="mt-50 mx-auto footer-text col-lg-12">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <a href="#" target="_blank">Innovative Technology</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>                                             
+                    </div>
+                </div>
+            </footer>   
+            <!-- End footer Area -->        
+
+            <script src="template/js/vendor/jquery-2.2.4.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="template/js/vendor/bootstrap.min.js"></script>          
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>          
+            <script src="template/js/easing.min.js"></script>            
+            <script src="template/js/hoverIntent.js"></script>
+            <script src="template/js/superfish.min.js"></script> 
+            <script src="template/js/jquery.ajaxchimp.min.js"></script>
+            <script src="template/js/jquery.magnific-popup.min.js"></script> 
+            <script src="template/js/owl.carousel.min.js"></script>          
+            <script src="template/js/jquery.sticky.js"></script>
+            <script src="template/js/jquery.nice-select.min.js"></script>    
+            <script src="template/js/waypoints.min.js"></script>
+            <script src="template/js/jquery.counterup.min.js"></script>                  
+            <script src="template/js/parallax.min.js"></script>      
+            <script src="template/js/mail-script.js"></script>   
+            <script src="template/js/main.js"></script>  
+             <script>
+          var time1 = $('#time1').val(), time2 = $('#time2').val();
+          $(document).ready(function() {
+          $("#form_dateDepart").val(time1);
+          $("#form_dateArrivee").val(time2);
+          });
+        </script>
+        <script> 
+ function calculDuree1() {
+ var today = $('#today').val(),time1 = $('#form_dateDepart').val(), time2 = $('#form_dateArrivee').val(),result = $("#form_duree");
+ var dt = new Date(today).getTime();
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+  //  if(d1 >= dt ){
+    if(d2>0){
+    if (parseInt(msec) > 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes');
+        var jours = dd;
+        document.getElementById('form_duree').value=dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes';
+        }
+    else if (parseInt(msec) == 0) {
+    document.getElementById("form_dateDepart").value=time1;
+    document.getElementById("form_dateArrivee").value=time1;
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }
+        else {
+    document.getElementById("form_dateDepart").value=time1;
+    document.getElementById("form_dateArrivee").value=time1;
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }
+ }
+/*}else{
+    document.getElementById("form_dateDepart").value=today;
+    if(d2 >= dt ){
+    document.getElementById("form_dateArrivee").value=time2;
+    }else{
+    document.getElementById("form_dateArrivee").value=today;
+    }
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+    }*/
+ };
+
+ function calculDuree() {
+ var time1 = $('#form_dateDepart').val(), time2 = $('#form_dateArrivee').val(),result = $("#form_duree");
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    
+    
+    if (parseInt(msec) > 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes');
+        var jours = dd;
+        document.getElementById('form_duree').value=dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes';
+        }
+    else  if (parseInt(msec) == 0) {
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }
+        else {
+        alert("La date d'arrivée doît être superieur à la date de depart");
+    document.getElementById("form_dateDepart").value=time1;
+    document.getElementById("form_dateArrivee").value=time1;
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }
+        }
+        ;
+       
+
+    var dat = $('<a href="reservation/new1/' + time1 + '/'+ time2 + '/' + result +'">send data</a>');
+    $('body').append(dat);
+    var dat1 = $('<a href="csr/new1/' + time1 + '/'+ time2 + '">send data</a>');
+    $('body').append(dat1);
+    var dat2 = $('<a href="contrat/new/' + time1 + '/'+ time2 + '/' + result +'">send data</a>');
+    $('body').append(dat2);
+  
+
+var nowTemp = new Date();
+var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+ 
+var checkin = $('#form_dateDepart').datepicker({
+  onRender: function(date) {
+    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+  }
+}).on('changeDate', function(ev) {
+  if (ev.date.valueOf() > checkout.date.valueOf()) {
+    var newDate = new Date(ev.date)
+    newDate.setDate(newDate.getDate() + 1);
+    checkout.setValue(newDate);
+  }
+  checkin.hide();
+  $('#form_dateFin')[0].focus();
+}).data('datepicker');
+var checkout = $('#form_dateFin').datepicker({
+  onRender: function(date) {
+    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+  }
+}).on('changeDate', function(ev) {
+  checkout.hide();
+}).data('datepicker');
+ </script>
+        </body>
+    </html>
+
+

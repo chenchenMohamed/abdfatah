@@ -1,0 +1,24 @@
+marque_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Marque:index" }
+    methods:  GET
+
+marque_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Marque:show" }
+    methods:  GET
+
+marque_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Marque:new" }
+    methods:  [GET, POST]
+
+marque_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Marque:edit" }
+    methods:  [GET, POST]
+
+marque_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Marque:delete" }
+    methods:  DELETE

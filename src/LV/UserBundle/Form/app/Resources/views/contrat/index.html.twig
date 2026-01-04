@@ -1,0 +1,274 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li class="active"><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+
+<div class="row">
+  <div class="span5">
+    <section class="content-header active"><center>
+      <a href="{{path('contrat_index')}}"><ol class="breadcrumb">
+        <li><h1>Contrat avec Réservation</h1></li>
+      </ol></a></center>
+    </section>
+  </div>
+  <div class="span6">
+    <section class="content-header"><center><a href="{{path('csr_index')}}">
+      <ol class="breadcrumb center">
+        <li><h3>Liste de Contrat</h3></li>
+      </ol></a></center>
+    </section>
+  </div>
+</div>
+      <div class="row">
+        <div class="span12">
+  <div class="content-wrapper">
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li  class="breadcrumb-item active">Contrat Avec Réservation</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+     <section class="content" style="padding-left:25px;padding-right:25px;">
+      <div class="row">
+        <div class="col-md-12">
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                   <h1><center> Contrat Avec Réservation  </center> </h1>
+                </div> 
+<div class="span12">
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <a href="{{ path('reservation_index') }}" class="btn btn-primary btn-lg">Ajouter un Contrat</a>
+          </div>
+      </div>
+</div><br><br>
+<div class="span12">
+  <div class="span3">
+    Matricule :   <br> <input type="text" id="matricule" onkeyup="matricule()" placeholder="Search for matricule.." title="Type in a name">
+  </div>
+  <div class="span3">
+    CIN :    <br><input type="text" id="cin" onkeyup="cin()" placeholder="Search for cin.." title="Type in a name">
+  </div>
+  <div class="span3">
+    Nom  :   <br> <input type="text" id="nom" onkeyup="nom()" placeholder="Search for nom.." title="Type in a name">
+  </div>
+  <div class="span2">
+    prenom  :  <br>  <input type="text" id="prenom" onkeyup="prenom()" placeholder="Search for prenom.." title="Type in a name">
+  </div>
+  <div class="span3">
+    Search All : <br><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+</div> <br>
+        <div class="box-body">
+          <div class="table-responsive"><br>
+            <table id="example" class="table table-striped"  style="background-color:#f1f1f1;padding-top:25px;padding-bottom:25px;padding-left:25px;padding-right:25px; border:1px;border-style: solid;border-color: #B8B8B8;">
+                    <thead>
+                     <tr>
+                      <th class="text-center">Numéro contrat</th>
+                      <th class="text-center">matricule</th>
+                      <th class="text-center">CIN client</th>
+                      <th class="text-center">Nom client</th>
+                      <th class="text-center">Prenom client</th>
+                      <th class="text-center">Date Contrat</th>
+                      <th class="text-center">Date Depart</th>
+                      <th class="text-center">Date arrivee</th>
+                      <th class="text-center">Km Depart</th>
+                      <th class="text-center">Recette</th>
+                      {#<th class="text-center">Montant Payée</th>
+                      <th class="text-center">Montant Restant</th>#}
+                      <th class="text-center">Etat</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                     </tr>
+                    </thead>
+                    <tbody id="myTable">
+                      {% for contrat in contrats | sort | reverse %}
+                      <tr>
+                        <td>{{ contrat.numContrat }}</td>
+                        <td>{{ contrat.refReservation.refVoiture.matricule }}</td>
+                        <td>{{ contrat.conducteur1.cin }}</td>
+                        <td>{{ contrat.conducteur1.nom }}</td>
+                        <td>{{ contrat.conducteur1.prenom }}</td>
+                        <td>{% if contrat.dateContrat %}{{ contrat.dateContrat|date('Y-m-d') }}{% endif %}</td>
+                        <td>{% if contrat.refReservation.dateDebut %}{{ contrat.refReservation.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                        <td>{% if contrat.refReservation.dateFin %}{{ contrat.refReservation.dateFin|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ contrat.kmDepart }}</td>
+                        <td>{{ contrat.recette }}</td>
+                        {#<td> {% for paiement in paiements if ((paiement.refContrat.id is defined) and (paiement.refContrat.id == contrat.id)) %} {{ paiement.montantPaye }} {% endfor %}</td>
+                        <td> {% for paiement in paiements if ((paiement.refContrat.id is defined) and (paiement.refContrat.id == contrat.id)) %} {{ paiement.montantRestant }} {% endfor %}</td>#}
+                        <td>{{ contrat.etat }}</td>
+                        {% for paiement in paiements if ((paiement.montantPaye != 0) and (paiement.refContrat.id is defined and paiement.refContrat.id == contrat.id))  %}
+                        {% if (paiement.montantRestant ==0) %}
+                        <td>
+                            <h4 class="text-center"><input type="button" class="btn btn-default btn-sm" value="Modifier" readonly></h4>
+                        </td>
+                        <td>
+                            <h4 class="text-center"><input type="button" class="btn btn-default btn-sm" value="Payée" readonly></h4>
+                        </td>                        
+                        <td>
+                            <h4 class="text-center"><a href="{{ path('facture_new1', { 'id': contrat.id }) }}" role="button" class="btn btn-info btn-sm">Facture</a></h4>
+                        </td>
+                        {% else %}  
+                        <td>
+                            <h4 class="text-center"><input type="button" class="btn btn-default btn-sm" value="Modifier" readonly></h4>
+                        </td>
+                        <td>
+                            <h4 class="text-center"><a href="{{ path('paiement_edit1', { 'id': contrat.id }) }}" role="button" class="btn btn-warning btn-sm">en cours</a></h4>
+                        </td>
+                        <td>
+                            <h4 class="text-center"><input type="button" class="btn btn-default btn-sm" value="Facture" readonly></h4>
+                        </td>
+                        {% endif %}
+                        {% else %} 
+                        <td>
+                            <h4 class="text-center"><a href="{{ path('contrat_edit', { 'id': contrat.id }) }}" role="button" class="btn btn-success btn-sm">Modifier</a></h4>
+                        </td>
+                        <td>
+                            <h4 class="text-center"><a href="{{ path('paiement_new', { 'id': contrat.id }) }}" role="button" class="btn btn-danger btn-sm">Paiement</a></h4>
+                        </td>
+                        <td>
+                            <h4 class="text-center"><input type="button" class="btn btn-default btn-sm" value="Facture" readonly></h4>
+                        </td>
+                        {% endfor %}
+                        <td>
+                           {% for retour in retours if ((retour.refContrat.id is defined) and (retour.refContrat.id == contrat.id )) %}  
+                               <button class="btn btn-default" readonly>Retournée</button>
+                           {% else %} 
+                               <h4 class="text-center"><a href="{{ path('retour_new1', { 'id': contrat.id }) }}" role="button" class="btn btn-success">Retour</a></h4>
+                           {% endfor %}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+       <!--          </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>-->
+{% endblock %}
+{% block javascripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+function matricule() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("matricule");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+function cin() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("cin");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function nom() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("nom");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[4];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function prenom() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("prenom");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[5];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+{% endblock %}

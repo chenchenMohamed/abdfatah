@@ -1,0 +1,342 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Modifier voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('voiture_index')}}">Liste des voitures</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Modifier voiture</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(edit_form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Modifier voiture</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Marque {{ form_errors(edit_form.marque) }}</label>
+                                    {{ form_widget(edit_form.marque, {'attr': {'class':'select2 form-control custom-select','style':'width: 100%;'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Modèle {{ form_errors(edit_form.modele) }}</label>
+                                    {{ form_widget(edit_form.modele, {'attr': {'class':'select2 form-control custom-select','style':'width: 100%;'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Matricule {{ form_errors(edit_form.matricule) }}</label>
+                                    {{ form_widget(edit_form.matricule, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Code couleur {{ form_errors(edit_form.couleur) }}</label>
+                                    {{ form_widget(edit_form.couleur, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Code radio {{ form_errors(edit_form.codeRadio) }}</label>
+                                    {{ form_widget(edit_form.codeRadio, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Date mise en circulation {{ form_errors(edit_form.miseEnCirculation) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(edit_form.miseEnCirculation, {'attr': {'class':'form-control'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Numéro contrat leasing {{ form_errors(edit_form.numContrat) }}</label>
+                                    {{ form_widget(edit_form.numContrat, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Fournisseur {{ form_errors(edit_form.fournisseur) }}</label>
+                                    {{ form_widget(edit_form.fournisseur, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Date premier paiement {{ form_errors(edit_form.datePremierPay) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(edit_form.datePremierPay, {'attr': {'class':'form-control', 'onchange': 'calculDuree1()'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date dernier paiement {{ form_errors(edit_form.dateDernierPay) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(edit_form.dateDernierPay, {'attr': {'class':'form-control', 'onchange': 'calculDuree()'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Nombre pay  restant {{ form_errors(edit_form.nbrePayRestant) }}</label>
+                                    {{ form_widget(edit_form.nbrePayRestant, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Auto financement {{ form_errors(edit_form.autoFinancement) }}</label>
+                                    {{ form_widget(edit_form.autoFinancement, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Montant total à payer {{ form_errors(edit_form.montantTotal) }}</label>
+                                    {{ form_widget(edit_form.montantTotal, {'attr': {'class':'form-control', 'onkeyup': 'calculMontant()'}}) }}
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Etat {{ form_errors(edit_form.etat) }}</label>
+                                    {{ form_widget(edit_form.etat, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                               </div>
+                               <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Montant mensuel {{ form_errors(edit_form.montantMensuel) }}</label>
+                                    {{ form_widget(edit_form.montantMensuel, {'attr': {'class':'form-control', 'readonly': 'readonly'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Kilométrage {{ form_errors(edit_form.km) }}</label>
+                                    {{ form_widget(edit_form.km, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Prix/Jour {{ form_errors(edit_form.prix) }}</label>
+                                    {{ form_widget(edit_form.prix, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Photo {{ form_errors(edit_form.photo) }}</label>
+                                      {{ form_widget(edit_form.photo) }}
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Disponibilité {{ form_errors(edit_form.disponibilite) }}</label>
+                                      {{ form_widget(edit_form.disponibilite) }}
+                                </div>
+                                <div class="form-group form-check">
+                                    {{ form_widget(edit_form.isEnable, {'attr': {'class': 'form-check-input'}}) }}
+                                    <label class="form-check-label" for="{{ edit_form.isEnable.vars.id }}">
+                                        Active
+                                    </label>
+                                    {{ form_errors(edit_form.isEnable) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Total depenses {{ form_errors(edit_form.totalDepenses) }}</label>
+                                      {{ form_widget(edit_form.totalDepenses, {'attr': {'class':'form-control','disabled': 'disabled'}}) }}
+                                </div>
+                               </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('voiture_index') }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+
+
+    
+{% endblock %}
+{% block javascripts %}
+<script>
+        $('#lv_locationbundle_voiture_marque').change(function () {
+            var marqueSelector = $(this);
+            
+            // Request the neighborhoods of the selected city.
+            $.ajax({
+                url: "{{ path('marque_list_modeles') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    marqueid: marqueSelector.val()
+                },
+                success: function (modeles) {
+                    var modeleSelect = $("#lv_locationbundle_voiture_modele");
+
+                    // Remove current options
+                    modeleSelect.html('');
+                    
+                    // Empty value ...
+                    modeleSelect.append('<option value> Sélectionner un modèle ' + marqueSelector.find("option:selected").text() + ' ...</option>');
+                    
+                    
+                    $.each(modeles, function (key, modele) {
+                        modeleSelect.append('<option value="' + modele.id + '">' + modele.nom + '</option>');
+                    });
+                },
+                error: function (err) {
+                    alert("An error ocurred while loading data ...");
+                }
+            });
+        });
+
+        $(function() {
+    if (localStorage.getItem('lv_locationbundle_voiture_typeTransmission')) {
+        $("#lv_locationbundle_voiture_typeTransmission option").eq(localStorage.getItem('lv_locationbundle_voiture_typeTransmission')).prop('selected', true);
+    }
+
+    $("#lv_locationbundle_voiture_typeTransmission").on('change', function() {
+        localStorage.setItem('lv_locationbundle_voiture_typeTransmission', $('option:selected', this).index());
+    });
+    
+});
+</script>
+<script> 
+
+
+ function calculDuree() {
+ var time1 = $('#lv_locationbundle_voiture_datePremierPay').val(), time2 = $('#lv_locationbundle_voiture_dateDernierPay').val(),result = $("#lv_locationbundle_voiture_nbrePayRestant"),a = $('#lv_locationbundle_voiture_montantTotal ').val(), b = $('#lv_locationbundle_voiture_autoFinancement').val();
+
+    if(isNaN(a)){a = 0};
+    if(isNaN(b)){b = 0};
+
+    if(isNaN(msec)){msec = 0};
+
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    if (parseInt(msec) > 0) {
+        var d1=time1.split('-'); 
+        var annee_1  = parseInt(d1[0]);
+        var mois_1 =  parseInt(d1[1]);
+
+       
+ 
+        var d2=time2.split('-'); 
+        var annee_2 = parseInt(d2[0]);
+        var mois_2 =  parseInt(d2[1]);
+        
+        var dd = (annee_2-annee_1)*12 + (mois_2-mois_1);
+        result.val(dd+1);
+        if(a != null){ 
+          var d = a/(dd+1);
+          document.getElementById("lv_locationbundle_voiture_montantMensuel").value=d.toFixed(3);}
+          else {
+            alert("Le montant mensuel doît être sup à 0");
+        }
+       
+      }
+        else{
+          alert("La date de dernier pay doît être sup au date de premier pay ");
+        $("#lv_locationbundle_voiture_dateDernierPay").val('');
+        }
+        }
+        ;
+
+    function calculDuree1() {
+ var time1 = $('#lv_locationbundle_voiture_datePremierPay').val(), time2 = $('#lv_locationbundle_voiture_dateDernierPay').val(),result = $("#lv_locationbundle_voiture_nbrePayRestant"),a = $('#lv_locationbundle_voiture_montantTotal ').val(), b = $('#lv_locationbundle_voiture_autoFinancement').val();
+
+    if(isNaN(a)){a = 0};
+    if(isNaN(b)){b = 0};
+
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+
+ if(isNaN(msec)){msec = 0};
+ 
+    if (parseInt(msec) >= 0) {
+        var d1=time1.split('-'); 
+        var annee_1  = parseInt(d1[0]);
+        var mois_1 =  parseInt(d1[1]);
+
+       
+ 
+        var d2=time2.split('-'); 
+        var annee_2 = parseInt(d2[0]);
+        var mois_2 =  parseInt(d2[1]);
+        
+        var dd = (annee_2-annee_1)*12 + (mois_2-mois_1);
+        result.val(dd+1);
+        if(a != null){ 
+          var d = a/(dd+1);
+          document.getElementById("lv_locationbundle_voiture_montantMensuel").value=d.toFixed(3);}
+          else {
+            alert("Le montant mensuel doît être sup à 0");
+        }
+       
+      }
+        else{
+          alert("La date de dernier pay doît être sup au date de premier pay ");
+        $("#lv_locationbundle_voiture_datePremierPay").val('');
+        }
+        }
+        ;
+
+      function calculMontant() {
+
+    var a = $('#lv_locationbundle_voiture_montantTotal').val();
+    var b = $('#lv_locationbundle_voiture_autoFinancement').val();
+    var c = $('#lv_locationbundle_voiture_nbrePayRestant').val();
+    var result = $("#lv_locationbundle_voiture_montantMensuel");
+    if(isNaN(a)){a = 0};
+    if(isNaN(b)){b = 0};
+    if(isNaN(c)){c = 0};
+    var d = a/c;
+    if (a >= 0) {
+    
+    result.val(d.toFixed(3));
+}
+    else {
+            alert("Le montant mensuel doît être sup à 0");
+        }
+        };
+
+
+       
+
+    
+  
+
+ 
+ </script>
+{% endblock %}
+
+
+
+

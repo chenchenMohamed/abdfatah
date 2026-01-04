@@ -1,0 +1,272 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+<input class="form-control" id="time1" type="hidden" value="{{ time1 }}" readonly>
+<input class="form-control" id="time2" type="hidden" value="{{ time2 }}" readonly>
+<!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Liste des voitures pour location</h4>#}
+                        <div class="ml-auto text-right col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('csr_index')}}">Liste des contrats</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Liste des voitures disponibles</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title m-b-0 col-12">Liste des voitures disponibles entre {{ time1 |date('d/m/Y  H:i') }} et {{ time2 |date('d/m/Y H:i' ) }}</h3>
+                                <br>
+                               
+                                {{ form_start(form) }}
+                                <div class=" col-12 row">
+                                <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                    <label>Date de départ : {{ form_errors(form.dateDepart) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(form.dateDepart, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                  <label>Date d'arrivée : {{ form_errors(form.dateArrivee) }}</label>
+                                  <div class="input-group">
+                                    {{ form_widget(form.dateArrivee, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="col-md-3 col-12" style="display: none;">
+                                <div class="form-group">
+                                  <label>Durée : {{ form_errors(form.duree) }}</label>
+                                  {{ form_widget(form.duree, {'attr': {'class':'form-control', 'style': 'height:37px;','readonly':'readonly'}}) }}
+                                </div>
+                                </div>
+                                <br>
+                                <div class="col-md-1 col-6">
+                                <div class="form-group">
+                                  
+                                  <label><span style="color:white;">Durée :</span></label>
+                                  <input type="submit" value="Chercher" class="btn btn-success" style="height: 37px;" onclick="calculDuree(event);">
+                                </div>
+                               </div>
+                                {{ form_end(form) }}
+                                <br>
+                                </div>
+                                <br>
+                                <div class="table-responsive">
+                                  <table id="zero_config" width="100%" class="table table-striped table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th>Photo</th>
+                                            <th>Matricule</th>
+                                            <th>Marque</th>
+                                            <th>Modele</th>
+                                            <th>Couleur</th>
+                                            <th>Actions</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {% set newArray = [] %}
+                                          {% for disponibilite in disponibilites %}
+                                          {% if disponibilite.etat == 'Location' or disponibilite.etat == '' %}
+                                          {% if disponibilite.matricule not in newArray %}
+                                          {% set newArray = newArray|merge([disponibilite.matricule]) %}
+                                          <tr>
+                                            <td style="padding:0 !important;" class="text-center" width="135px">
+                                                {% if disponibilite.photo != null %}
+                                              <img src="{{asset('uploads/images/')}}{{ disponibilite.photo }}" width="135px" height="66">
+                                              {% else %}
+                                              <img src="{{ asset('assets/images/Pas-dimage-disponible.jpg') }}" width="135px" height="66" />
+                                              {% endif %}
+                                            </td>
+                                            <td>{{ disponibilite.matricule }}</td>
+                                            <td>{{ disponibilite.marque }}</td>
+                                            <td>{{ disponibilite.modele }}</td>
+                                            <td>{{ disponibilite.couleur }}</td>
+                                            <td class="text-center" style='white-space: nowrap'>
+                                            <a href="{{ path('reservation_new1', { 'time1': time1, 'time2': time2 , 'result' : duree ,'voiture': disponibilite.matricule }) }}" role="button" class="btn btn-info btn-md" style="width: 120px;">Réserver</a>
+                          
+                                            <a href="{{ path('csr_new1', { 'time1': time1, 'time2': time2 , 'result' : duree ,'voiture': disponibilite.matricule, 'c1': 0, 'c2': 0 }) }}" role="button" class="btn btn-primary btn-md" style="width: 120px;">Ajouter contrat</a>
+                                            </td>
+                                          </tr>
+                                          {% endif %}
+                                          {% endif %}
+                                          {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+{% block javascripts %}
+ <script> 
+ function calculDuree1() {
+ var today = $('#today').val(),time1 = $('#form_dateDepart').val(), time2 = $('#form_dateArrivee').val(),result = $("#form_duree");
+ var dt = new Date(today).getTime();
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+ //   if(d1 >= dt ){
+    //if(d2>0){
+    if (parseInt(msec) > 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes');
+        //var jours = dd;
+        //document.getElementById('form_duree').value=dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes';
+        }
+    /*else if (parseInt(msec) == 0) {
+    document.getElementById("form_dateDepart").value=time1;
+    document.getElementById("form_dateArrivee").value=time1;
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }*/
+        else {
+           alert("La date d'arrivée doît être superieur à la date de depart")
+           var time1 = $('#time1').val();
+           document.getElementById("form_dateDepart").value=time1;
+           /*document.getElementById("form_dateArrivee").value=time1;
+           result.val('1 jours , 0  heures , 0  minutes');
+           document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';*/
+        }
+ //}
+/*}else{
+    document.getElementById("form_dateDepart").value=today;
+    if(d2 >= dt ){
+    document.getElementById("form_dateArrivee").value=time2;
+    }else{
+    document.getElementById("form_dateArrivee").value=today;
+    }
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';}*/
+ };
+
+ function calculDuree(e) {
+ var time1 = $('#form_dateDepart').val(), time2 = $('#form_dateArrivee').val(),result = $("#form_duree");
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    
+    
+    if (parseInt(msec) > 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes');
+        //var jours = dd;
+        //document.getElementById('form_duree').value=dd + ' jours ,' + hh + ' heures ,' + mm + ' minutes';
+        }
+    /*else if (parseInt(msec) == 0) {
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';
+        }*/
+        else {
+        e.preventDefault() ;
+        alert("La date d'arrivée doît être superieur à la date de depart");
+        var time2 = $('#time2').val();
+        document.getElementById("form_dateArrivee").value=time2;
+        document.getElementById("form_datedepart").value=time1;
+    /*document.getElementById("form_dateDepart").value=time1;
+    document.getElementById("form_dateArrivee").value=time1;
+        result.val('1 jours , 0  heures , 0  minutes');
+        document.getElementById('form_duree').value='1 jours , 0  heures , 0  minutes';*/
+        }
+        }
+        ;
+
+  
+       
+
+    var dat = $('<a href="reservation/new1/' + time1 + '/'+ time2 + '/' + result +'">send data</a>');
+    $('body').append(dat);
+    var dat1 = $('<a href="csr/new1/' + time1 + '/'+ time2 + '">send data</a>');
+    $('body').append(dat1);
+    var dat2 = $('<a href="contrat/new/' + time1 + '/'+ time2 + '/' + result +'">send data</a>');
+    $('body').append(dat2);
+  
+
+/*var nowTemp = new Date();
+var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+ 
+var checkin = $('#form_dateDepart').datepicker({
+  onRender: function(date) {
+    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+  }
+}).on('changeDate', function(ev) {
+  if (ev.date.valueOf() > checkout.date.valueOf()) {
+    var newDate = new Date(ev.date)
+    newDate.setDate(newDate.getDate() + 1);
+    checkout.setValue(newDate);
+  }
+  checkin.hide();
+  $('#form_dateFin')[0].focus();
+}).data('datepicker');
+var checkout = $('#form_dateFin').datepicker({
+  onRender: function(date) {
+    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+  }
+}).on('changeDate', function(ev) {
+  checkout.hide();
+}).data('datepicker');*/
+ </script>
+<script>
+ var time1 = $('#time1').val(), time2 = $('#time2').val();
+  $(document).ready(function() {
+    $("#form_dateDepart").val(time1);
+     $("#form_dateArrivee").val(time2);
+
+});
+</script>
+{% endblock %}
+
+

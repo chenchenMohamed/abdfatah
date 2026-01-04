@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Example 1</title>
+   
+      
+        <link rel="stylesheet" href="{{ asset('bundles/location/css/style.css') }}" media="all"/>
+
+  
+
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <!--<img src="{{ asset('bundles/location/images/logo.png') }}"/>-->
+      </div>
+      <h1>FACTURE N° : {{ facture.numFacture }}</h1>
+      <div id="company" class="clearfix">
+        <div>Agence RENT A CAR</div>
+        <div>Zarzis<br /> Zarzis, Tunisie</div>
+        <div>Tél1 : +216 75 100 100</div>
+        <div>Tél2 : +216 98 100 100</div>
+        <div>Mail : <a href="mailto:agencerentacar@mail.com">agencerentacar@mail.com</a></div>
+      </div>
+      <div id="project">
+        <div><span>Client : </span> {{ facture.refPayement.refContrat.refReservation.refClient.prenom }} {{ facture.refPayement.refContrat.refReservation.refClient.nom }}</div>
+        <div><span>Adresse : </span> {{ facture.refPayement.refContrat.refReservation.refClient.adresse }}</div>
+        <div><span>Date : </span> {{ 'now'|date('d / m / Y') }}</div>
+        <div><span>Due le : </span> {{ facture.refPayement.refContrat.dateContrat|date('d / m / Y') }} contrat n° {{ facture.refPayement.refContrat.numContrat }}</div> 
+      </div>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th class="service"></th>
+            <th class="desc">DESCRIPTION</th>
+            <th>PRIX</th>
+            <th>QUANTITE</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="service"></td>
+            <td class="desc">Location de voiture {{facture.refPayement.refContrat.refReservation.refVoiture.matricule }}                                                                                                                </td>
+            <td class="unit">{{ facture.refPayement.refContrat.refReservation.refVoiture.prix |number_format(3, '.', ',')}}</td>
+            <td class="qty">{{ duree }}</td>
+            <td class="total">{{ facture.refPayement.refContrat.recette|number_format(3, '.', ',')}}</td>
+          </tr>
+          
+          <tr>
+            <td class="service"></td>
+            <td class="desc">----------------------------------------------------------------------------------</td>
+            <td class="unit">--------</td>
+            <td class="qty">----------------</td>
+            <td class="total">-----------</td>
+          </tr>
+          
+          <tr>
+            <td colspan="4">TOTAL HT</td>
+            <td class="total">{{ facture.refPayement.refContrat.recette|number_format(3, '.', ',') }}</td>
+          </tr>
+          <tr>
+            <td colspan="4">TAX 19%</td>
+            <td class="total">{{ ((facture.refPayement.refContrat.recette/100)*19)|number_format(3, '.', ',') }}</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="grand total">TOTAL TTC</td>
+            <td class="grand total">{{ (facture.refPayement.refContrat.recette+((facture.refPayement.refContrat.recette/100)*19))|number_format(3, '.', ',') }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="notices">
+      <br/>
+        <!--<div>NOTICE:</div>
+        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>-->
+      </div>
+    </main>
+    <footer>
+      <!--Invoice was created on a computer and is valid without the signature and seal.-->
+    </footer>
+  </body>
+</html>
+
+

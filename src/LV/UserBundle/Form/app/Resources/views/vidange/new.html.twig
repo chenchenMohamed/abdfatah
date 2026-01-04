@@ -1,0 +1,109 @@
+
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+<h1>Ajouter une Vidange</h1>  
+<div class="content-wrapper">
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('vidange_index') }}"><i class="fa fa-car"></i>Vidange</a></li>
+        <li  class="breadcrumb-item active">Ajouter une Vidange</li>
+      </ol>
+    </section>
+           <div align="right" class="form-group" style="margin-right:110px;">
+                <div class="input-group">
+                  <h4 class="text-center"><a href="{{ path('vidange_index') }}" role="button" class="btn btn-info btn-sm">Retour à  la Liste</a></h4>
+                </div>
+            </div>
+   
+<div class="row">
+   <div class="col-sm-4">
+   </div>
+   <div class="col-sm-5 text-left" style="padding:25px;">
+    {{ form_start(form) }}
+      <div class="span4">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(form.numVidange) }}</div>
+           {{ form_errors(form.numVidange) }}
+           <div class="col-sm-8">{{ form_widget(form.numVidange) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(form.dateVidange) }}</div>
+           {{ form_errors(form.dateVidange) }}
+           <div class="col-sm-8">{{ form_widget(form.dateVidange) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(form.prochVidange) }}</div>
+           {{ form_errors(form.prochVidange) }}
+           <div class="col-sm-8">{{ form_widget(form.prochVidange) }}</div>
+        </div>
+      </div>
+      <div class="span4">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(form.compteur) }}</div>
+           {{ form_errors(form.compteur) }}
+           <div class="col-sm-8">{{ form_widget(form.compteur) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(form.filtre) }}</div>
+           {{ form_errors(form.filtre) }}
+           <div class="col-sm-8">{{ form_widget(form.filtre) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(form.bougie) }}</div>
+           {{ form_errors(form.bougie) }}
+           <div class="col-sm-8">{{ form_widget(form.bougie) }}</div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(form.chaine) }}</div>
+           {{ form_errors(form.chaine) }}
+           <div class="col-sm-8">{{ form_widget(form.chaine) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(form.refVoiture) }}</div>
+           {{ form_errors(form.refVoiture) }}
+           <div class="col-sm-8">{{ form_widget(form.refVoiture,{'attr': {'class':'chosen-select'}}) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(form.montant) }}</div>
+           {{ form_errors(form.montant) }}
+           <div class="col-sm-8">{{ form_widget(form.montant) }}</div>
+        </div>
+      </div>
+        <div class="row text-right">
+            <input type="submit" class="btn btn-success" value="Create" />
+        </div>
+    {{ form_end(form) }}
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

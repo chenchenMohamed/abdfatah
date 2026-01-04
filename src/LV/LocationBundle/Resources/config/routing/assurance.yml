@@ -1,0 +1,28 @@
+assurance_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Assurance:index" }
+    methods:  GET
+
+assurance_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Assurance:show" }
+    methods:  GET
+
+assurance_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Assurance:new" }
+    methods:  [GET, POST]
+
+assurance_new1:
+    path:     /new1/{num}
+    defaults: { _controller: "LocationBundle:Assurance:new1" }
+    methods:  [GET, POST]
+
+assurance_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Assurance:edit" }
+    methods:  [GET, POST]
+
+assurance_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Assurance:delete" }

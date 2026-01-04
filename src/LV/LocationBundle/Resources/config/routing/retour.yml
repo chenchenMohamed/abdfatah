@@ -1,0 +1,39 @@
+retour_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Retour:index" }
+    methods:  GET
+
+retour_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Retour:show" }
+    methods:  GET
+
+retour_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Retour:new" }
+    methods:  [GET, POST]
+
+retour_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Retour:edit" }
+    methods:  [GET, POST]
+
+retour_edit2:
+    path:     /{id}/edit2
+    defaults: { _controller: "LocationBundle:Retour:edit2" }
+    methods:  [GET, POST]
+
+retour_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Retour:delete" }
+    methods:  DELETE
+
+retour_new1:
+    path:     /new1/{id}/
+    defaults: { _controller: "LocationBundle:Retour:new1" }
+    methods:  [GET, POST]
+
+retour_new2:
+    path:     /new2/{id}/
+    defaults: { _controller: "LocationBundle:Retour:new2" }
+    methods:  [GET, POST]

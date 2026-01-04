@@ -1,0 +1,21 @@
+CREATE TABLE `type_depenses` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`label` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb3_unicode_ci',
+	PRIMARY KEY (`id`) USING BTREE
+)
+COLLATE='utf8mb3_unicode_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
+
+-- 1. Ajouter la relation type_depenses -> depenses
+ALTER TABLE `depenses`
+    ADD COLUMN `ref_type_depense_id` INT(10) NULL DEFAULT NULL,
+    ADD CONSTRAINT `fk_depenses_type_depenses`
+        FOREIGN KEY (`ref_type_depense_id`) REFERENCES `type_depenses`(`id`)
+        ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- 2. Ajouter totalDepenses et isEnable à voiture
+ALTER TABLE `voiture`
+    ADD COLUMN `totalDepenses` DOUBLE NOT NULL DEFAULT 0 AFTER `id`,
+    ADD COLUMN `isEnable` BOOLEAN NOT NULL DEFAULT TRUE AFTER `totalDepenses`;

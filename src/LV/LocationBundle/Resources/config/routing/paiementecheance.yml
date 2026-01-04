@@ -1,0 +1,28 @@
+paiementecheance_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:PaiementEcheance:index" }
+    methods:  GET
+
+paiementecheance_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:PaiementEcheance:show" }
+    methods:  GET
+
+paiementecheance_new:
+    path:     /new/{id}/{date}
+    defaults: { _controller: "LocationBundle:PaiementEcheance:new" }
+    methods:  [GET, POST]
+
+paiementecheance_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:PaiementEcheance:edit" }
+    methods:  [GET, POST]
+
+paiementecheance_annuler:
+    path:     /{id}/{date}/annuler
+    defaults: { _controller: "LocationBundle:PaiementEcheance:annuler" }
+
+paiementecheance_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:PaiementEcheance:delete" }
+    methods:  DELETE

@@ -1,0 +1,23 @@
+depenses_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Depenses:index" }
+    methods:  GET
+
+depenses_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Depenses:show" }
+    methods:  GET
+
+depenses_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Depenses:new" }
+    methods:  [GET, POST]
+
+depenses_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Depenses:edit" }
+    methods:  [GET, POST]
+
+depenses_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Depenses:delete" }

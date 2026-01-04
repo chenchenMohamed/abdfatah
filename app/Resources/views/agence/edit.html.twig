@@ -1,0 +1,210 @@
+{#{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+<h2><center>Modifier une Agence</center></h2>  
+<div class="content-wrapper">
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('agence_index') }}"><i class="fa fa-car"></i>Agence</a></li>
+        <li  class="breadcrumb-item active">Modifier une Agence</li>
+      </ol>
+    </section>
+           <div align="right" class="form-group" style="margin-right:110px;">
+                <div class="input-group">
+                  <h4 class="text-center"><a href="{{ path('agence_index') }}" role="button" class="btn btn-info btn-sm">Retour à  la Liste</a></h4>
+                </div>
+            </div>
+    {{ form_start(edit_form) }}
+    <div class="span3">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.codeAgence) }}</div>
+           {{ form_errors(edit_form.codeAgence) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.codeAgence) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.nom) }}</div>
+           {{ form_errors(edit_form.nom) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.nom) }}</div>
+        </div>
+    </div>
+    <div class="span3">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.adresse) }}</div>
+           {{ form_errors(edit_form.adresse) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.adresse) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.ville) }}</div>
+           {{ form_errors(edit_form.ville) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.ville) }}</div>
+        </div>
+    </div>
+    <div class="span3">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.tel) }}</div>
+           {{ form_errors(edit_form.tel) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.tel) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.tel2) }}</div>
+           {{ form_errors(edit_form.tel2) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.tel2) }}</div>
+        </div>
+    </div>
+    <div class="span2">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.fax) }}</div>
+           {{ form_errors(edit_form.fax) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.fax) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.nature) }}</div>
+           {{ form_errors(edit_form.nature) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.nature) }}</div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="row text-right">
+            <input type="submit" class="btn btn-success" value="Modifier" />
+        </div>
+    </div>
+    {{ form_end(edit_form) }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}#}
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('agence_index')}}">Mon agence</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Modifer les informations de mon agence</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(edit_form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Modifier les informations de mon agence</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Code agence {{ form_errors(edit_form.codeAgence) }}</label>
+                                    {{ form_widget(edit_form.codeAgence, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom {{ form_errors(edit_form.nom) }}</label>
+                                    {{ form_widget(edit_form.nom, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Téléphone 1 {{ form_errors(edit_form.tel) }}</label>
+                                    {{ form_widget(edit_form.tel, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Téléphone 2 {{ form_errors(edit_form.tel2) }}</label>
+                                    {{ form_widget(edit_form.tel2, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Fax {{ form_errors(edit_form.fax) }}</label>
+                                    {{ form_widget(edit_form.fax, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Adresse {{ form_errors(edit_form.adresse) }}</label>
+                                    {{ form_widget(edit_form.adresse, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Ville {{ form_errors(edit_form.ville) }}</label>
+                                    {{ form_widget(edit_form.ville, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Nature de l'agence {{ form_errors(edit_form.nature) }}</label>
+                                    {{ form_widget(edit_form.nature, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('agence_index') }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+
+

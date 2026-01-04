@@ -1,0 +1,294 @@
+<?php
+
+namespace LV\LocationBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+
+/**
+ * Depenses
+ *
+ * @ORM\Table(name="depenses")
+ * @ORM\Entity(repositoryClass="LV\LocationBundle\Repository\DepensesRepository")
+ */
+/**
+ * @ORM\Entity
+ * @UniqueEntity("codeDepense", message="Code déjà existant")
+ */
+class Depenses
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDepense", type="date")
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     */
+    private $dateDepense;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codeDepense", type="string", unique=true)
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     * @Assert\GreaterThan(value=0, message="Valeur non valide")
+     */
+    private $codeDepense;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     */
+    private $description;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="montant", type="float")
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     * @Assert\GreaterThan(value=0, message="Valeur non valide")
+     */
+    private $montant;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LV\LocationBundle\Entity\Agence", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     */
+    private $refAgence;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="refUtilisateur", type="string")
+     * @Assert\NotBlank(message="Valeur obligatoire")
+     */
+    private $refUtilisateur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LV\LocationBundle\Entity\Voiture")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $refVoiture;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LV\LocationBundle\Entity\TypeDepenses")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $refTypeDepense;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set codeDepense
+     *
+     * @param integer $codeDepense
+     *
+     * @return Depenses
+     */
+    public function setCodeDepense($codeDepense)
+    {
+        $this->codeDepense = $codeDepense;
+
+        return $this;
+    }
+
+    /**
+     * Get codeDepense
+     *
+     * @return int
+     */
+    public function getCodeDepense()
+    {
+        return $this->codeDepense;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Depenses
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set refAgence
+     *
+     * @param string $refAgence
+     *
+     * @return Depenses
+     */
+    public function setRefAgence($refAgence)
+    {
+        $this->refAgence = $refAgence;
+
+        return $this;
+    }
+
+    /**
+     * Get refAgence
+     *
+     * @return string
+     */
+    public function getRefAgence()
+    {
+        return $this->refAgence;
+    }
+    
+  /**
+     * Set refUtilisateur
+     *
+     * @param integer $refUtilisateur
+     *
+     * @return Depenses
+     */
+    public function setRefUtilisateur($refUtilisateur)
+    {
+        $this->refUtilisateur = $refUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get refUtilisateur
+     *
+     * @return int
+     */
+    public function getRefUtilisateur()
+    {
+        return $this->refUtilisateur;
+    }
+
+    /**
+     * Set montant
+     *
+     * @param float $montant
+     *
+     * @return Depenses
+     */
+    public function setMontant($montant)
+    {
+        $this->montant = $montant;
+
+        return $this;
+    }
+
+    /**
+     * Get montant
+     *
+     * @return float
+     */
+    public function getMontant()
+    {
+        return $this->montant;
+    }
+
+    /**
+     * Set dateDepense
+     *
+     * @param \DateTime $dateDepense
+     *
+     * @return Depenses
+     */
+    public function setDateDepense($dateDepense)
+    {
+        $this->dateDepense = $dateDepense;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDepense
+     *
+     * @return \DateTime
+     */
+    public function getDateDepense()
+    {
+        return $this->dateDepense;
+    }
+
+    /**
+     * Set refVoiture
+     *
+     * @param \LV\LocationBundle\Entity\Voiture $refVoiture
+     *
+     * @return Depenses
+     */
+    public function setRefVoiture(\LV\LocationBundle\Entity\Voiture $refVoiture = null)
+    {
+        $this->refVoiture = $refVoiture;
+    
+        return $this;
+    }
+
+    /**
+     * Get refVoiture
+     *
+     * @return \LV\LocationBundle\Entity\Voiture
+     */
+    public function getRefVoiture()
+    {
+        return $this->refVoiture;
+    }
+
+    /**
+     * Set refTypeDepense
+     *
+     * @param \LV\LocationBundle\Entity\TypeDepenses $refTypeDepense
+     *
+     * @return TypeDepenses
+     */
+    public function setRefTypeDepense(\LV\LocationBundle\Entity\TypeDepenses $refTypeDepense = null)
+    {
+        $this->refTypeDepense = $refTypeDepense;
+    
+        return $this;
+    }
+
+    /**
+     * Get refTypeDepense
+     *
+     * @return \LV\LocationBundle\Entity\TypeDepenses
+     */
+    public function getRefTypeDepense()
+    {
+        return $this->refTypeDepense;
+    }
+}

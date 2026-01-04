@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+<h2><center>Modifier une Agence</center></h2>  
+<div class="content-wrapper">
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item"><a href="{{ path('agence_index') }}"><i class="fa fa-car"></i>Agence</a></li>
+        <li  class="breadcrumb-item active">Modifier une Agence</li>
+      </ol>
+    </section>
+           <div align="right" class="form-group" style="margin-right:110px;">
+                <div class="input-group">
+                  <h4 class="text-center"><a href="{{ path('agence_index') }}" role="button" class="btn btn-info btn-sm">Retour à  la Liste</a></h4>
+                </div>
+            </div>
+    {{ form_start(edit_form) }}
+    <div class="span3">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.codeAgence) }}</div>
+           {{ form_errors(edit_form.codeAgence) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.codeAgence) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.nom) }}</div>
+           {{ form_errors(edit_form.nom) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.nom) }}</div>
+        </div>
+    </div>
+    <div class="span3">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.adresse) }}</div>
+           {{ form_errors(edit_form.adresse) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.adresse) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.ville) }}</div>
+           {{ form_errors(edit_form.ville) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.ville) }}</div>
+        </div>
+    </div>
+    <div class="span3">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.tel) }}</div>
+           {{ form_errors(edit_form.tel) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.tel) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.tel2) }}</div>
+           {{ form_errors(edit_form.tel2) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.tel2) }}</div>
+        </div>
+    </div>
+    <div class="span2">
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.fax) }}</div>
+           {{ form_errors(edit_form.fax) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.fax) }}</div>
+        </div>
+        <div class="row" style="padding-bottom:25px;">
+           <div class="col-sm-4">{{ form_label(edit_form.nature) }}</div>
+           {{ form_errors(edit_form.nature) }}
+           <div class="col-sm-8">{{ form_widget(edit_form.nature) }}</div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="row text-right">
+            <input type="submit" class="btn btn-success" value="Modifier" />
+        </div>
+    </div>
+    {{ form_end(edit_form) }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

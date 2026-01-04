@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li class="active"><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+    <h1>Facture edit</h1>
+
+    {{ form_start(edit_form) }}
+        
+        <div>
+           <div >{{ form_label(edit_form.numFacture) }}</div>
+           {{ form_errors(edit_form.numFacture) }}
+           <div>{{ form_widget(edit_form.numFacture) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.dateFacture) }}</div>
+           {{ form_errors(edit_form.dateFacture) }}
+           <div>{{ form_widget(edit_form.dateFacture) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.refPayement) }}</div>
+           {{ form_errors(edit_form.refPayement) }}
+           <div>{{ form_widget(edit_form.refPayement,{'attr': {'class':'chosen-select'}}) }}</div>
+        </div> 
+        {% if facture.typePayement == 'Chèque' %}
+        <div>
+           <div id="refCheque">Information chèque</div>
+           {{ form_errors(edit_form.refCheque) }}
+           <div>{{ form_widget(edit_form.refCheque) }}</div>
+        </div>
+        {% else %}
+        <div>
+           <div id="refCheque" style="display:none;">Information chèque</div>
+           {{ form_errors(edit_form.refCheque) }}
+           <div>{{ form_widget(edit_form.refCheque,{'attr': {'class':'chosen-select', 'style': 'display:none;'}}) }}</div>
+        </div>
+        {% endif %}
+        <div>
+            <input type="submit" value="Edit" />
+        </div>
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('facture_index') }}">Back to the list</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+     
+          $(document).ready(function() {
+// [.change] Une fonction de JQuery à exécuter chaque fois que l'événement est déclenché.
+    $('#lv_locationbundle_facture_typePayement').change(function() {
+        var selected = $('#lv_locationbundle_facture_typePayement').val();
+        if (selected == "Espèce" || selected == "") {
+
+// [.fadeIn();] Fonction pour afficher le contenu du champ Compétence
+
+// [.fadeOut();] Fonction pour cacher le contenu du champ Compétence
+            $("#lv_locationbundle_facture_refCheque").fadeOut();
+            $("#refCheque").fadeOut();
+        }
+        else {
+            $("#lv_locationbundle_facture_refCheque").fadeIn();
+            $("#refCheque").fadeIn();
+        }
+    });
+});
+
+
+
+    function calculReste() {
+
+    var a = $('#lv_locationbundle_facture_montantTotal'); 
+    var b = $('#lv_locationbundle_facture_montantPaye');
+    var result = $("#lv_locationbundle_facture_montnatRestant");
+    var d = a-b;
+    if (d >= 0) {
+    
+    result.val(d);}
+    else {
+            alert("Le montant total doît être sup au payé");
+        }
+        };
+        
+    </script>
+{% endblock %}
+
+
+
+
+                                                                            
+                                                                            
+                                                                    

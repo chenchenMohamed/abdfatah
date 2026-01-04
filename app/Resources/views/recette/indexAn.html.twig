@@ -1,0 +1,160 @@
+{% extends 'template.html.twig' %}
+{% block stylesheets %}
+<style type="text/css">
+    @media (max-width: 600px){
+      #title{
+        margin-bottom: 20px;
+      }
+      #button{
+        height: 35px;
+      }
+    }
+  </style>
+{% endblock %}
+{% block body %}
+<!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Liste des voitures pour location</h4>#}
+                        <div class="ml-auto text-right col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Recette du mois</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                <h3 class="card-title m-b-0 col-md-9 col-12" id="title">Recette du {{"now"|date('Y')}}</h3>
+                                <div class="btn-group col-md-1 col-4" style="float: right;">
+                                  <a href="{{ path('recette_jour') }}" class="btn btn-success" id="button" style="width: 150px;">Jour</a>
+                                </div>
+                                <div class="btn-group col-md-1 col-4" style="float: right;">
+                                  <a href="{{ path('recette_mois') }}" class="btn btn-success" id="button" style="width: 150px;">Mois</a>
+                                </div>
+                                <div class="btn-group col-md-1 col-4" style="float: right;">
+                                  <a href="{{ path('recette_an') }}" class="btn btn-success" id="button" style="width: 150px;">Année</a>
+                                </div>
+                                </div>
+                                <br>
+                               
+                                {{ form_start(form) }}
+                                <div class="col-md-12 row">
+                                <div class="col-md-4 col-12">
+                                <div class="form-group" style="display: none;">
+                                {{ form_errors(form.date.day) }}
+                                {{ form_widget(form.date.day) }}
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <div class="input-group">
+                                    {{ form_widget(form.date.month, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                  <label>Année : {{ form_errors(form.date.year) }}</label>
+                                    <div class="input-group">
+                                    {{ form_widget(form.date.year, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa'}}) }}
+                                    
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="col-md-2 col-6">
+                                <div class="form-group">
+                                  <label><span style="color:white;">Durée :</span></label>
+                                  <label><span style="color:white;">Durée :</span></label>
+
+                                  <input type="submit" value="Chercher" class="btn btn-success" style="height: 37px;">
+                                </div>
+                               </div>
+                                {{ form_end(form) }}
+                                <br>
+                                </div>
+                                <br>
+                                <div class="table-responsive">
+                                  <table id="zero_config" width="100%" class="table table-striped table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th>Date de payement</th>
+                                            <th>Numéro contrat</th>
+                                            <th>Client</th>
+                                            <th>Montant payé</th>
+                                            <th>Montant restant</th>
+                                            <th>Etat</th>
+                                            <th>Type de payement</th>
+                                            <th>Numéro chèque ou virement</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {% for paiement in paiements %}
+            <tr>
+                <td>{% if paiement.datePayement %}{{ paiement.datePayement|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if paiement.refContrat != "" %}{{ paiement.refContrat.numContrat }}{% elseif paiement.refCsr != "" %}{{ paiement.refCsr.numContrat }}{% endif %}</td>
+                <td>{{ paiement.refCsr.conducteur1.nom }} {{ paiement.refCsr.conducteur1.prenom }}</td>
+                <td>{{ paiement.montantPaye|number_format(3, '.', ',') }}</td>
+                <td>{{ paiement.montantRestant|number_format(3, '.', ',') }}</td>
+                 <td>{% if (paiement.montantRestant == 0) %}Payé{% else %}Non Payé{% endif %}</td>
+                <td>{{ paiement.typePayement }}</td>
+                <td>{% if (paiement.typePayement == 'Chèque') %}{{ paiement.numCheque }}{% elseif (paiement.typePayement == 'Virement bancaire') %}{{ paiement.numVirement }}{% else %}-{% endif %}</td>
+               
+                
+            </tr>
+        {% endfor %}
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Total</th>
+                <th>{% if mp == 0 %}0{% else %}{{mp|number_format(3, '.', ',')}}{% endif %}</th>
+                <th>{% if mr == 0 %}0{% else %}{{mr|number_format(3, '.', ',')}}{% endif %}</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}

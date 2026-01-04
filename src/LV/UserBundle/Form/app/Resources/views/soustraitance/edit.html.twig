@@ -1,0 +1,206 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+
+        
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1><center>Modifier un Soustraitance</center></h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+        <li  class="breadcrumb-item active">Soustraitance</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+     <section class="content" style="padding-left:50px;padding-right:50px;">
+      <div class="row">
+        <div class="col-md-12">
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><center>Modifier un soustraitance</center></h3>
+                </div>
+  <div class="span12">
+      <div align="right" class="form-group">
+          <div class="input-group">
+            <h4 class="text-center"><a href="{{ path('soustraitance_index') }}" role="button" class="btn btn-info btn-sm">Retour à la Liste</a></h4>
+          </div>
+      </div>
+  </div><br>
+                <div class="box-body">
+    {{ form_start(edit_form) }}
+    <div class="span3">
+        <div>
+           <div >{{ form_label(edit_form.numSoustraitance) }}</div>
+           {{ form_errors(edit_form.numSoustraitance) }}
+           <div>{{ form_widget(edit_form.numSoustraitance) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.datePremierPay) }}</div>
+           {{ form_errors(edit_form.datePremierPay) }}
+           <div>{{ form_widget(edit_form.datePremierPay) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.dateDernierPay) }}</div>
+           {{ form_errors(edit_form.dateDernierPay) }}
+           <div>{{ form_widget(edit_form.dateDernierPay, {'attr': {'onchange': 'calculDuree()'}}) }}</div>
+        </div>
+    </div>
+    <div class="span3">
+        <div>
+           <div >{{ form_label(edit_form.nbrePayRestant) }}</div>
+           {{ form_errors(edit_form.nbrePayRestant) }}
+           <div>{{ form_widget(edit_form.nbrePayRestant) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.montantMensuel) }}</div>
+           {{ form_errors(edit_form.montantMensuel) }}
+           <div>{{ form_widget(edit_form.montantMensuel, {'attr': {'onchange': 'calculMontant()'}}) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.montantTotal) }}</div>
+           {{ form_errors(edit_form.montantTotal) }}
+           <div>{{ form_widget(edit_form.montantTotal) }}</div>
+        </div>
+    </div>
+    <div class="span3">
+        <div>
+           <div >{{ form_label(edit_form.montantPaye) }}</div>
+           {{ form_errors(edit_form.montantPaye) }}
+           <div>{{ form_widget(edit_form.montantPaye) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.montantRestant) }}</div>
+           {{ form_errors(edit_form.montantRestant) }}
+           <div>{{ form_widget(edit_form.montantRestant) }}</div>
+        </div>
+        <div>
+           <div >{{ form_label(edit_form.etat) }}</div>
+           {{ form_errors(edit_form.etat) }}
+           <div>{{ form_widget(edit_form.etat) }}</div>
+        </div>
+    </div>
+    <div class="span2">
+        <div>
+           <div >{{ form_label(edit_form.refAgence) }}</div>
+           {{ form_errors(edit_form.refAgence) }}
+           <div>{{ form_widget(edit_form.refAgence,{'attr': {'class':'chosen-select'}}) }}</div>
+        </div>
+        <div>
+           <div>{{ form_label(edit_form.refVoiture,"Matricule") }}</div>
+           {{ form_errors(edit_form.refVoiture) }}
+           <div style='display:none'>{{ form_widget(edit_form.refVoiture) }}</div>
+           <input type="text" value="{{ voiture }}" readonly>
+        </div>
+    </div>
+    <div class="span9">&nbsp;
+    </div>
+    <div class="span2">
+        <input type="submit" class="btn btn-success" value="Modifier" />
+    </div>
+    {{ form_end(edit_form) }}
+</div></div></div></div>
+</section>
+</div></div></div></div></div></div>
+{% endblock %}
+{% block javascripts %}
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script> 
+
+
+ function calculDuree() {
+    var a = $('#lv_locationbundle_soustraitance_montantMensuel').val();
+ var time1 = $('#lv_locationbundle_soustraitance_datePremierPay').val(), time2 = $('#lv_locationbundle_soustraitance_dateDernierPay').val(),result = $("#lv_locationbundle_soustraitance_nbrePayRestant");
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    
+    
+    if (parseInt(msec) >= 0) {
+        hh = Math.floor(msec / 1000 / 60 / 60); //get hours
+        dd = Math.floor(hh / 24); //calculate days
+        msec -= hh * 1000 * 60 * 60; //remove hours from msec
+        hh -= dd * 24; //remove days from hours
+        var mm = Math.floor(msec / 1000 / 60); //get minutes
+        result.val(parseInt(dd/30)+1);
+        var jours = dd;
+        var d = a*(parseInt(dd/30)+1);
+    if (d >= 0) {
+        document.getElementById("lv_locationbundle_soustraitance_montantTotal").value=d;
+        document.getElementById("lv_locationbundle_soustraitance_montantRestant").value=d;
+      //  result2.val(a);
+    }else {
+            alert("Le montant total doît être sup à 0");
+        }
+        }
+        else {
+        alert("La date de dernier pay doît être sup au date de Premier pay ");
+        }
+        }
+        ;
+
+       function calculMontant() {
+
+    var a = $('#lv_locationbundle_soustraitance_montantMensuel').val();
+    var b = $('#lv_locationbundle_soustraitance_nbrePayRestant').val();
+    var result = $("#lv_locationbundle_soustraitance_montantTotal");
+    var result2 = $("#lv_locationbundle_soustraitance_montantRestant");
+    var d = a*b;
+    if (d >= 0) {
+    
+    result.val(d);
+    result2.val(d);}
+    else {
+            alert("Le montant mensuel ou nbre de paiements doît être sup à 0");
+        }
+        };
+
+       function calculMontant() {
+
+    var a = $('#lv_locationbundle_soustraitance_montantMensuel').val();
+    var b = $('#lv_locationbundle_soustraitance_nbrePayRestant').val();
+    var result = $("#lv_locationbundle_soustraitance_montantTotal");
+    var result2 = $("#lv_locationbundle_soustraitance_montantRestant");
+    var d = a*b;
+    if (d >= 0) {
+    
+    result.val(d);
+    result2.val(d);}
+    else {
+            alert("Le montant mensuel ou nbre de paiements doît être sup à 0");
+        }
+        };
+
+
+       
+
+    
+  
+
+ 
+ </script>
+ {% endblock %}
+

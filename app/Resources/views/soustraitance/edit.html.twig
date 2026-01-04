@@ -1,0 +1,246 @@
+{% extends 'template.html.twig' %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        {#<h4 class="page-title">Nouvelle voiture</h4>#}
+                        <div class="ml-auto col-12">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{path('accueil')}}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('soustraitance_index')}}">Liste des contrats de soustraitance</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Modifier contrat</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                          {{ form_start(edit_form) }}
+                            <div class="card-body">
+                              <h3 class="card-title m-b-0">Modifier contrat</h3>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group" style="display: none;">
+                                    <label>Voiture {{ form_errors(edit_form.refVoiture) }}</label>
+                                    {{ form_widget(edit_form.refVoiture, {'attr': {'class':'select2 form-control custom-select','style':'width: 100%;'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Voiture</label>
+                                    <input type="text" class="form-control" value="{{voiture}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Client {{ form_errors(edit_form.refClient) }}</label>
+                                    {{ form_widget(edit_form.refClient, {'attr': {'class':'form-control select2 custom-select','style':'width: 100%; height:36px;'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Numéro contrat {{ form_errors(edit_form.numSoustraitance) }}</label>
+                                    {{ form_widget(edit_form.numSoustraitance, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Date premier payement {{ form_errors(edit_form.datePremierPay) }}</label>
+                                    <div class="input-group">
+                                        {{ form_widget(edit_form.datePremierPay, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa' ,'onchange': 'calculDuree1()', 'style': 'height:35.5px;', 'onchange': 'calculDuree1()'}}) }}
+                                        
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date dernier payement {{ form_errors(edit_form.dateDernierPay) }}</label>
+                                    <div class="input-group">
+                                        {{ form_widget(edit_form.dateDernierPay, {'attr': {'class':'form-control','placeholder':'jj/mm/aaaa', 'onchange': 'calculDuree()', 'style': 'height:35px;', 'onchange': 'calculDuree()'}}) }}
+                                        
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nombre payement restant {{ form_errors(edit_form.nbrePayRestant) }}</label>
+                                    {{ form_widget(edit_form.nbrePayRestant, {'attr': {'class':'form-control', 'readonly':'readonly'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Montant mensuel {{ form_errors(edit_form.montantMensuel) }}</label>
+                                    {{ form_widget(edit_form.montantMensuel, {'attr': {'class':'form-control', 'onkeyup': 'calculMontant()'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Montant total {{ form_errors(edit_form.montantTotal) }}</label>
+                                    {{ form_widget(edit_form.montantTotal, {'attr': {'class':'form-control', 'onkeyup': 'calculMontant()', 'readonly':'readonly'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Montant payé {{ form_errors(edit_form.montantPaye) }}</label>
+                                    {{ form_widget(edit_form.montantPaye, {'attr': {'class':'form-control' , 'readonly':'readonly'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Montant restant {{ form_errors(edit_form.montantRestant) }}</label>
+                                    {{ form_widget(edit_form.montantRestant, {'attr': {'class':'form-control', 'readonly':'readonly'}}) }}
+                                </div>
+                               </div>
+                               <div class="col-md-4">
+                                <div class="form-group" style="display: none;">
+                                    <label>Nom {{ form_errors(edit_form.etat) }}</label>
+                                    {{ form_widget(edit_form.etat, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                               </div>
+                              </div>
+                            </div>
+                            <div class="border-top" >
+                                    <div class="card-body" style="float: right;" >
+                                        <div class="btn-group">
+                                        <a href="{{ path('soustraitance_index') }}" class="btn btn-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                        <div class="btn-group">
+                                        <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valider&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-primary"></div>
+                                    </div>
+                              </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- editor -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+{% endblock %}
+{% block javascripts %}
+ <script> 
+
+
+ function calculDuree() {
+    var a = $('#lv_locationbundle_soustraitance_montantMensuel').val();
+ var time1 = $('#lv_locationbundle_soustraitance_datePremierPay').val(), time2 = $('#lv_locationbundle_soustraitance_dateDernierPay').val(),result = $("#lv_locationbundle_soustraitance_nbrePayRestant");
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    
+    
+    if (parseInt(msec) > 0) {
+       
+        var d1=time1.split('-'); 
+        var annee_1  = parseInt(d1[0]);
+        var mois_1 =  parseInt(d1[1]);
+
+       
+ 
+        var d2=time2.split('-'); 
+        var annee_2 = parseInt(d2[0]);
+        var mois_2 =  parseInt(d2[1]);
+        
+        var dd = (annee_2-annee_1)*12 + (mois_2-mois_1);
+        result.val(dd+1);
+        var d = parseFloat(a.replace(",", "."))*((dd+1));
+        //alert(d);
+    if (a > 0) {
+        document.getElementById("lv_locationbundle_soustraitance_montantTotal").value=d.toFixed(2);
+        document.getElementById("lv_locationbundle_soustraitance_montantRestant").value=d.toFixed(2);
+      //  result2.val(a);
+    }else {
+            alert("Le montant mensuel doît être sup à 0");
+        }
+        }
+        else {
+        alert("La date de dernier pay doît être sup au date de premier pay");
+        var a = $('#time2').val();
+        document.getElementById("lv_locationbundle_soustraitance_dateDernierPay").value=a;
+        }
+        }
+        ;
+
+         function calculDuree1() {
+    var a = $('#lv_locationbundle_soustraitance_montantMensuel').val();
+ var time1 = $('#lv_locationbundle_soustraitance_datePremierPay').val(), time2 = $('#lv_locationbundle_soustraitance_dateDernierPay').val(),result = $("#lv_locationbundle_soustraitance_nbrePayRestant");
+ var d1 = new Date(time1).getTime(); 
+ var d2 = new Date(time2).getTime();
+ var msec = d2 - d1; //get difference in milliseconds
+    
+    
+    if (parseInt(msec) > 0) {
+        
+        var d1=time1.split('-'); 
+        var annee_1  = parseInt(d1[0]);
+        var mois_1 =  parseInt(d1[1]);
+
+       
+ 
+        var d2=time2.split('-'); 
+        var annee_2 = parseInt(d2[0]);
+        var mois_2 =  parseInt(d2[1]);
+        
+        var dd = (annee_2-annee_1)*12 + (mois_2-mois_1);
+        result.val(dd+1);
+        var d = parseFloat(a.replace(",", "."))*((dd+1));
+        //alert(d);
+    if (a > 0) {
+        document.getElementById("lv_locationbundle_soustraitance_montantTotal").value=d.toFixed(2);
+        document.getElementById("lv_locationbundle_soustraitance_montantRestant").value=d.toFixed(2);
+      //  result2.val(a);
+    }else {
+            alert("Le montant mensuel doît être sup à 0");
+        }
+        }
+        else {
+        alert("La date de dernier pay doît être sup au date de premier pay");
+        var a = $('#time1').val();
+        document.getElementById("lv_locationbundle_soustraitance_datePremierPay").value=a;
+        }
+        }
+        ;
+
+       function calculMontant() {
+
+    var a = $('#lv_locationbundle_soustraitance_montantMensuel').val();
+    var b = $('#lv_locationbundle_soustraitance_nbrePayRestant').val();
+    var result = $("#lv_locationbundle_soustraitance_montantTotal");
+    var result2 = $("#lv_locationbundle_soustraitance_montantRestant");
+    var d = parseFloat(a.replace(",", "."))*b;
+    var c = d.toFixed(2);
+    if (a >= 0) {
+    
+    result.val(c);
+    result2.val(c);}
+    else {
+            alert("Le montant mensuel ou nbre de paiements doît être sup à 0");
+        }
+        };      
+ 
+ </script>
+{% endblock %}
+
+
+
+
+
+
+

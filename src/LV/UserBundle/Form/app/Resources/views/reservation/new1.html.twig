@@ -1,0 +1,220 @@
+{% extends 'base.html.twig' %}
+{% block menu %}
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li><a href="{{path('accueil')}}"><i class="icon-dashboard"></i><span>Tableau de Bord</span> </a> </li>
+        <li><a href="{{path('voiture_index')}}"><i class="fa fa-automobile"></i><span>Vehicule</span> </a> </li>
+        <li><a href="{{path('client_index')}}"><i class="shortcut-icon icon-user"></i><span>Client</span> </a></li>
+        <li class="active"><a href="{{path('reservation_index')}}"><i class="shortcut-icon icon-save"></i><span>Reservation</span> </a> </li>
+        <li><a href="{{path('csr_index')}}"><i class="shortcut-icon icon-edit"></i><span>Contrat</span> </a> </li>
+        <li><a href="{{path('paiement_index')}}"><i class="shortcut-icon icon-random"></i><span>Paiement</span> </a> </li>
+        <li><a href="{{path('facture_index')}}"><i class="shortcut-icon icon-list-alt"></i><span>Facture</span> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+<div class="main">
+  <div class="main-inner">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+<div class="content-wrapper">
+  <section class="content" style="mapping:25px">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Créer une Réservation</h3>
+          </div>
+          <section class="content-header">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ path('accueil') }}"><i class="fa fa-dashboard"></i> Tableau de Bord</a></li>
+              <li  class="breadcrumb-item"><a href="{{ path('reservation_index') }}"><i class="fa fa-car"></i>/ Réservation</a></li>
+              <li  class="breadcrumb-item active"><i class="fa fa-car"></i>/ Créer une Réservation</li>
+            </ol>
+          </section><br>
+          <div class="box-body">
+            {{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
+              <div class="row">
+              <div class="span3">
+                <div>
+                  <div >{{ form_label(form.numReservation) }}</div>
+                  {{ form_errors(form.numReservation) }}
+                  <div>{{ form_widget(form.numReservation,{'attr':{'value':num,'readonly' : "readonly"}}) }}</div>
+                </div>
+                <div>
+                  <div >{{ form_label(form.dateResevation) }}</div>
+                  {{ form_errors(form.dateResevation) }}
+                  <div>{{form_widget(form.dateResevation,{'attr':{'readonly':"readonly"}})}}</div>
+                </div>
+              </div>
+              <div class="span3">
+                <div>
+                  <div >{{ form_label(form.dateDebut) }}</div>
+                  {{ form_errors(form.dateDebut) }}
+                  <div>{{ form_widget(form.dateDebut, {'attr':{'readonly' : "readonly"}}) }}</div>
+                </div>
+                <div>
+                  <div >{{ form_label(form.dateFin) }}</div>
+                  {{ form_errors(form.dateFin) }}
+                  <div>{{ form_widget(form.dateFin, {'attr': {'readonly' : "readonly"}}) }}</div>
+                </div>
+              </div>
+              <div class="span3">
+                <div>
+                  <div >{{ form_label(form.nbreJour) }}</div>
+                  {{ form_errors(form.nbreJour) }}
+                  <div>{{ form_widget(form.nbreJour, {'attr': {'readonly' : "readonly"}}) }}</div>
+                </div>
+                <div>
+                  <div >{{ form_label(form.refVoiture,'Matricule ') }}</div>
+                  {{ form_errors(form.refVoiture) }}
+                  <div style="display:none;">{{ form_widget(form.refVoiture, {'attr':{'readonly':"readonly"}}) }}</div>
+                <input type="text" value="{{ voiture }}" readonly>
+                </div>
+              </div>
+              <div class="span3">
+                <div>
+                  <div class="col-sm-3">{{ form_label(form.refClient,'Client ') }}</div>
+                  {{ form_errors(form.refClient) }} 
+                  <div class="col-sm-8">{{ form_widget(form.refClient,{'attr': {'class':'chosen-select'}}) }}
+				  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#new_client"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                  </div>
+                 </div>
+                </div>
+              </div>
+			</div>
+              <div class="row" align="right">
+                 <input type="submit" class="btn btn-success" value="Réserver" />
+              </div>
+            {{ form_end(form) }}
+            <!-- Modal -->
+    
+<div class="modal fade" id="new_client" role="dialog" aria-labelledby="new_role-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="new_role-label">Ajouter nouveau client</h4>
+            </div>
+            <div class="modal-body">
+               <div class="box-body">
+                    {{ form_start(form_client) }}
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.cin) }}</div>
+                             {{ form_errors(form_client.cin) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.cin) }}</div>
+                         </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.numPermis) }}</div>
+                             {{ form_errors(form_client.numPermis) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.numPermis) }}</div>
+                          </div>
+                      </div>
+                      <div class="span4">
+                         <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.nom) }}</div>
+                             {{ form_errors(form_client.nom) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.nom) }}</div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.prenom) }}</div>
+                             {{ form_errors(form_client.prenom) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.prenom) }}</div>
+                          </div>
+                          
+                      </div>
+                      <div class="span4">
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.nationalite) }}</div>
+                             {{ form_errors(form_client.nationalite) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.nationalite) }}</div>
+                          </div>
+                          
+                          <div class="row">
+                             <div class="col-sm-4">{{ form_label(form_client.adresse) }}</div>
+                             {{ form_errors(form_client.adresse) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.adresse) }}</div>
+                          </div>
+                          <div class="row" style="display:none;">
+                             <div class="col-sm-4">{{ form_label(form_client.degat) }}</div>
+                             {{ form_errors(form_client.degat) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.degat,{'attr': {'readonly' : true}}) }}</div>
+                          </div>
+                          <div class="row" style="display:none;">
+                             <div class="col-sm-4">{{ form_label(form_client.cause) }}</div>
+                             {{ form_errors(form_client.cause) }}
+                             <div class="col-sm-8">{{ form_widget(form_client.cause) }}</div>
+                          </div>
+                      </div>
+                          <div class="row" align="right">
+                              <input type="submit" class="btn btn-success btn-sm" value="Ajouter" />
+              </div>
+                      {{ form_end(form_client) }}
+                </div>
+        </div>
+            
+          </div>
+               
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+  <script src="{{asset('chosen/docsupport/jquery-3.2.1.min.js')}}" type="text/javascript"></script>
+  <script src="{{asset('chosen/chosen.jquery.js')}}" type="text/javascript"></script>
+  <script src="{{asset('chosen/docsupport/prism.js')}}" type="text/javascript" charset="utf-8"></script>
+  <script src="{{asset('chosen/docsupport/init.js')}}" type="text/javascript" charset="utf-8"></script>
+
+        
+<script>
+    
+     $('lv_locationbundle_reservation_dateFin').datetimepicker({
+                        mask: '39/19/9999 29:59'
+                    });
+
+
+$("#button").click(function() {
+  $("form").dialog({
+    appendTo: '#dialog',
+    title: "Dialog Title"
+  });
+});
+
+
+
+
+      
+
+
+
+
+
+
+ </script>
+
+
+    {% endblock %}
+
