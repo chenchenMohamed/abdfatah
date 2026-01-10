@@ -1460,7 +1460,7 @@ CREATE TABLE IF NOT EXISTS `fos_user` (
 
 -- Listage des données de la table 0fe_23612547_bibene.fos_user : ~3 rows (environ)
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-	(1, 'admin', 'admin', 'admin@admin.com', 'admin@admin.com', 1, NULL, '$2y$13$noJA/3Uze1SdXVY8.n12E.rnHZbJpowe.DD0ClxphS1zeOO8OT6BK', '2025-12-01 14:45:24', NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}'),
+	(1, 'admin', 'admin', 'admin@admin.com', 'admin@admin.com', 1, NULL, '$2y$13$noJA/3Uze1SdXVY8.n12E.rnHZbJpowe.DD0ClxphS1zeOO8OT6BK', '2025-08-25 11:23:23', NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}'),
 	(3, 'user2', 'user2', 'user2@user.com', 'user2@user.com', 1, NULL, '$2y$13$smd3e331802ZOpj11pRyZOGBLwlAwEaaD.1sa/KaVo.UMAw.xWLxu', '2019-04-05 13:27:36', NULL, NULL, 'a:0:{}'),
 	(4, 'innovtech', 'innovtech', 'innovtech@admin.com', 'innovtech@admin.com', 1, NULL, '$2y$13$bj8.VmDdf3ELTa87u5h45.I1BpspZ6o4xkj2u3pGSsni6qxTS9owS', '2022-09-05 21:53:08', NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}');
 
