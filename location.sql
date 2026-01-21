@@ -15,24 +15,22 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Listage de la structure de la base pour 0fe_23612547_bibene
-CREATE DATABASE IF NOT EXISTS `0fe_23612547_bibene` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `0fe_23612547_bibene`;
+
 
 -- Listage de la structure de table 0fe_23612547_bibene. agence
 CREATE TABLE IF NOT EXISTS `agence` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `codeAgence` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `nom` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `tel` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `tel2` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `fax` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `adresse` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `ville` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `nature` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `codeAgence` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tel2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fax` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `adresse` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ville` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nature` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_64C19AA95006A4F` (`codeAgence`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.agence : ~0 rows (environ)
 INSERT INTO `agence` (`id`, `codeAgence`, `nom`, `tel`, `tel2`, `fax`, `adresse`, `ville`, `nature`) VALUES
@@ -42,13 +40,13 @@ INSERT INTO `agence` (`id`, `codeAgence`, `nom`, `tel`, `tel2`, `fax`, `adresse`
 CREATE TABLE IF NOT EXISTS `assurance` (
   `id` int NOT NULL AUTO_INCREMENT,
   `numAssurance` int NOT NULL,
-  `nomAssurance` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nomAssurance` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `dateAssurance` date NOT NULL,
   `DateProchAssurance` date NOT NULL,
   `montant` double NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_386829AE4D4AB7AB` (`numAssurance`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.assurance : ~0 rows (environ)
 
@@ -61,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `assurance_voiture` (
   KEY `IDX_DBE97F3181A8BA` (`voiture_id`),
   CONSTRAINT `FK_DBE97F3181A8BA` FOREIGN KEY (`voiture_id`) REFERENCES `voiture` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_DBE97F3B288C3E3` FOREIGN KEY (`assurance_id`) REFERENCES `assurance` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.assurance_voiture : ~0 rows (environ)
 
@@ -69,28 +67,28 @@ CREATE TABLE IF NOT EXISTS `assurance_voiture` (
 CREATE TABLE IF NOT EXISTS `cheque` (
   `id` int NOT NULL AUTO_INCREMENT,
   `numCheque` int DEFAULT NULL,
-  `banque` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `banque` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `monatant` double DEFAULT NULL,
-  `nomProp` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `nomProp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dateValidation` date DEFAULT NULL,
-  `etat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `etat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_A0BBFDE96AACA535` (`numCheque`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.cheque : ~0 rows (environ)
 
 -- Listage de la structure de table 0fe_23612547_bibene. client
 CREATE TABLE IF NOT EXISTS `client` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `cin` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `nom` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `prenom` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `numPermis` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `nationalite` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `adresse` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `cin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numPermis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nationalite` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `adresse` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `degat` tinyint(1) DEFAULT NULL,
-  `cause` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `cause` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `telephone` int DEFAULT NULL,
   `disponibilite` tinyint(1) DEFAULT NULL,
   `delivre` date DEFAULT NULL,
@@ -99,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_C7440455ABE530DA` (`cin`),
   UNIQUE KEY `UNIQ_C7440455DD2FCC8F` (`numPermis`)
-) ENGINE=InnoDB AUTO_INCREMENT=443 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=443 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.client : ~409 rows (environ)
 INSERT INTO `client` (`id`, `cin`, `nom`, `prenom`, `numPermis`, `nationalite`, `adresse`, `degat`, `cause`, `telephone`, `disponibilite`, `delivre`, `dateNaissance`, `type`) VALUES
@@ -519,14 +517,14 @@ CREATE TABLE IF NOT EXISTS `contrat` (
   `conducteur1_id` int NOT NULL,
   `conducteur2_id` int DEFAULT NULL,
   `ref_reservation_id` int NOT NULL,
-  `NumContrat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `NumContrat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `dateContrat` date NOT NULL,
-  `nbreJour` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nbreJour` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `kmDepart` double NOT NULL,
-  `niveauCarburant` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `niveauCarburant` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tarif` double NOT NULL,
   `recette` double NOT NULL,
-  `etat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `etat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_60349993A0C613E4` (`NumContrat`),
   KEY `IDX_60349993A49A255C` (`conducteur1_id`),
@@ -535,7 +533,7 @@ CREATE TABLE IF NOT EXISTS `contrat` (
   CONSTRAINT `FK_60349993A49A255C` FOREIGN KEY (`conducteur1_id`) REFERENCES `client` (`id`),
   CONSTRAINT `FK_60349993B62F8AB2` FOREIGN KEY (`conducteur2_id`) REFERENCES `client` (`id`),
   CONSTRAINT `FK_60349993F5A4A6E8` FOREIGN KEY (`ref_reservation_id`) REFERENCES `reservation` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.contrat : ~0 rows (environ)
 
@@ -545,16 +543,16 @@ CREATE TABLE IF NOT EXISTS `csr` (
   `conducteur1_id` int NOT NULL,
   `conducteur2_id` int DEFAULT NULL,
   `ref_voiture_id` int DEFAULT NULL,
-  `NumContrat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `NumContrat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `dateContrat` date NOT NULL,
   `dateDebut` datetime NOT NULL,
   `dateFin` datetime NOT NULL,
-  `nbreJour` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nbreJour` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `kmDepart` double NOT NULL,
-  `niveauCarburant` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `niveauCarburant` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tarif` double NOT NULL,
   `recette` double NOT NULL,
-  `etat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `etat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ref_reservation_id` int DEFAULT NULL,
   `kmRetour` double DEFAULT NULL,
   `garant` double DEFAULT NULL,
@@ -567,7 +565,7 @@ CREATE TABLE IF NOT EXISTS `csr` (
   `sousTotal` double NOT NULL,
   `timbre` double NOT NULL,
   `total` double NOT NULL,
-  `etatRetour` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `etatRetour` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `degats` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_FC9964EEF9B1034` (`NumContrat`),
@@ -579,7 +577,7 @@ CREATE TABLE IF NOT EXISTS `csr` (
   CONSTRAINT `FK_FC9964EA49A255C` FOREIGN KEY (`conducteur1_id`) REFERENCES `client` (`id`),
   CONSTRAINT `FK_FC9964EB62F8AB2` FOREIGN KEY (`conducteur2_id`) REFERENCES `client` (`id`),
   CONSTRAINT `FK_FC9964EF5A4A6E8` FOREIGN KEY (`ref_reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=439 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=439 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.csr : ~364 rows (environ)
 INSERT INTO `csr` (`id`, `conducteur1_id`, `conducteur2_id`, `ref_voiture_id`, `NumContrat`, `dateContrat`, `dateDebut`, `dateFin`, `nbreJour`, `kmDepart`, `niveauCarburant`, `tarif`, `recette`, `etat`, `ref_reservation_id`, `kmRetour`, `garant`, `fraisAeroport`, `siegeBebe`, `supplement`, `carburant`, `totalHTVA`, `TVA`, `sousTotal`, `timbre`, `total`, `etatRetour`, `degats`) VALUES
@@ -962,10 +960,10 @@ CREATE TABLE IF NOT EXISTS `depenses` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ref_agence_id` int NOT NULL,
   `dateDepense` date NOT NULL,
-  `codeDepense` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `codeDepense` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `montant` double NOT NULL,
-  `refUtilisateur` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `refUtilisateur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ref_voiture_id` int DEFAULT NULL,
   `ref_type_depense_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -974,7 +972,7 @@ CREATE TABLE IF NOT EXISTS `depenses` (
   KEY `IDX_EE350ECB74447A4` (`ref_voiture_id`),
   KEY `ref_type_depense` (`ref_type_depense_id`) USING BTREE,
   CONSTRAINT `fk_depenses_type_depenses` FOREIGN KEY (`ref_type_depense_id`) REFERENCES `type_depenses` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.depenses : ~19 rows (environ)
 INSERT INTO `depenses` (`id`, `ref_agence_id`, `dateDepense`, `codeDepense`, `description`, `montant`, `refUtilisateur`, `ref_voiture_id`, `ref_type_depense_id`) VALUES
@@ -1004,14 +1002,14 @@ CREATE TABLE IF NOT EXISTS `disponibilite` (
   `ref_voiture_id` int NOT NULL,
   `dateDebut` datetime NOT NULL,
   `dateFin` datetime NOT NULL,
-  `etat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `etat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ref_client_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_2CBACE2F74447A4` (`ref_voiture_id`),
   KEY `IDX_2CBACE2F6AB16864` (`ref_client_id`),
   CONSTRAINT `FK_2CBACE2F6AB16864` FOREIGN KEY (`ref_client_id`) REFERENCES `client` (`id`),
   CONSTRAINT `FK_2CBACE2F74447A4` FOREIGN KEY (`ref_voiture_id`) REFERENCES `voiture` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=446 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=446 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.disponibilite : ~362 rows (environ)
 INSERT INTO `disponibilite` (`id`, `ref_voiture_id`, `dateDebut`, `dateFin`, `etat`, `ref_client_id`) VALUES
@@ -1402,14 +1400,14 @@ CREATE TABLE IF NOT EXISTS `echeance` (
   `DatePremierPay` date NOT NULL,
   `dateDernierPay` date NOT NULL,
   `nbrePayRestant` int NOT NULL,
-  `etat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `etat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `contartLeasing` int NOT NULL,
-  `nomLeasing` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nomLeasing` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_40D9893B2692CB58` (`contartLeasing`),
   UNIQUE KEY `UNIQ_40D9893B74447A4` (`ref_voiture_id`),
   CONSTRAINT `FK_40D9893B74447A4` FOREIGN KEY (`ref_voiture_id`) REFERENCES `voiture` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.echeance : ~0 rows (environ)
 
@@ -1417,46 +1415,46 @@ CREATE TABLE IF NOT EXISTS `echeance` (
 CREATE TABLE IF NOT EXISTS `facture` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ref_payement_id` int NOT NULL,
-  `numFacture` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `numFacture` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `dateFacture` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_FE8664107129EDB7` (`numFacture`),
   UNIQUE KEY `UNIQ_FE8664107C85FE85` (`ref_payement_id`),
   CONSTRAINT `FK_FE8664107C85FE85` FOREIGN KEY (`ref_payement_id`) REFERENCES `paiement` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.facture : ~0 rows (environ)
 
 -- Listage de la structure de table 0fe_23612547_bibene. fos_group
 CREATE TABLE IF NOT EXISTS `fos_group` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(180) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `roles` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
+  `name` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_4B019DDB5E237E06` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.fos_group : ~0 rows (environ)
 
 -- Listage de la structure de table 0fe_23612547_bibene. fos_user
 CREATE TABLE IF NOT EXISTS `fos_user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(180) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `username_canonical` varchar(180) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `email` varchar(180) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `email_canonical` varchar(180) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `username` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username_canonical` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_canonical` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `enabled` tinyint(1) NOT NULL,
-  `salt` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_login` datetime DEFAULT NULL,
-  `confirmation_token` varchar(180) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `confirmation_token` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password_requested_at` datetime DEFAULT NULL,
-  `roles` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
+  `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_957A647992FC23A8` (`username_canonical`),
   UNIQUE KEY `UNIQ_957A6479A0D96FBF` (`email_canonical`),
   UNIQUE KEY `UNIQ_957A6479C05FB297` (`confirmation_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.fos_user : ~3 rows (environ)
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
@@ -1473,17 +1471,17 @@ CREATE TABLE IF NOT EXISTS `fos_user_user_group` (
   KEY `IDX_B3C77447FE54D947` (`group_id`),
   CONSTRAINT `FK_B3C77447A76ED395` FOREIGN KEY (`user_id`) REFERENCES `fos_user` (`id`),
   CONSTRAINT `FK_B3C77447FE54D947` FOREIGN KEY (`group_id`) REFERENCES `fos_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.fos_user_user_group : ~0 rows (environ)
 
 -- Listage de la structure de table 0fe_23612547_bibene. marque
 CREATE TABLE IF NOT EXISTS `marque` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_5A6F91CE6C6E55B5` (`nom`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.marque : ~13 rows (environ)
 INSERT INTO `marque` (`id`, `nom`) VALUES
@@ -1505,12 +1503,12 @@ INSERT INTO `marque` (`id`, `nom`) VALUES
 CREATE TABLE IF NOT EXISTS `modele` (
   `id` int NOT NULL AUTO_INCREMENT,
   `marque_id` int DEFAULT NULL,
-  `nom` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_100285586C6E55B5` (`nom`),
   KEY `IDX_100285584827B9B2` (`marque_id`),
   CONSTRAINT `FK_100285584827B9B2` FOREIGN KEY (`marque_id`) REFERENCES `marque` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.modele : ~17 rows (environ)
 INSERT INTO `modele` (`id`, `marque_id`, `nom`) VALUES
@@ -1540,7 +1538,7 @@ CREATE TABLE IF NOT EXISTS `paiement` (
   `datePayement` date NOT NULL,
   `montantPaye` double NOT NULL,
   `montantRestant` double NOT NULL,
-  `typePayement` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `typePayement` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `dateProchPayement` date DEFAULT NULL,
   `numVirement` int DEFAULT NULL,
   `numCheque` int DEFAULT NULL,
@@ -1549,7 +1547,7 @@ CREATE TABLE IF NOT EXISTS `paiement` (
   UNIQUE KEY `UNIQ_B1DC7A1EACFF5A84` (`ref_csr_id`),
   CONSTRAINT `FK_B1DC7A1E1EE6E901` FOREIGN KEY (`ref_contrat_id`) REFERENCES `contrat` (`id`),
   CONSTRAINT `FK_B1DC7A1EACFF5A84` FOREIGN KEY (`ref_csr_id`) REFERENCES `csr` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=386 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=386 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.paiement : ~358 rows (environ)
 INSERT INTO `paiement` (`id`, `ref_contrat_id`, `ref_csr_id`, `datePayement`, `montantPaye`, `montantRestant`, `typePayement`, `dateProchPayement`, `numVirement`, `numCheque`) VALUES
@@ -1925,7 +1923,7 @@ CREATE TABLE IF NOT EXISTS `paiement_echeance` (
   PRIMARY KEY (`id`),
   KEY `IDX_8A7E7101A1387EFF` (`ref_echeance_id`),
   CONSTRAINT `FK_8A7E7101A1387EFF` FOREIGN KEY (`ref_echeance_id`) REFERENCES `echeance` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.paiement_echeance : ~0 rows (environ)
 
@@ -1938,7 +1936,7 @@ CREATE TABLE IF NOT EXISTS `paiement_soustraitance` (
   PRIMARY KEY (`id`),
   KEY `IDX_7A6F0FD280BFFF56` (`ref_soustraitance_id`),
   CONSTRAINT `FK_7A6F0FD280BFFF56` FOREIGN KEY (`ref_soustraitance_id`) REFERENCES `soustraitance` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.paiement_soustraitance : ~2 rows (environ)
 INSERT INTO `paiement_soustraitance` (`id`, `ref_soustraitance_id`, `date`, `montant`) VALUES
@@ -1950,18 +1948,18 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ref_voiture_id` int NOT NULL,
   `ref_client_id` int NOT NULL,
-  `numReservation` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `numReservation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `dateResevation` datetime NOT NULL,
   `dateDebut` datetime NOT NULL,
   `dateFin` datetime NOT NULL,
-  `nbreJour` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nbreJour` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_42C8495528087671` (`numReservation`),
   KEY `IDX_42C8495574447A4` (`ref_voiture_id`),
   KEY `IDX_42C849556AB16864` (`ref_client_id`),
   CONSTRAINT `FK_42C849556AB16864` FOREIGN KEY (`ref_client_id`) REFERENCES `client` (`id`),
   CONSTRAINT `FK_42C8495574447A4` FOREIGN KEY (`ref_voiture_id`) REFERENCES `voiture` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.reservation : ~12 rows (environ)
 INSERT INTO `reservation` (`id`, `ref_voiture_id`, `ref_client_id`, `numReservation`, `dateResevation`, `dateDebut`, `dateFin`, `nbreJour`) VALUES
@@ -1987,7 +1985,7 @@ CREATE TABLE IF NOT EXISTS `retour` (
   `ref_csr_id` int DEFAULT NULL,
   `km` int NOT NULL,
   `degats` tinyint(1) NOT NULL,
-  `etatRetour` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `etatRetour` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_ED6FD3211EE6E901` (`ref_contrat_id`),
   UNIQUE KEY `UNIQ_ED6FD321ACFF5A84` (`ref_csr_id`),
@@ -1997,7 +1995,7 @@ CREATE TABLE IF NOT EXISTS `retour` (
   CONSTRAINT `FK_ED6FD3216AB16864` FOREIGN KEY (`ref_client_id`) REFERENCES `client` (`id`),
   CONSTRAINT `FK_ED6FD32174447A4` FOREIGN KEY (`ref_voiture_id`) REFERENCES `voiture` (`id`),
   CONSTRAINT `FK_ED6FD321ACFF5A84` FOREIGN KEY (`ref_csr_id`) REFERENCES `csr` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.retour : ~0 rows (environ)
 
@@ -2005,7 +2003,7 @@ CREATE TABLE IF NOT EXISTS `retour` (
 CREATE TABLE IF NOT EXISTS `soustraitance` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ref_voiture_id` int NOT NULL,
-  `numSoustraitance` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `numSoustraitance` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nbrePayRestant` int DEFAULT NULL,
   `montantTotal` double DEFAULT NULL,
   `montantPaye` double DEFAULT NULL,
@@ -2013,7 +2011,7 @@ CREATE TABLE IF NOT EXISTS `soustraitance` (
   `montantRestant` double DEFAULT NULL,
   `datePremierPay` date DEFAULT NULL,
   `dateDernierPay` date DEFAULT NULL,
-  `etat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `etat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ref_client_id` int NOT NULL,
   `autoFinancement` float DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -2022,7 +2020,7 @@ CREATE TABLE IF NOT EXISTS `soustraitance` (
   KEY `IDX_3F0EE59C6AB16864` (`ref_client_id`),
   CONSTRAINT `FK_3F0EE59C6AB16864` FOREIGN KEY (`ref_client_id`) REFERENCES `client` (`id`),
   CONSTRAINT `FK_3F0EE59C74447A4` FOREIGN KEY (`ref_voiture_id`) REFERENCES `voiture` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.soustraitance : ~2 rows (environ)
 INSERT INTO `soustraitance` (`id`, `ref_voiture_id`, `numSoustraitance`, `nbrePayRestant`, `montantTotal`, `montantPaye`, `montantMensuel`, `montantRestant`, `datePremierPay`, `dateDernierPay`, `etat`, `ref_client_id`, `autoFinancement`) VALUES
@@ -2032,9 +2030,9 @@ INSERT INTO `soustraitance` (`id`, `ref_voiture_id`, `numSoustraitance`, `nbrePa
 -- Listage de la structure de table 0fe_23612547_bibene. type_depenses
 CREATE TABLE IF NOT EXISTS `type_depenses` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `label` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.type_depenses : ~2 rows (environ)
 INSERT INTO `type_depenses` (`id`, `label`) VALUES
@@ -2053,7 +2051,7 @@ CREATE TABLE IF NOT EXISTS `vidange` (
   UNIQUE KEY `UNIQ_872AAB8B885222C` (`numVidange`),
   KEY `IDX_872AAB8B74447A4` (`ref_voiture_id`),
   CONSTRAINT `FK_872AAB8B74447A4` FOREIGN KEY (`ref_voiture_id`) REFERENCES `voiture` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.vidange : ~6 rows (environ)
 INSERT INTO `vidange` (`id`, `ref_voiture_id`, `numVidange`, `dateVidange`, `prochVidange`, `compteur`, `montant`) VALUES
@@ -2077,7 +2075,7 @@ CREATE TABLE IF NOT EXISTS `visite` (
   UNIQUE KEY `UNIQ_B09C8CBB7A8BD467` (`numVisite`),
   KEY `IDX_B09C8CBB74447A4` (`ref_voiture_id`),
   CONSTRAINT `FK_B09C8CBB74447A4` FOREIGN KEY (`ref_voiture_id`) REFERENCES `voiture` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.visite : ~4 rows (environ)
 INSERT INTO `visite` (`id`, `ref_voiture_id`, `numVisite`, `dateVisite`, `dateProchVisite`, `montant`) VALUES
@@ -2095,13 +2093,13 @@ CREATE TABLE IF NOT EXISTS `voiture` (
   `modele_id` int DEFAULT NULL,
   `numContrat` int NOT NULL,
   `km` int NOT NULL,
-  `matricule` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `couleur` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `codeRadio` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `fournisseur` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `matricule` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `couleur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `codeRadio` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fournisseur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `prix` double NOT NULL,
-  `etat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `etat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `disponibilite` tinyint(1) DEFAULT NULL,
   `miseEnCirculation` datetime NOT NULL,
   `DatePremierPay` date NOT NULL,
@@ -2119,7 +2117,7 @@ CREATE TABLE IF NOT EXISTS `voiture` (
   KEY `IDX_E9E2810FAC14B70A` (`modele_id`),
   CONSTRAINT `FK_E9E2810F4827B9B2` FOREIGN KEY (`marque_id`) REFERENCES `marque` (`id`),
   CONSTRAINT `FK_E9E2810FAC14B70A` FOREIGN KEY (`modele_id`) REFERENCES `modele` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table 0fe_23612547_bibene.voiture : ~20 rows (environ)
 INSERT INTO `voiture` (`id`, `totalDepenses2`, `marque_id`, `modele_id`, `numContrat`, `km`, `matricule`, `couleur`, `codeRadio`, `fournisseur`, `prix`, `etat`, `photo`, `disponibilite`, `miseEnCirculation`, `DatePremierPay`, `dateDernierPay`, `montantTotal`, `montantMensuel`, `autoFinancement`, `nbrePayRestant`, `type`, `totalDepenses`, `isEnable`) VALUES

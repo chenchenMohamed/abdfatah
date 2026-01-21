@@ -15,10 +15,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Listage de la structure de la base pour location
-CREATE DATABASE IF NOT EXISTS `location` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `location`;
-
 -- Listage de la structure de table location. agence
 CREATE TABLE IF NOT EXISTS `agence` (
   `id` int NOT NULL AUTO_INCREMENT,

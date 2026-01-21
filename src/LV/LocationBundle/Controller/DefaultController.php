@@ -1127,7 +1127,7 @@ public function print2Action(Request $request) {
         $date = date('Y-m-d 00:00:00');
         $date2 = date('Y-m-d 00:00:00',strtotime('+1 day'));
         $now = new \DateTime($date);
-        $now2 = new\DateTime($date2);
+        $now2 = new \DateTime($date2);
 
         $date = $now->format('Y-m-d H:i');
         $date = str_replace (' ', 'T', $date);

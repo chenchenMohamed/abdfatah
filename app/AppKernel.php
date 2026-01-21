@@ -3,6 +3,7 @@
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Sensio\Bundle\DistributionBundle\SensioDistributionBundle;
 
 class AppKernel extends Kernel
 {
@@ -20,12 +21,12 @@ class AppKernel extends Kernel
             new LV\UserBundle\UserBundle(),
             new LV\LocationBundle\LocationBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new SensioDistributionBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
 
             if ('dev' === $this->getEnvironment()) {
                 $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
